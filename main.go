@@ -36,5 +36,6 @@ func main() {
 	err := handle(configPath, cmd.ArgumentValue("file"), cmd.IsOptionSet("v"))
 	if err != nil {
 		log.Fatalf("%s\n", err)
+		os.Exit(2)
 	}
 }

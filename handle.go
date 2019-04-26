@@ -1,20 +1,18 @@
 package main
 
 import (
-	"os"
 	"log"
 
 	"github.com/gabriel-vasile/mimetype"
 )
 
-func handle(configFile string, filePath string, verbosity bool) (error) {
+func handle(configFile string, filePath string, verbose bool) (error) {
 	// get mimetype of given file, we don't care about the extension
 	mime, _, err := mimetype.DetectFile(filePath)
 	if err != nil {
-		log.Fatalf("%s\n", err)
-		os.Exit(1)
+		return err
 	}
-	if verbosity {
+	if verbose {
 		log.Printf("detected mimetype is %s", mime)
 		log.Printf("reading configuration from %s", configFile)
 	}
