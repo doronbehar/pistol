@@ -14,8 +14,12 @@ import (
 	"github.com/gabriel-vasile/mimetype"
 )
 
-func run_command(command string, args []string) (error) {
+func run_command(command string, args []string, trim bool) (error) {
 	cmd := exec.Command(command, args...)
+	if !trim {
+		cmd.Stdout = os.Stdout
+		return cmd.Run()
+	}
 	r, err := cmd.StdoutPipe()
 	if err != nil {
 		return err
@@ -25,7 +29,7 @@ func run_command(command string, args []string) (error) {
 	}
 	s := bufio.NewScanner(r)
 	s.Split(bufio.ScanLines)
-	line_counter := 0
+	line_counter := 2
 	tm_height := tm.Height()
 	for s.Scan() {
 		fmt.Println(s.Text())
@@ -37,7 +41,7 @@ func run_command(command string, args []string) (error) {
 	return nil
 }
 
-func handle(configFile, filePath string, verbose bool) (error) {
+func handle(configFile, filePath string, verbose, trim bool) (error) {
 	// get mimetype of given file, we don't care about the extension
 	mime, _, err := mimetype.DetectFile(filePath)
 	if err != nil {
@@ -73,7 +77,7 @@ func handle(configFile, filePath string, verbose bool) (error) {
 			if verbose {
 				log.Printf("running command %s %s\n", command, args)
 			}
-			return run_command(command, args)
+			return run_command(command, args, trim)
 		}
 	}
 	return errors.New(fmt.Sprintf("couldn't find a matching string for mime %s", mime))
