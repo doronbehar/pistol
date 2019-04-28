@@ -11,7 +11,7 @@ import (
 	"errors"
 
 	tm "github.com/buger/goterm"
-	"github.com/gabriel-vasile/mimetype"
+	"github.com/rakyll/magicmime"
 )
 
 func run_command(command string, args []string, trim bool) (error) {
@@ -43,7 +43,11 @@ func run_command(command string, args []string, trim bool) (error) {
 
 func handle(configFile, filePath string, verbose, trim bool) (error) {
 	// get mimetype of given file, we don't care about the extension
-	mime, _, err := mimetype.DetectFile(filePath)
+	if err := magicmime.Open(magicmime.MAGIC_MIME_TYPE | magicmime.MAGIC_SYMLINK); err != nil {
+		return err
+	}
+	mime, err := magicmime.TypeByFile(filePath)
+	magicmime.Close()
 	if err != nil {
 		return err
 	}
