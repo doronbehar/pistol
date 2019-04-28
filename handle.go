@@ -14,12 +14,8 @@ import (
 	"github.com/rakyll/magicmime"
 )
 
-func run_command(command string, args []string, trim bool) (error) {
+func run_command(command string, args []string) (error) {
 	cmd := exec.Command(command, args...)
-	if !trim {
-		cmd.Stdout = os.Stdout
-		return cmd.Run()
-	}
 	r, err := cmd.StdoutPipe()
 	if err != nil {
 		return err
@@ -29,7 +25,7 @@ func run_command(command string, args []string, trim bool) (error) {
 	}
 	s := bufio.NewScanner(r)
 	s.Split(bufio.ScanLines)
-	line_counter := 2
+	line_counter := 0
 	tm_height := tm.Height()
 	for s.Scan() {
 		fmt.Println(s.Text())
@@ -41,7 +37,7 @@ func run_command(command string, args []string, trim bool) (error) {
 	return nil
 }
 
-func handle(configFile, filePath string, verbose, trim bool) (error) {
+func handle(configFile, filePath string, verbose bool) (error) {
 	// get mimetype of given file, we don't care about the extension
 	if err := magicmime.Open(magicmime.MAGIC_MIME_TYPE | magicmime.MAGIC_SYMLINK); err != nil {
 		return err
@@ -81,7 +77,7 @@ func handle(configFile, filePath string, verbose, trim bool) (error) {
 			if verbose {
 				log.Printf("running command %s %s\n", command, args)
 			}
-			return run_command(command, args, trim)
+			return run_command(command, args)
 		}
 	}
 	return errors.New(fmt.Sprintf("couldn't find a matching string for mime %s", mime))

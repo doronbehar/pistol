@@ -17,7 +17,6 @@ func main() {
 	// Setup cmdline arguments
 	cmd := cmdline.New()
 	cmd.AddFlag("v", "verbosity","increase verbosity")
-	cmd.AddFlag("t", "trim","trim output (not needed if used in lf)")
 	cmd.AddOption("c", "config", "config", fmt.Sprintf("configuration file to use (defaults to %s/pistol.conf)", xdg.ConfigHome))
 	cmd.AddArgument("file", "the file to preview")
 	cmd.Parse(os.Args)
@@ -34,7 +33,7 @@ func main() {
 	}
 
 	// handle file argument with configuration
-	err := handle(configPath, cmd.ArgumentValue("file"), cmd.IsOptionSet("v"), cmd.IsOptionSet("t"))
+	err := handle(configPath, cmd.ArgumentValue("file"), cmd.IsOptionSet("v"))
 	if err != nil {
 		log.Fatal(err)
 		os.Exit(2)
