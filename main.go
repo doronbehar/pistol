@@ -33,9 +33,10 @@ func main() {
 	}
 
 	// handle file argument with configuration
-	err := handle(configPath, cmd.ArgumentValue("file"), cmd.IsOptionSet("v"))
+	previewer, err := NewPreviewer(cmd.ArgumentValue("file"), configPath, cmd.IsOptionSet("v"))
 	if err != nil {
 		log.Fatal(err)
 		os.Exit(2)
 	}
+	previewer.Write(os.Stdout)
 }
