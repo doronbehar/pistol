@@ -1,4 +1,4 @@
-package main
+package pistol
 
 import (
 	"log"
@@ -74,16 +74,15 @@ func NewPreviewer(filePath, configPath string, verbose bool) (Previewer, error) 
 	return p, nil
 }
 
-func (p *Previewer) Write(w io.Writer) {
+func (p *Previewer) Write(w io.Writer) (err error) {
 	// if a match was encountered when the configuration file was read
 	if p.command != "" {
 		cmd := exec.Command(p.command, p.args...)
 		cmd.Stdout = w
 		if err := cmd.Start(); err != nil {
-			panic(err)
+			return nil
 		}
 		cmd.Wait()
-		return
 	}
-	// if the above didn't happen, we try to use an internal viewer
+	return nil
 }

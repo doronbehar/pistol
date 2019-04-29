@@ -5,6 +5,7 @@ import (
 	"os"
 	"log"
 
+	"github.com/doronbehar/pistol"
 	"github.com/galdor/go-cmdline"
 	"github.com/adrg/xdg"
 )
@@ -33,10 +34,13 @@ func main() {
 	}
 
 	// handle file argument with configuration
-	previewer, err := NewPreviewer(cmd.ArgumentValue("file"), configPath, cmd.IsOptionSet("v"))
+	previewer, err := pistol.NewPreviewer(cmd.ArgumentValue("file"), configPath, cmd.IsOptionSet("v"))
 	if err != nil {
 		log.Fatal(err)
 		os.Exit(2)
 	}
-	previewer.Write(os.Stdout)
+	if err := previewer.Write(os.Stdout); err != nil {
+		log.Fatal(err)
+		os.Exit(2)
+	}
 }
