@@ -7,15 +7,16 @@ import (
 	"io"
 	"os/exec"
 	"fmt"
-	"regexp"
 	"strings"
-	// "errors"
+	"regexp"
 
+	"github.com/doronbehar/pistol/internal_writers"
 	"github.com/rakyll/magicmime"
 )
 
 type Previewer struct {
-	mimetype string
+	filePath string
+	mimeType string
 	verbose bool
 	// if the following are set, we use them, if not, we revert to using internal mechanisms
 	command string
@@ -36,9 +37,9 @@ func NewPreviewer(filePath, configPath string, verbose bool) (Previewer, error) 
 	if err != nil {
 		return p, err
 	}
-	p.mimetype = mimetype
+	p.mimeType = mimetype
 	if verbose {
-		log.Printf("detected mimetype is %s", p.mimetype)
+		log.Printf("detected mimetype is %s", p.mimeType)
 		log.Printf("reading configuration from %s", configPath)
 	}
 	file, err := os.Open(configPath)
@@ -49,7 +50,7 @@ func NewPreviewer(filePath, configPath string, verbose bool) (Previewer, error) 
 	scanner.Split(bufio.ScanLines)
 	for scanner.Scan() {
 		def := strings.Split(scanner.Text(), " ")
-		match, err := regexp.MatchString(def[0], p.mimetype)
+		match, err := regexp.MatchString(def[0], p.mimeType)
 		if err != nil {
 			return p, err
 		}
@@ -65,24 +66,34 @@ func NewPreviewer(filePath, configPath string, verbose bool) (Previewer, error) 
 			if verbose {
 				log.Printf("previewer's command is %s %s\n", p.command, p.args)
 			}
-			break
+			return p, nil
 		}
 	}
-	if verbose && p.command == "" {
-		log.Printf("didn't find a match for detected mimetype %s\n", p.mimetype)
+	p.filePath = filePath
+	if verbose {
+		log.Printf("didn't find a match in configuration for detected mimetype: %s\n", p.mimeType)
 	}
 	return p, nil
 }
 
-func (p *Previewer) Write(w io.Writer) (err error) {
+func (p *Previewer) Write(w io.Writer) (error) {
 	// if a match was encountered when the configuration file was read
 	if p.command != "" {
 		cmd := exec.Command(p.command, p.args...)
 		cmd.Stdout = w
 		if err := cmd.Start(); err != nil {
-			return nil
+			return err
 		}
 		cmd.Wait()
+	} else {
+		// try to match with internal writers
+		internal_writer, err := pistol.MatchInternalWriter(p.mimeType, p.filePath, p.verbose)
+		if err != nil {
+			return err
+		}
+		if err := internal_writer(w); err != nil {
+			return err
+		}
 	}
 	return nil
 }
