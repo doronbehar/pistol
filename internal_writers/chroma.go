@@ -14,7 +14,7 @@ import (
 
 func NewChromaWriter(mimeType, filePath string, verbose bool) (func(w io.Writer) error, error) {
 	if verbose {
-		log.Printf("using chroma to print file with syntax highlighting\n")
+		log.Printf("using chroma to print %s with syntax highlighting\n", filePath)
 	}
 	lexer := clexers.Match(filePath)
 	if lexer == nil {
