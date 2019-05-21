@@ -3,7 +3,6 @@ package pistol
 import (
 	"io"
 	"regexp"
-	"errors"
 )
 
 var internalWritersRegexMap = map[string] func(string, string, bool) (func(w io.Writer) error, error) {
@@ -30,5 +29,9 @@ func MatchInternalWriter(mimeType, filePath string, verbose bool) (func(w io.Wri
 			return writer, nil
 		}
 	}
-	return emptyWriter, errors.New("no internal handler is implemented for given mime type either")
+	writer, err := NewFallbackWriter(mimeType, filePath, verbose)
+	if err != nil {
+		return emptyWriter, err
+	}
+	return writer, err
 }
