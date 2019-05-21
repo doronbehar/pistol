@@ -130,8 +130,7 @@ HTML previewer:
 text/html w3m -T text/html -dump %s
 ```
 
-And here's an example that leverages `ls` for printing directories, just in
-case this is needed for whatever usage you have in mind for Pistol:
+And here's an example that leverages `ls` for printing directories' contents:
 
 ```
 inode/directory ls -l --color %s
