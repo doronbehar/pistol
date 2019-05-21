@@ -1,45 +1,35 @@
 # Pistol
 
-## Background
+## Introduction
 
-Pistol is a file previewer that was designed to replace `scope.sh` which is
-widely used in [Ranger](https://ranger.github.io/) configurations. 
+Pistol is a file previewer for command line file managers such as
+[Ranger](https://ranger.github.io/) and [Lf](https://github.com/gokcehan/lf)
+intended to replace the file previewer
+[`scope.sh`](https://github.com/ranger/ranger/blob/v1.9.2/ranger/data/scope.sh)
+commonly used with them.
 
-Ranger is written in Python which means it has various disadvantages such as
-slow startup time and lot's of dependencies including Python it self which need
-to be installed on runtime. Never the less, it has proven useful and popular
-among passionate command line users.
+`scope.sh` is written in Bash and it uses several `case` switches to handle
+every [MIME type](https://en.wikipedia.org/wiki/Media_type) or file extension.
+Bash has a slow startup time and the `case` switches make it hard to configure
+/ maintain. Additionally, `scope.sh` invokes the external program `file` to
+determine the MIME type which makes it even slower.
 
-Ranger has given inspiration to an alternative written in Go called
-[Lf](https://github.com/gokcehan/lf). Lf attempts to be a faster and a simpler
-file manager which is intended to replace Ranger.
+Pistol is written in Go (with 0 dependencies) and it's MIME type detection is
+internal. Moreover, it features native preview support for most types of
+archive files and for text files along with syntax highlighting while
+`scope.sh` relies on external programs to do these basic tasks.
 
-One of the main features used by both file managers is the preview window which
-displays a preview of the highlighted file in it. Ranger uses a shell
-script called `scope.sh` which is the common way to configure what program is
-used for what kind of file.
+The following table lists Pistol's native previewing support:
 
-Inspired by Lf, Pistol aims to provide a faster and simpler alternative to
-`scope.sh`. Instead of spawning external programs like `file` and running
-multiple `case` switches to handle every mimetype or file extension, Pistol
-attempts to enable the same functionality but in a much simpler manner and
-using only through mimetype detection.
-
-## Design
-
-Pistol was designed to be not only a faster replacement for `scope.sh`, but
-also provide a simpler interface - both in regard to configuration and first
-time usage. Therefor, out of the box, Pistol provides preview using internal
-previewers for certain common mimetypes:
-
-File Type  | Notes on implementation
+File/MIME Type  | Notes on implementation
 ---------- | -----------------------
 `text/*`   | Prints text files with syntax highlighting thanks to [`chroma`](https://github.com/alecthomas/chroma).
 Archives   | Prints the contents of archive files using [`archiver`](https://github.com/mholt/archiver).
 
-Besides these, if a previewer wasn't configured for a given mimetype and
-a file of this mimetype is encountered, a general description of the file type will
-be printed. So for example, the preview for an executable will be similar to this:
+In case Pistol encounters a MIME type which it doesn't know how to handle
+natively and no configuration was defined for it, a general description of the
+file type will be printed. E.g, the preview for an executable will be similar
+to this:
 
 ```
 ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=a34861a1ae5358dc1079bc239df9dfe4830a8403, for GNU/Linux 3.2.0, not stripped
@@ -47,27 +37,37 @@ ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked, interpr
 
 This feature is available out of the box as well.
 
-### MimeType Detection
+### A Note on MIME type Detection
 
-There are several Go libraries that provide mimetype detection. Here are the
-top search results (using a common web search engine) I got when I started
-develop Pistol and I realised I need such a library for the project.
+There are several Go libraries that provide MIME type detection. Here are the
+top search results I got using a common web search engine:
 
-- https://github.com/gabriel-vasile/mimetype/
+- https://github.com/gabriel-vasile/mimetype
 - https://github.com/h2non/filetype
 - https://github.com/rakyll/magicmime
 
 Pistol uses the last one which leverages the well known C library
-[libmagic(3)](http://linux.die.net/man/3/libmagic). This choice was made after
-experimenting with the other candidates and due to their lack of extensive
-database as [libmagic(3)](http://linux.die.net/man/3/libmagic) has, I chose
-[magicmime](https://github.com/rakyll/magicmime).
+[libmagic(3)](http://linux.die.net/man/3/libmagic). I made this choice after
+experimenting with the other candidates and due to their lack of an extensive
+database such as [libmagic(3)](http://linux.die.net/man/3/libmagic) has,
+I chose [magicmime](https://github.com/rakyll/magicmime).
 
 Note that this choice also features compatibility with the standard command
-`file` which is available by default on most GNU/Linux platforms
+`file` which is available by default on most GNU/Linux distributions.
 <sup id="a1">[1](#f1)</sup>.
 
 ## Install
+
+### Prerequisits
+
+Since Pistol depends on  [magicmime](https://github.com/rakyll/magicmime),
+you'll need a `libmagic` package installed. Please refer to [this section in
+magicmime's
+README](https://github.com/rakyll/magicmime/tree/v0.1.0#prerequisites) for the
+appropriete commands for every OS.
+
+Assumming `libmagic` is installed, Use the following command to install Pistol to
+`$GOPATH/.bin/pistol`:
 
 ```sh
 go get -u github.com/doronbehar/pistol/cmd/pistol
@@ -92,22 +92,24 @@ file                   the file to preview
 
 ## Configuration
 
-Although Pistol previews files of certain mimetypes by default, it doesn't
-force you into using these internal previewers for these mimetypes. You can
-change this behaviour by writing a configuration file in
-`$XDG_CONFIG_HOME/pistol.conf` (or `~/.config/pistol.conf`) which features
-a dumb simple syntax as explained below.
+Although Pistol previews files of certain MIME types by default, it doesn't
+force you to use these internal previewers for these MIME types. You can change
+this behaviour by writing a configuration file in
+`$XDG_CONFIG_HOME/pistol.conf` (or `~/.config/pistol.conf`) with a dumb simple
+syntax as explained below.
 
 ### Syntax
 
-The 1st word is a regular expression, interpreted by the [built-in go
-library](https://golang.org/pkg/regexp) which it's syntax is documented
-[here](https://golang.org/pkg/regexp/syntax/). This regular expression should
-match the mimetype of the file you may wish to preview. You can inspect the
-mimetype of any file on GNU/Linux with the command `file --mime-type <file>`.
+The 1st word in every line is a regular expression, interpreted by the
+[built-in go library](https://golang.org/pkg/regexp) which it's syntax is
+documented [here](https://golang.org/pkg/regexp/syntax/). This regular
+expression should match the MIME type of the file you may wish to preview. You
+can inspect the MIME type of any file on a GNU/Linux OS and on Mac OS with the
+command `file --mime-type <file>`.
 
-The rest of the line, is interpreted as the command you wish to run on the
-file. `%s` is used in this part of the line as the file argument.
+The rest of the line, is interpreted as the command you wish to run on the file
+when the given MIME type matches. `%s` is used in this part of the line as the
+file argument.
 
 For example, say you wish to replace Pistol's internal text previewer with that
 of [bat](https://github.com/sharkdp/bat)'s, you'd put the following in your
@@ -128,8 +130,8 @@ HTML previewer:
 text/html w3m -T text/html -dump %s
 ```
 
-And here's an example that leverages `ls` for printing a directories content,
-just in case this is needed with whatever usage you have in mind for Pistol:
+And here's an example that leverages `ls` for printing directories, just in
+case this is needed for whatever usage you have in mind for Pistol:
 
 ```
 inode/directory ls -l --color %s
@@ -138,24 +140,23 @@ inode/directory ls -l --color %s
 #### A Note on RegEx matching
 
 When Pistol parses your configuration file, as soon as it finds a match, it
-stops the parsing process and it invokes the command written on the rest of the
-line. Therefor, if you wish to use the examples from above which use `w3m` and
-`bat`, you'll need to put `w3m`'s line **before** `bat`'s line. Since
-otherwise, `text/*` will be matched first and `text/html` won't be checked at
-all.
+stops parsing it and it invokes the command written on the rest of the line.
+Therefor, if you wish to use the examples from above which use `w3m` and `bat`,
+you'll need to put `w3m`'s line **before** `bat`'s line. Since otherwise,
+`text/*` will be matched first and `text/html` won't be checked at all.
 
 Of course that this is a mere example, the same may apply to any regular
-expressions used internally or externally.
+expressions you'd choose to match against.
 
-For a list of the internal regular expressions which are tested against in
-order to find a suitable internal previewer, see [this
-variable](https://github.com/doronbehar/pistol/blob/218310e5bf394d0d7edca4274145eef8f2f491df/internal_writers/map.go#L8-L12).
+For a list of the internal regular expressions tested against when Pistol
+reverts to it's native previewers, read the file
+[`internal_writers/map.go`](https://github.com/doronbehar/pistol/blob/218310e5bf394d0d7edca4274145eef8f2f491df/internal_writers/map.go#L8-L12).
 
 ## Footnotes
 
-<b id="f1">1</b> Considering Pistol's dependence on
+<b id="f1">1</b> Considering Pistol's indirect dependence on
 [libmagic(3)](http://linux.die.net/man/3/libmagic), it will never attempt to
-have Windows support unless you are willing to compile it for Windows and
-attempt to teach [magicmime](https://github.com/rakyll/magicmime) to use it.
-[↩](#a1)
-
+support Windows unless you'd be willing to take the trouble of compiling it for
+Windows and teach [magicmime](https://github.com/rakyll/magicmime) to use it
+your version of libmagic. If you'll succeed in this heroic task, please let us
+know. [↩](#a1)
