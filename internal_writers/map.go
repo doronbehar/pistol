@@ -7,7 +7,7 @@ import (
 
 var internalWritersRegexMap = map[string] func(string, string, bool) (func(w io.Writer) error, error) {
 	"text/*": NewChromaWriter,
-	"application/x-xz": NewArchiveLister,
+	"application/(x-(xz|bzip|bzip2|rar|tar)|zip)": NewArchiveLister,
 }
 
 var emptyWriter = func(w io.Writer) error {
