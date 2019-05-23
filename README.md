@@ -58,15 +58,15 @@ Note that this choice also features compatibility with the standard command
 
 ## Install
 
-### Prerequisits
+### Prerequisites
 
 Since Pistol depends on  [magicmime](https://github.com/rakyll/magicmime),
 you'll need a `libmagic` package installed. Please refer to [this section in
 magicmime's
 README](https://github.com/rakyll/magicmime/tree/v0.1.0#prerequisites) for the
-appropriete commands for every OS.
+appropriate commands for every OS.
 
-Assumming `libmagic` is installed and you have [setup a Go
+Assuming `libmagic` is installed and you have [setup a Go
 environment](https://golang.org/doc/install), Use the following command to
 install Pistol to `$GOPATH/.bin/pistol`:
 
