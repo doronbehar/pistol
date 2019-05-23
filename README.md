@@ -90,6 +90,37 @@ ARGUMENTS
 file                   the file to preview
 ```
 
+### Integrations
+
+#### Ranger / Lf
+
+Pistol can be used as a file previewer in [Ranger](https://ranger.github.io/)
+and [Lf](https://github.com/gokcehan/lf). For Ranger, set your `preview_script` in your
+`rc.conf` as follows:
+
+```
+set preview_script ~/.go/bin/pistol
+```
+
+The same goes for Lf, but in `lfrc`:
+
+```
+set previewer ~/.go/bin/pistol
+```
+
+You need to put the full path of where `pistol` is installed. Use the command
+`which pistol` to be sure of that.
+
+#### fzf
+
+If you use [fzf](https://github.com/junegunn/fzf) to search for files, you can
+tell it to use `pistol` as the previewer. For example, the following command
+opens python file(s) that are selected with fzf with pistol as a previewer:
+
+```sh
+vim "$(find -name '*.py' | fzf --preview='pistol {}')"
+```
+
 ## Configuration
 
 Although Pistol previews files of certain MIME types by default, it doesn't
