@@ -66,8 +66,9 @@ magicmime's
 README](https://github.com/rakyll/magicmime/tree/v0.1.0#prerequisites) for the
 appropriete commands for every OS.
 
-Assumming `libmagic` is installed, Use the following command to install Pistol to
-`$GOPATH/.bin/pistol`:
+Assumming `libmagic` is installed and you have [setup a Go
+environment](https://golang.org/doc/install), Use the following command to
+install Pistol to `$GOPATH/.bin/pistol`:
 
 ```sh
 go get -u github.com/doronbehar/pistol/cmd/pistol
