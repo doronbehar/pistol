@@ -28,7 +28,16 @@ func NewChromaWriter(mimeType, filePath string, verbose bool) (func(w io.Writer)
 	if err != nil {
 		return emptyWriter, err
 	}
-	formatter := cformatters.Get("terminal")
+	env_formatter := os.Getenv("PISTOL_CHROMA_FORMATTER")
+	var formatter chroma.Formatter
+	if env_formatter != "" {
+		if verbose {
+			log.Printf("Using style from environment: %s\n", env_formatter)
+		}
+		formatter = cformatters.Get(env_formatter)
+	} else {
+		formatter = cformatters.Get("terminal")
+	}
 	env_style := os.Getenv("PISTOL_CHROMA_STYLE")
 	var style *chroma.Style
 	if env_style != "" {
