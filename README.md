@@ -151,6 +151,48 @@ For a list of the internal regular expressions tested against when Pistol
 reverts to it's native previewers, read the file
 [`internal_writers/map.go`](https://github.com/doronbehar/pistol/blob/218310e5bf394d0d7edca4274145eef8f2f491df/internal_writers/map.go#L8-L12).
 
+
+### Environmental Variables
+
+Pistol's internal previewer for text files includes syntax highlighting thanks
+to [chroma](https://github.com/alecthomas/chroma) Go library. You can customize
+Pistol's syntax highlighting formatting and style through environmental
+variables.
+
+#### Chroma Formatters
+
+The term _formatter_ refers to the way the given file is presented in the
+terminal. These include:
+
+- `terminal`: The default formatter that uses terminal control codes to change
+  colors between every key word. This formatter has 8 colors and it is the
+  default.
+- `terminal256`: Same as `terminal` but with 256 colors available.
+- `terminal16m`: Same as `terminal` but with 24 Bits colors i.e True-Color.
+
+Other formatters include `json`, and `html` but they won't be useful to be used with Pistol.
+
+To tell Pistol to use a specific formatter, set `PISTOL_CHROMA_FORMATTER` in
+your  environment, e.g:
+
+```sh
+export PISTOL_CHROMA_FORMATTER=terminal16m
+```
+
+#### Chroma Styles
+
+The term _style_ refers to the set of colors used to print the given file.
+All styles are documented and presented by chroma
+[here](https://xyproto.github.io/splash/docs/all.html) and
+[here](https://xyproto.github.io/splash/docs/longer/all.html).
+
+The default style used by Pistol is `pygments`. To tell Pistol to use
+a specific style set `PISTOL_CHROMA_STYLE` in your environment, e.g:
+
+```sh
+export PISTOL_CHROMA_STYLE=monokai
+```
+
 ## Footnotes
 
 <b id="f1">1</b> Considering Pistol's indirect dependence on
