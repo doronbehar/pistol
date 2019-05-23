@@ -19,7 +19,7 @@ func main() {
 	cmd := cmdline.New()
 	cmd.AddFlag("v", "verbosity","increase verbosity")
 	cmd.AddOption("c", "config", "config", fmt.Sprintf("configuration file to use (defaults to %s/pistol.conf)", xdg.ConfigHome))
-	cmd.AddArgument("file", "the file to preview")
+	cmd.AddTrailingArguments("file", "the file to preview")
 	cmd.Parse(os.Args)
 
 	// Handle configuration file path
@@ -34,7 +34,7 @@ func main() {
 	}
 
 	// handle file argument with configuration
-	previewer, err := pistol.NewPreviewer(cmd.ArgumentValue("file"), configPath, verbose)
+	previewer, err := pistol.NewPreviewer(cmd.TrailingArgumentsValues("file")[0], configPath, verbose)
 	if err != nil {
 		log.Fatal(err)
 		os.Exit(2)
