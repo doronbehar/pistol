@@ -36,7 +36,7 @@ func NewChromaWriter(mimeType, filePath string, verbose bool) (func(w io.Writer)
 		}
 		formatter = cformatters.Get(env_formatter)
 	} else {
-		formatter = cformatters.Get("terminal")
+		formatter = cformatters.TTY8
 	}
 	env_style := os.Getenv("PISTOL_CHROMA_STYLE")
 	var style *chroma.Style
@@ -46,7 +46,8 @@ func NewChromaWriter(mimeType, filePath string, verbose bool) (func(w io.Writer)
 		}
 		style = cstyles.Get(env_style)
 	} else {
-		style = cstyles.Get("vim")
+		// I think this is the most impressive one on default usage with Lf
+		style = cstyles.Get("pygments")
 	}
 	return func (w io.Writer) error {
 		return formatter.Format(w, style, iterator)
