@@ -40,11 +40,18 @@ func NewPreviewer(filePath, configPath string, verbose bool) (Previewer, error) 
 	p.mimeType = mimetype
 	if verbose {
 		log.Printf("detected mimetype is %s", p.mimeType)
-		log.Printf("reading configuration from %s", configPath)
+	}
+	p.filePath = filePath
+	// If configuration file doesn't exist, we don't try to read it
+	if configPath == "" {
+		return p, nil
 	}
 	file, err := os.Open(configPath)
 	if err != nil {
 		return p, err
+	}
+	if verbose {
+		log.Printf("reading configuration from %s", configPath)
 	}
 	scanner := bufio.NewScanner(file)
 	scanner.Split(bufio.ScanLines)
@@ -69,7 +76,6 @@ func NewPreviewer(filePath, configPath string, verbose bool) (Previewer, error) 
 			return p, nil
 		}
 	}
-	p.filePath = filePath
 	if verbose {
 		log.Printf("didn't find a match in configuration for detected mimetype: %s\n", p.mimeType)
 	}
