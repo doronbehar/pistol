@@ -211,6 +211,12 @@ your  environment, e.g:
 export PISTOL_CHROMA_FORMATTER=terminal16m
 ```
 
+**Note**: [Ranger](https://ranger.github.io/) and
+[Lf](https://github.com/gokcehan/lf) don't support more then 8 colors in their
+preview window so this variable is best kept unset at least within these
+programs. You can use `/usr/bin/env -u PISTOL_CHROMA_FORMATTER pistol` as the
+preview command if `PISTOL_CHROMA_FORMATTER` is set in your global environment.
+
 #### Chroma Styles
 
 The term _style_ refers to the set of colors used to print the given file.
