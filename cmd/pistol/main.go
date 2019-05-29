@@ -26,6 +26,10 @@ func main() {
 	configPath := cmd.OptionValue("config")
 
 	// handle file argument with configuration
+	if len(cmd.TrailingArgumentsValues("file")) == 0 {
+		log.Fatalf("no arguments!")
+		os.Exit(1)
+	}
 	previewer, err := pistol.NewPreviewer(cmd.TrailingArgumentsValues("file")[0], configPath)
 	if err != nil {
 		log.Fatal(err)
