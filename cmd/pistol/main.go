@@ -17,7 +17,7 @@ func main() {
 
 	// Setup cmdline arguments
 	cmd := cmdline.New()
-	cmd.AddFlag("v", "verbosity","increase verbosity")
+	cmd.AddFlag("v", "verbosity", "increase verbosity")
 	cmd.AddOption("c", "config", "config", fmt.Sprintf("configuration file to use (defaults to %s/pistol.conf)", xdg.ConfigHome))
 	cmd.AddTrailingArguments("file", "the file to preview")
 	cmd.Parse(os.Args)
