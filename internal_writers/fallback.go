@@ -7,7 +7,7 @@ import (
 	"github.com/rakyll/magicmime"
 )
 
-func NewFallbackWriter(mimeType, filePath string, verbose bool) (func(w io.Writer) error, error) {
+func NewFallbackWriter(mimeType, filePath string) (func(w io.Writer) error, error) {
 	if err := magicmime.Open(magicmime.MAGIC_SYMLINK); err != nil {
 		return emptyWriter, err
 	}

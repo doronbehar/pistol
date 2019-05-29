@@ -1,7 +1,6 @@
 package pistol
 
 import (
-	"log"
 	"bufio"
 	"os"
 	"io"
@@ -10,6 +9,7 @@ import (
 	"strings"
 	"regexp"
 
+	log "github.com/sirupsen/logrus"
 	"github.com/doronbehar/pistol/internal_writers"
 	"github.com/rakyll/magicmime"
 )
@@ -17,16 +17,20 @@ import (
 type Previewer struct {
 	filePath string
 	mimeType string
-	verbose bool
 	// if the following are set, we use them, if not, we revert to using internal mechanisms
 	command string
 	args []string
 }
 
-func NewPreviewer(filePath, configPath string, verbose bool) (Previewer, error) {
+func NewPreviewer(filePath, configPath string) (Previewer, error) {
+	verbose := os.Getenv("PISTOL_DEBUG")
+	if verbose != "" {
+		log.SetLevel(log.InfoLevel)
+	} else {
+		log.SetLevel(log.ErrorLevel)
+	}
 	// create an empty Previewer
 	p := Previewer{}
-	p.verbose = verbose
 	// opens the magic library
 	if err := magicmime.Open(magicmime.MAGIC_MIME_TYPE | magicmime.MAGIC_SYMLINK); err != nil {
 		return p, err
@@ -38,21 +42,18 @@ func NewPreviewer(filePath, configPath string, verbose bool) (Previewer, error) 
 		return p, err
 	}
 	p.mimeType = mimetype
-	if verbose {
-		log.Printf("detected mimetype is %s", p.mimeType)
-	}
+	log.Infof("detected mimetype is %s", p.mimeType)
 	p.filePath = filePath
 	// If configuration file doesn't exist, we don't try to read it
 	if configPath == "" {
+		log.Warnf("configuration file was not supplied")
 		return p, nil
 	}
 	file, err := os.Open(configPath)
 	if err != nil {
 		return p, err
 	}
-	if verbose {
-		log.Printf("reading configuration from %s", configPath)
-	}
+	log.Infof("reading configuration from %s", configPath)
 	scanner := bufio.NewScanner(file)
 	scanner.Split(bufio.ScanLines)
 	for scanner.Scan() {
@@ -70,15 +71,11 @@ func NewPreviewer(filePath, configPath string, verbose bool) (Previewer, error) 
 					p.args = append(p.args, arg)
 				}
 			}
-			if verbose {
-				log.Printf("previewer's command is %s %s\n", p.command, p.args)
-			}
+			log.Infof("previewer's command is %s %s\n", p.command, p.args)
 			return p, nil
 		}
 	}
-	if verbose {
-		log.Printf("didn't find a match in configuration for detected mimetype: %s\n", p.mimeType)
-	}
+	log.Infof("didn't find a match in configuration for detected mimetype: %s\n", p.mimeType)
 	return p, nil
 }
 
@@ -93,7 +90,7 @@ func (p *Previewer) Write(w io.Writer) (error) {
 		cmd.Wait()
 	} else {
 		// try to match with internal writers
-		internal_writer, err := pistol.MatchInternalWriter(p.mimeType, p.filePath, p.verbose)
+		internal_writer, err := pistol.MatchInternalWriter(p.mimeType, p.filePath)
 		if err != nil {
 			return err
 		}

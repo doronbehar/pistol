@@ -3,18 +3,16 @@ package pistol
 import (
 	"archive/tar"
 	"archive/zip"
-	"log"
 	"io"
 	"fmt"
 
 	"github.com/mholt/archiver"
+	log "github.com/sirupsen/logrus"
 	"github.com/nwaples/rardecode"
 )
 
-func NewArchiveLister(mimeType, filePath string, verbose bool) (func(w io.Writer) error, error) {
-	if verbose {
-		log.Printf("listing files in archive %s\n", filePath)
-	}
+func NewArchiveLister(mimeType, filePath string) (func(w io.Writer) error, error) {
+	log.Infof("listing files in archive %s\n", filePath)
 	return func (w io.Writer) error {
 		var count int
 		err := archiver.Walk(filePath, func(f archiver.File) error {
