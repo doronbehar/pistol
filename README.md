@@ -211,11 +211,14 @@ your  environment, e.g:
 export PISTOL_CHROMA_FORMATTER=terminal16m
 ```
 
-**Note**: [Ranger](https://ranger.github.io/) and
-[Lf](https://github.com/gokcehan/lf) don't support more then 8 colors in their
-preview window so this variable is best kept unset at least within these
-programs. You can use `/usr/bin/env -u PISTOL_CHROMA_FORMATTER pistol` as the
-preview command if `PISTOL_CHROMA_FORMATTER` is set in your global environment.
+Recent versions of [Lf](https://github.com/gokcehan/lf) support [256
+colors](https://github.com/gokcehan/lf/pull/93) in it's preview window.
+AFAIK<sup id="a2">[2](#f2)</sup>, [Ranger](https://ranger.github.io/) supports
+8 colors and Lf's `color256` isn't enabled by default.
+
+Therefor, I decided that it'll be best to keep this variable unset in your
+general environment. If you do set `color256` in your `lfrc`, you may feel free
+to set `PISTOL_CHROMA_FORMATTER` in your environment.
 
 #### Chroma Styles
 
@@ -239,3 +242,7 @@ trouble to personally try and make it work on Windows natively. If you'll
 succeed in the heroic task of compiling libmagic for Windows and teach
 [magicmime](https://github.com/rakyll/magicmime) to use it, please let me know.
 [↩](#a1)
+
+<b id="f2">2</b>I don't use Ranger anymore, ever since I moved to Lf. If you
+have evidence it does support 256 colors, let me know and I'll change the
+default. [↩](#a[↩](#a1)2)
