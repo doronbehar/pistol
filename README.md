@@ -234,8 +234,8 @@ export PISTOL_CHROMA_STYLE=monokai
 ## Footnotes
 
 <b id="f1">1</b> Considering Pistol's indirect dependence on
-[libmagic(3)](http://linux.die.net/man/3/libmagic), it will never attempt to
-support Windows unless you'd be willing to take the trouble of compiling it for
-Windows and teach [magicmime](https://github.com/rakyll/magicmime) to use it
-your version of libmagic. If you'll succeed in this heroic task, please let us
-know. [↩](#a1)
+[libmagic(3)](http://linux.die.net/man/3/libmagic), I will never take the
+trouble to personally try and make it work on Windows natively. If you'll
+succeed in the heroic task of compiling libmagic for Windows and teach
+[magicmime](https://github.com/rakyll/magicmime) to use it, please let me know.
+[↩](#a1)
