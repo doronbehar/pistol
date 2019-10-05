@@ -82,7 +82,7 @@ Usage: pistol OPTIONS <file>
 
 OPTIONS
 
--c, --config <config>  configuration file to use (defaults to /home/doron/.config/pistol.conf)
+-c, --config <config>  configuration file to use (defaults to ~/.config/pistol/pistol.conf)
 -h, --help             print help and exit
 -v, --verbosity        increase verbosity
 
@@ -127,8 +127,8 @@ vim "$(find -name '*.py' | fzf --preview='pistol {}')"
 Although Pistol previews files of certain MIME types by default, it doesn't
 force you to use these internal previewers for these MIME types. You can change
 this behaviour by writing a configuration file in
-`$XDG_CONFIG_HOME/pistol.conf` (or `~/.config/pistol.conf`) with a dumb simple
-syntax as explained below.
+`$XDG_CONFIG_HOME/pistol/pistol.conf` (or `~/.config/pistol/pistol.conf`) with
+a dumb simple syntax as explained below.
 
 ### Syntax
 

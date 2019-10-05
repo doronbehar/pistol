@@ -15,14 +15,21 @@ func main() {
 	log.SetPrefix(os.Args[0] + ": ")
 
 	// Setup cmdline arguments
-	defaultConfigPath, _ := xdg.SearchConfigFile("pistol.conf")
 	cmd := cmdline.New()
-	cmd.AddOption("c", "config", "config file", "configuration file to use")
-	cmd.SetOptionDefault("config", defaultConfigPath)
+	cmd.AddOption("c", "config", "config file", "configuration file to use (defaults to ~/.config/pistol/pistol.conf)")
 	cmd.AddTrailingArguments("file", "the file to preview")
 	cmd.Parse(os.Args)
 
 	// Handle configuration file path
+	xdgPaths := []string{"pistol/pistol.conf", "pistol.conf"}
+	for _, xdgPath := range xdgPaths {
+		defaultConfigPath, err := xdg.SearchConfigFile(xdgPath)
+		// if a file was found
+		if err == nil {
+			cmd.SetOptionDefault("config", defaultConfigPath)
+			break
+		}
+	}
 	configPath := cmd.OptionValue("config")
 
 	// handle file argument with configuration
