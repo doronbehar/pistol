@@ -8,16 +8,16 @@ intended to replace the file previewer
 [`scope.sh`](https://github.com/ranger/ranger/blob/v1.9.2/ranger/data/scope.sh)
 commonly used with them.
 
-`scope.sh` is written in Bash and it uses several `case` switches to handle
-every [MIME type](https://en.wikipedia.org/wiki/Media_type) or file extension.
-Bash has a slow startup time and the `case` switches make it hard to configure
-/ maintain. Additionally, `scope.sh` invokes the external program `file` to
-determine the MIME type which makes it even slower.
+`scope.sh` is a Bash script and using `case` switches to handle every [MIME
+type](https://en.wikipedia.org/wiki/Media_type) or file extension. Bash has
+a slow startup time and the `case` switches make it hard to configure
+/ maintain the script. As a plus, `scope.sh` invokes the external program
+`file` to determine the MIME type which makes it even slower.
 
-Pistol is written in Go (with 0 dependencies) and it's MIME type detection is
-internal. Moreover, it features native preview support for most types of
-archive files and for text files along with syntax highlighting while
-`scope.sh` relies on external programs to do these basic tasks.
+Pistol is a Go (with (almost) 0 dependencies) and it's MIME type detection is
+internal. Moreover, it features native preview support for almost any archive
+file and for text files along with syntax highlighting while `scope.sh` relies
+on external programs to do these basic tasks.
 
 The following table lists Pistol's native previewing support:
 
@@ -26,10 +26,10 @@ File/MIME Type  | Notes on implementation
 `text/*`   | Prints text files with syntax highlighting thanks to [`chroma`](https://github.com/alecthomas/chroma).
 Archives   | Prints the contents of archive files using [`archiver`](https://github.com/mholt/archiver).
 
-In case Pistol encounters a MIME type which it doesn't know how to handle
-natively and no configuration was defined for it, a general description of the
-file type will be printed. E.g, the preview for an executable will be similar
-to this:
+In case Pistol encounters a MIME type it doesn't know how to handle natively
+and you haven't configured a program to handle it, it'll prints a general
+description of the file type it encountered. For example, the preview for an
+executable might be:
 
 ```
 ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=a34861a1ae5358dc1079bc239df9dfe4830a8403, for GNU/Linux 3.2.0, not stripped
@@ -39,12 +39,12 @@ This feature is available out of the box as well.
 
 ### A Note on MIME type Detection
 
-There are several Go libraries that provide MIME type detection. Here are the
-top search results I got using a common web search engine:
+Some _pure_ Go libraries provide MIME type detection. Here are the top search
+results I got using a common web search engine:
 
-- https://github.com/gabriel-vasile/mimetype
-- https://github.com/h2non/filetype
-- https://github.com/rakyll/magicmime
+- [https://github.com/gabriel-vasile/mimetype](https://github.com/gabriel-vasile/mimetype)
+- [https://github.com/h2non/filetype](https://github.com/h2non/filetype)
+- [https://github.com/rakyll/magicmime](https://github.com/rakyll/magicmime)
 
 Pistol uses the last one which leverages the well known C library
 [libmagic(3)](http://linux.die.net/man/3/libmagic). I made this choice after
@@ -86,7 +86,7 @@ magicmime's
 README](https://github.com/rakyll/magicmime/tree/v0.1.0#prerequisites) for the
 appropriate commands for every OS.
 
-Assuming `libmagic` is installed and you have [setup a Go
+Assuming you've installed `libmagic` properly and you have [setup a Go
 environment](https://golang.org/doc/install), Use the following command to
 install Pistol to `$GOPATH/.bin/pistol`:
 
@@ -115,9 +115,9 @@ file                   the file to preview
 
 #### Ranger / Lf
 
-Pistol can be used as a file previewer in [Ranger](https://ranger.github.io/)
-and [Lf](https://github.com/gokcehan/lf). For Ranger, set your `preview_script` in your
-`rc.conf` as follows:
+You can use Pistol as a file previewer in [Ranger](https://ranger.github.io/)
+and [Lf](https://github.com/gokcehan/lf). For Ranger, set your `preview_script`
+in your `rc.conf` as follows:
 
 ```
 set preview_script ~/.go/bin/pistol
@@ -129,17 +129,15 @@ The same goes for Lf, but in `lfrc`:
 set previewer ~/.go/bin/pistol
 ```
 
-You need to put the full path of where `pistol` is installed. Use the command
-`which pistol` to be sure of that.
-
 #### fzf
 
 If you use [fzf](https://github.com/junegunn/fzf) to search for files, you can
 tell it to use `pistol` as the previewer. For example, the following command
-opens python file(s) that are selected with fzf with pistol as a previewer:
+edits with your `$EDITOR` selected python file(s) using `pistol` as
+a previewer:
 
 ```sh
-vim "$(find -name '*.py' | fzf --preview='pistol {}')"
+$EDITOR "$(find -name '*.py' | fzf --preview='pistol {}')"
 ```
 
 ## Configuration
@@ -153,8 +151,7 @@ a dumb simple syntax as explained below.
 ### Syntax
 
 The 1st word in every line is a regular expression, interpreted by the
-[built-in go library](https://golang.org/pkg/regexp) which it's syntax is
-documented [here](https://golang.org/pkg/regexp/syntax/). This regular
+[built-in go library](https://golang.org/pkg/regexp/syntax). This regular
 expression should match the MIME type of the file you may wish to preview. You
 can inspect the MIME type of any file on a GNU/Linux OS and on Mac OS with the
 command `file --mime-type <file>`.
@@ -171,9 +168,7 @@ of [bat](https://github.com/sharkdp/bat)'s, you'd put the following in your
 text/* bat --paging=never --color=always %s
 ```
 
-Naturally, Pistol reads the configuration file first in order to determine how
-to preview a file. Only if such definition is not found, it'll attempt to use
-it's own internal previewers.
+Naturally, your configuration file overrides the internal previewers.
 
 Here's another example which features [w3m](http://w3m.sourceforge.net/) as an
 HTML previewer:
@@ -217,12 +212,13 @@ The term _formatter_ refers to the way the given file is presented in the
 terminal. These include:
 
 - `terminal`: The default formatter that uses terminal control codes to change
-  colors between every key word. This formatter has 8 colors and it is the
+  colors between every key word. This formatter has 8 colors and it's the
   default.
 - `terminal256`: Same as `terminal` but with 256 colors available.
 - `terminal16m`: Same as `terminal` but with 24 Bits colors i.e True-Color.
 
-Other formatters include `json`, and `html` but they won't be useful to be used with Pistol.
+Other formatters include `json`, and `html` but I'd be surprised if you'll find
+them useful for Pistol's purpose.
 
 To tell Pistol to use a specific formatter, set `PISTOL_CHROMA_FORMATTER` in
 your  environment, e.g:
@@ -242,8 +238,8 @@ to set `PISTOL_CHROMA_FORMATTER` in your environment.
 
 #### Chroma Styles
 
-The term _style_ refers to the set of colors used to print the given file.
-All styles are documented and presented by chroma
+The term _style_ refers to the set of colors used to print a given file. the
+chroma project documents all styles
 [here](https://xyproto.github.io/splash/docs/all.html) and
 [here](https://xyproto.github.io/splash/docs/longer/all.html).
 
