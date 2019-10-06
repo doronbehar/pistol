@@ -53,8 +53,28 @@ database such as [libmagic(3)](http://linux.die.net/man/3/libmagic) has,
 I chose [magicmime](https://github.com/rakyll/magicmime).
 
 Note that this choice also features compatibility with the standard command
-`file` which is available by default on most GNU/Linux distributions.
-<sup id="a1">[1](#f1)</sup>.
+`file` which is available by default on most GNU/Linux distributions <sup
+id="a1">[1](#f1)</sup>.
+
+### A Note on Archive Previews
+
+Pistol previews all archive / compression formats supported by the Go library
+[`archiver`](https://github.com/mholt/archiver). Some formats do nothing but
+compression, meaning they operate on 1 file alone and some files are
+a combination of archive, compressed in a certain algorithm.
+
+For example, a `.gz` file is a _single_ file compressed with `gzip`. A `.tar`
+file is an _uncompressed_ archive (collection) of files. A `.tar.gz` is
+a `.tar` file compressedusing `gzip`. 
+
+When pistol encounters a single file compressed using a known compression
+algorithm, it doesn't know how to handle it's content, so it displays the type
+of the archive. If a known compression algorithm has compressed a `.tar` file,
+Pistol lists the files themselves.
+
+[brotli](https://en.wikipedia.org/wiki/Brotli) compressed files, (`.tar.br` or
+`.br`) are not detected by libmagic so Pistol doesn't know how to handle them.
+<sup id="a2">[2](#f2)</sup>
 
 ## Install
 
@@ -213,7 +233,7 @@ export PISTOL_CHROMA_FORMATTER=terminal16m
 
 Recent versions of [Lf](https://github.com/gokcehan/lf) support [256
 colors](https://github.com/gokcehan/lf/pull/93) in it's preview window.
-AFAIK<sup id="a2">[2](#f2)</sup>, [Ranger](https://ranger.github.io/) supports
+AFAIK<sup id="a3">[3](#f3)</sup>, [Ranger](https://ranger.github.io/) supports
 8 colors and Lf's `color256` isn't enabled by default.
 
 Therefor, I decided that it'll be best to keep this variable unset in your
@@ -243,6 +263,9 @@ succeed in the heroic task of compiling libmagic for Windows and teach
 [magicmime](https://github.com/rakyll/magicmime) to use it, please let me know.
 [↩](#a1)
 
-<b id="f2">2</b>I don't use Ranger anymore, ever since I moved to Lf. If you
+<b id="f2">2</b> [`file` bug report](https://bugs.astron.com/view.php?id=111);
+[`brotli` bug report](https://github.com/google/brotli/issues/727). [↩](#a2)
+
+<b id="f3">3</b>I don't use Ranger anymore, ever since I moved to Lf. If you
 have evidence it does support 256 colors, let me know and I'll change the
-default. [↩](#a[↩](#a1)2)
+default. [↩](#a3)
