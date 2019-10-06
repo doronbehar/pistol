@@ -7,7 +7,16 @@ import (
 
 var internalWritersRegexMap = map[string] func(string, string) (func(w io.Writer) error, error) {
 	"text/*": NewChromaWriter,
-	"application/(x-(xz|bzip|bzip2|rar|tar)|zip)": NewArchiveLister,
+	"application/zip": NewArchiveLister,
+	"application/x-rar-compressed": NewArchiveLister,
+	"application/x-tar": NewArchiveLister,
+	"application/x-xz": NewArchiveLister,
+	"application/x-bzip2": NewArchiveLister,
+	"application/gzip": NewArchiveLister,
+	"application/x-lz4": NewArchiveLister,
+	"application/x-snappy-framed": NewArchiveLister,
+	"application/x-zstd": NewArchiveLister,
+	// TODO: Match brotli when libmagic supports it
 }
 
 var emptyWriter = func(w io.Writer) error {
