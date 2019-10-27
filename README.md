@@ -8,13 +8,12 @@ intended to replace the file previewer
 [`scope.sh`](https://github.com/ranger/ranger/blob/v1.9.2/ranger/data/scope.sh)
 commonly used with them.
 
-`scope.sh` is a Bash script and using `case` switches to handle every [MIME
-type](https://en.wikipedia.org/wiki/Media_type) or file extension. Bash has
-a slow startup time and the `case` switches make it hard to configure
-/ maintain the script. As a plus, `scope.sh` invokes the external program
-`file` to determine the MIME type which makes it even slower.
+`scope.sh` is a Bash script that uses `case` switches and external programs to decide how to preview every file it encounters. It knows how to handle every file according to it's [MIME
+type](https://en.wikipedia.org/wiki/Media_type) and/or file extension using
+`case` switches and external programs. This design makes it hard to configure
+/ maintain and it makes it slow for startup and heavy when running.
 
-Pistol is a Go (with (almost) 0 dependencies) and it's MIME type detection is
+Pistol is a Go program (with (almost) 0 dependencies) and it's MIME type detection is
 internal. Moreover, it features native preview support for almost any archive
 file and for text files along with syntax highlighting while `scope.sh` relies
 on external programs to do these basic tasks.
@@ -27,7 +26,7 @@ File/MIME Type  | Notes on implementation
 Archives   | Prints the contents of archive files using [`archiver`](https://github.com/mholt/archiver).
 
 In case Pistol encounters a MIME type it doesn't know how to handle natively
-and you haven't configured a program to handle it, it'll prints a general
+and you haven't configured a program to handle it, it'll print a general
 description of the file type it encountered. For example, the preview for an
 executable might be:
 
@@ -35,7 +34,7 @@ executable might be:
 ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=a34861a1ae5358dc1079bc239df9dfe4830a8403, for GNU/Linux 3.2.0, not stripped
 ```
 
-This feature is available out of the box as well.
+This feature is available out of the box just like the previews for the common mime types mentioned above.
 
 ### A Note on MIME type Detection
 
@@ -65,15 +64,15 @@ a combination of archive, compressed in a certain algorithm.
 
 For example, a `.gz` file is a _single_ file compressed with `gzip`. A `.tar`
 file is an _uncompressed_ archive (collection) of files. A `.tar.gz` is
-a `.tar` file compressedusing `gzip`. 
+a `.tar` file compressed using `gzip`. 
 
 When pistol encounters a single file compressed using a known compression
-algorithm, it doesn't know how to handle it's content, so it displays the type
+algorithm, it doesn't know how to handle it's content, it displays the type
 of the archive. If a known compression algorithm has compressed a `.tar` file,
 Pistol lists the files themselves.
 
-[brotli](https://en.wikipedia.org/wiki/Brotli) compressed files, (`.tar.br` or
-`.br`) are not detected by libmagic so Pistol doesn't know how to handle them.
+[brotli](https://en.wikipedia.org/wiki/Brotli) compressed archives, (`.tar.br`) and
+brotli compressed files (`.br`) are not detected by libmagic so Pistol doesn't know how to handle them.
 <sup id="a2">[2](#f2)</sup>
 
 ## Install
@@ -196,13 +195,13 @@ expressions you'd choose to match against.
 
 For a list of the internal regular expressions tested against when Pistol
 reverts to it's native previewers, read the file
-[`internal_writers/map.go`](https://github.com/doronbehar/pistol/blob/218310e5bf394d0d7edca4274145eef8f2f491df/internal_writers/map.go#L8-L12).
+[`internal_writers/map.go`](https://github.com/doronbehar/pistol/blob/master/internal_writers/map.go#L8-L12).
 
 
 ### Environmental Variables
 
 Pistol's internal previewer for text files includes syntax highlighting thanks
-to [chroma](https://github.com/alecthomas/chroma) Go library. You can customize
+to the Go library [chroma](https://github.com/alecthomas/chroma). You can customize
 Pistol's syntax highlighting formatting and style through environmental
 variables.
 
