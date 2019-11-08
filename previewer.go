@@ -62,7 +62,7 @@ func NewPreviewer(filePath, configPath string) (Previewer, error) {
 		if err != nil {
 			return p, err
 		}
-		if match {
+		if match && len(def) > 1 {
 			p.command = def[1]
 			for _, arg := range def[2:] {
 				if match, _ := regexp.MatchString("%s", arg); match {
