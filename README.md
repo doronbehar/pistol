@@ -77,6 +77,11 @@ brotli compressed files (`.br`) are not detected by libmagic so Pistol doesn't k
 
 ## Install
 
+If someone has packaged Pistol for your distribution, you might find a package
+for of it linked [in the
+WiKi](https://github.com/doronbehar/pistol/wiki/GNU-Linux-Distributions'-Packages).
+If not, you can install it from source according to the following instructions:
+
 ### Prerequisites
 
 Since Pistol depends on  [magicmime](https://github.com/rakyll/magicmime),
