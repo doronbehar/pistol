@@ -10,7 +10,6 @@ require (
 	github.com/galdor/go-cmdline v1.1.0
 	github.com/mattn/go-isatty v0.0.8 // indirect
 	github.com/mholt/archiver v0.0.0-20190623220050-33320f6f7306
-	github.com/nwaples/rardecode v1.0.0
 	github.com/rakyll/magicmime v0.1.0
 	github.com/sirupsen/logrus v1.4.2
 	github.com/stretchr/testify v1.3.0 // indirect
