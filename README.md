@@ -92,11 +92,13 @@ appropriate commands for every OS.
 
 Assuming you've installed `libmagic` properly and you have [setup a Go
 environment](https://golang.org/doc/install), Use the following command to
-install Pistol to `$GOPATH/.bin/pistol`:
+install Pistol to `$GOPATH/bin/pistol`:
 
 ```sh
-go get -u github.com/doronbehar/pistol/cmd/pistol
+env GO111MODULE=on go get -u github.com/doronbehar/pistol/cmd/pistol
 ```
+
+<sup id="a3">[3](#f3)</sup>
 
 ## Usage
 
@@ -233,7 +235,7 @@ export PISTOL_CHROMA_FORMATTER=terminal16m
 
 Recent versions of [Lf](https://github.com/gokcehan/lf) support [256
 colors](https://github.com/gokcehan/lf/pull/93) in it's preview window.
-AFAIK<sup id="a3">[3](#f3)</sup>, [Ranger](https://ranger.github.io/) supports
+AFAIK<sup id="a4">[4](#f4)</sup>, [Ranger](https://ranger.github.io/) supports
 8 colors and Lf's `color256` isn't enabled by default.
 
 Therefor, I decided that it'll be best to keep this variable unset in your
@@ -266,6 +268,10 @@ succeed in the heroic task of compiling libmagic for Windows and teach
 <b id="f2">2</b> [`file` bug report](https://bugs.astron.com/view.php?id=111);
 [`brotli` bug report](https://github.com/google/brotli/issues/727). [↩](#a2)
 
-<b id="f3">3</b>I don't use Ranger anymore, ever since I moved to Lf. If you
+<b id="f3">3</b> `env GO111MODULE=on` is needed due to a recent bug / issue
+[with Go](https://github.com/golang/go/issues/31529), see
+[#6](https://github.com/doronbehar/pistol/issues/6) for more details. [↩](#a3)
+
+<b id="f4">4</b>I don't use Ranger anymore, ever since I moved to Lf. If you
 have evidence it does support 256 colors, let me know and I'll change the
-default. [↩](#a3)
+default. [↩](#a4)
