@@ -17,8 +17,14 @@ func main() {
 	// Setup cmdline arguments
 	cmd := cmdline.New()
 	cmd.AddOption("c", "config", "config file", "configuration file to use (defaults to ~/.config/pistol/pistol.conf)")
+	cmd.AddFlag("V", "version", "Print version date and exit")
 	cmd.AddTrailingArguments("file", "the file to preview")
 	cmd.Parse(os.Args)
+
+	if cmd.IsOptionSet("version") {
+		print("2019-12-12\n")
+		os.Exit(0)
+	}
 
 	// Handle configuration file path
 	xdgPaths := []string{"pistol/pistol.conf", "pistol.conf"}
