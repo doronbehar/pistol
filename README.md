@@ -189,6 +189,8 @@ And here's an example that leverages `ls` for printing directories' contents:
 inode/directory ls -l --color %s
 ```
 
+More examples can be found in [this WiKi page](https://github.com/doronbehar/pistol/wiki/Config-examples).
+
 #### A Note on RegEx matching
 
 When Pistol parses your configuration file, as soon as it finds a match, it
