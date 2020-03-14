@@ -5,6 +5,9 @@ import (
 	"fmt"
 	"math"
 	"regexp"
+	"archive/tar"
+	"archive/zip"
+	"github.com/nwaples/rardecode"
 
 	"github.com/mholt/archiver"
 	log "github.com/sirupsen/logrus"
@@ -124,7 +127,21 @@ func NewArchiveLister(mimeType, filePath string) (func(w io.Writer) error, error
 				fPerm := fmt.Sprintf("%v", f.Mode())
 				fSize := humanize.Bytes(uint64(f.Size()))
 				fModt := fmt.Sprintf("%v", f.ModTime())
-				fName := f.Name()
+				var fName string
+				switch h := f.Header.(type) {
+				case zip.FileHeader:
+					fName = h.Name
+				case *tar.Header:
+					fName = h.Name
+				case *rardecode.FileHeader:
+					fName = h.Name
+				default:
+					// We don't know the full path when another type of archive
+					// file is read but we don't need it, as other archive
+					// types are not a collection of files but rather a single
+					// file compressed.
+					fName = f.Name()
+				}
 				fPermMaxWidth = int(math.Max(float64(fPermMaxWidth), float64(len(fPerm))))
 				fSizeMaxWidth = int(math.Max(float64(fSizeMaxWidth), float64(len(fSize))))
 				fModtMaxWidth = int(math.Max(float64(fModtMaxWidth), float64(len(fModt))))
@@ -155,7 +172,7 @@ func NewArchiveLister(mimeType, filePath string) (func(w io.Writer) error, error
 				fmt.Fprintf(w, "  ")
 			}
 			fmt.Fprintf(w, "\n")
-			
+
 			for _, fileInfo := range filesInfo {
 				fmt.Fprintf(w, lineFmt, fileInfo.Permissions, fileInfo.Size, fileInfo.ModifiedTime, fileInfo.FileName)
 			}
