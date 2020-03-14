@@ -74,6 +74,8 @@ func NewPreviewer(filePath, configPath string) (Previewer, error) {
 			log.Infof("previewer's command is %s %s\n", p.command, p.args)
 			return p, nil
 		}
+		// Test if fpath keyword is used at the beginning, indicating it's a
+		// file path match we should be looking for
 		if def[0] == "fpath" {
 			log.Infof("found 'fpath' at the beginning, testing match against file path")
 		}
