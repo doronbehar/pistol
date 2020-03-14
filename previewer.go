@@ -74,6 +74,26 @@ func NewPreviewer(filePath, configPath string) (Previewer, error) {
 			log.Infof("previewer's command is %s %s\n", p.command, p.args)
 			return p, nil
 		}
+		if def[0] == "fpath" {
+			log.Infof("found 'fpath' at the beginning, testing match against file path")
+		}
+		match, err = regexp.MatchString(def[1], filePath)
+		if err != nil {
+			return p, err
+		}
+		if match && len(def) > 2 {
+			log.Infof("matched file path match against filePath")
+			p.command = def[2]
+			for _, arg := range def[3:] {
+				if match, _ := regexp.MatchString("%s", arg); match {
+					p.args = append(p.args, fmt.Sprintf(arg, filePath))
+				} else {
+					p.args = append(p.args, arg)
+				}
+			}
+			log.Infof("previewer's command is %s %s\n", p.command, p.args)
+			return p, nil
+		}
 	}
 	log.Infof("didn't find a match in configuration for detected mimetype: %s\n", p.mimeType)
 	return p, nil
