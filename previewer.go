@@ -76,14 +76,16 @@ func NewPreviewer(filePath, configPath string) (Previewer, error) {
 		}
 		// Test if fpath keyword is used at the beginning, indicating it's a
 		// file path match we should be looking for
-		if def[0] == "fpath" {
+		if def[0] == "fpath" && len(def) > 2 {
 			log.Infof("found 'fpath' at the beginning, testing match against file path")
+		} else {
+			break
 		}
 		match, err = regexp.MatchString(def[1], filePath)
 		if err != nil {
 			return p, err
 		}
-		if match && len(def) > 2 {
+		if match {
 			log.Infof("matched file path match against filePath")
 			p.command = def[2]
 			for _, arg := range def[3:] {
