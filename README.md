@@ -274,6 +274,6 @@ succeed in the heroic task of compiling libmagic for Windows and teach
 [with Go](https://github.com/golang/go/issues/31529), see
 [#6](https://github.com/doronbehar/pistol/issues/6) for more details. [↩](#a3)
 
-<b id="f4">4</b>I don't use Ranger anymore, ever since I moved to Lf. If you
+<b id="f4">4</b> I don't use Ranger anymore, ever since I moved to Lf. If you
 have evidence it does support 256 colors, let me know and I'll change the
 default. [↩](#a4)
