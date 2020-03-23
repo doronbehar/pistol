@@ -42,61 +42,41 @@ func NewArchiveLister(mimeType, filePath string) (func(w io.Writer) error, error
 			if compressedTar(filePath) {
 				log.Infoln("Creating a new tar xz archiver walker interface")
 				wIface = archiver.NewTarXz()
-			} else {
-				log.Infoln("Creating a new xz interface")
-				// wIface = archiver.NewXz()
 			}
 		case "application/x-bzip2":
 			// Test file name for maybe it's a tar.bz2 file
 			if compressedTar(filePath) {
 				log.Infoln("Creating a new tar bz archiver walker interface")
 				wIface = archiver.NewTarBz2()
-			} else {
-				log.Infoln("Creating a new bz2 interface")
-				// wIface = archiver.NewBz2()
 			}
 		case "application/gzip":
 			// Test file name for maybe it's a tar.gz file
 			if compressedTar(filePath) {
 				log.Infoln("Creating a new tar gz archiver walker interface")
 				wIface = archiver.NewTarGz()
-			} else {
-				log.Infoln("Creating a new gz interface")
-				// wIface = archiver.NewGz()
 			}
 		case "application/x-lz4":
 			// Test file name for maybe it's a tar.lz file
 			if compressedTar(filePath) {
 				log.Infoln("Creating a new tar lz4 archiver walker interface")
 				wIface = archiver.NewTarLz4()
-			} else {
-				log.Infoln("Creating a new lz4 interface")
-				// wIface = archiver.NewLz4()
 			}
 		case "application/x-snappy-framed":
 			// Test file name for maybe it's a tar.sz file
 			if compressedTar(filePath) {
 				log.Infoln("Creating a new tar snappy archiver walker interface")
 				wIface = archiver.NewTarSz()
-			} else {
-				log.Infoln("Creating a new snappy interface")
-				// wIface = archiver.NewSnappy()
 			}
 		case "application/x-zstd":
 			if compressedTar(filePath) {
 				log.Infoln("Creating a new tar zstd archiver walker interface")
 				wIface = archiver.NewTarZstd()
-			} else {
-				log.Infoln("Creating a new snappy interface")
-				// wIface = archiver.NewSnappy()
 			}
 		// brotli - currently unsupported by libmagic
 		// case "application/x-brotli":
 			// // This may be a brotli compressed file / tar
 			// if compressedTar(filePath) {
 				// wIface = archiver.NewTarBrotli()
-			// } else {
-				// // wIface = archiver.NewBrotli()
 			// }
 		// 7z - currently unsupported by archiver, see https://github.com/mholt/archiver/issues/53
 		// case "application/x-7z-compressed":
@@ -105,9 +85,7 @@ func NewArchiveLister(mimeType, filePath string) (func(w io.Writer) error, error
 		walker, ok := wIface.(archiver.Walker)
 		if !ok {
 			log.Infof("format specified by archive filename (%s) is not a walker format: (%T)", filePath, wIface)
-			log.Infof("printing the only file contained in it")
 			fmt.Fprintf(w, "%s compressed file\n", mimeType)
-			// TODO: Print the inside contents (see README note on archive previews)
 			return nil
 		} else {
 			log.Infof("format specified by archive filename (%s) is: (%T)", filePath, wIface)
