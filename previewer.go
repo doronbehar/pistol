@@ -8,6 +8,7 @@ import (
 	"fmt"
 	"strings"
 	"regexp"
+	"path/filepath"
 
 	log "github.com/sirupsen/logrus"
 	"github.com/doronbehar/pistol/internal_writers"
@@ -67,6 +68,41 @@ func NewPreviewer(filePath, configPath string) (Previewer, error) {
 			for _, arg := range def[2:] {
 				if match, _ := regexp.MatchString("%s", arg); match {
 					p.args = append(p.args, fmt.Sprintf(arg, filePath))
+				} else {
+					p.args = append(p.args, arg)
+				}
+			}
+			log.Infof("previewer's command is %s %s\n", p.command, p.args)
+			return p, nil
+		}
+		// Test if fpath keyword is used at the beginning, indicating it's a
+		// file path match we should be looking for
+		if def[0] == "fpath" {
+			log.Infof("found 'fpath' at the beginning, testing match against file path")
+			if len(def) < 3 {
+				log.Warnf("found 'fpath' keyword but it's line contains less then 3 words:\n%s", def)
+				log.Warnf("skipping")
+				continue
+			}
+		} else {
+			// skip this line
+			continue
+		}
+		absFpath, err := filepath.Abs(filePath)
+		if err != nil {
+			return p, err
+		}
+		match, err = regexp.MatchString(def[1], absFpath)
+		if err != nil {
+			return p, err
+		}
+		if match {
+			log.Infof("matched file path against absFpath: %s", absFpath)
+			p.command = def[2]
+			for _, arg := range def[3:] {
+				if match, _ := regexp.MatchString("%s", arg); match {
+					// Question: Should we use filePath instead here?
+					p.args = append(p.args, fmt.Sprintf(arg, absFpath))
 				} else {
 					p.args = append(p.args, arg)
 				}
