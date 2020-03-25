@@ -156,15 +156,27 @@ a dumb simple syntax as explained below.
 
 ### Syntax
 
-The 1st word in every line is a regular expression, interpreted by the
-[built-in go library](https://golang.org/pkg/regexp/syntax). This regular
-expression should match the MIME type of the file you may wish to preview. You
-can inspect the MIME type of any file on a GNU/Linux OS and on Mac OS with the
-command `file --mime-type <file>`.
+You can configure preview commands according to file path or mime type regex.
+The 1st word may is always interpreted first as a mime type regex such as:
+`text/*`.
 
-The rest of the line, is interpreted as the command you wish to run on the file
-when the given MIME type matches. `%s` is used in this part of the line as the
-file argument.
+If a line is not matched but the 1st word is exactly `fpath`, then the 2nd
+argument is interpreted as a file path regex, such as:
+`/var/src/.*/README.md`.
+
+On every line, whether you used `fpath` or not, the next arguments are the
+command's arguments, where `%s` is substituted by `pistol` to the file at
+question. You'll see more examples in the following sections.
+
+Both regular expressions (for file paths and for mime types) are interpreted by
+the [built-in library's `regexp.match`](https://golang.org/pkg/regexp/#Match).
+Please refer to [this link](https://golang.org/pkg/regexp/syntax) for the full
+reference regarding syntax.
+
+#### Matching Mime Types
+
+You can inspect the MIME type of any file on a GNU/Linux OS and on Mac OS with
+the command `file --mime-type <file>`.
 
 For example, say you wish to replace Pistol's internal text previewer with that
 of [bat](https://github.com/sharkdp/bat)'s, you'd put the following in your
@@ -189,15 +201,26 @@ And here's an example that leverages `ls` for printing directories' contents:
 inode/directory ls -l --color %s
 ```
 
-More examples can be found in [this WiKi page](https://github.com/doronbehar/pistol/wiki/Config-examples).
+#### Matching File Path
+
+For example, say you wish to preview all files that reside in a certain `./bin` directory with
+[bat](https://github.com/sharkdp/bat)'s syntax highlighting for
+bash. You could use:
+
+```
+fpath /var/src/my-bash-project/bin/[^/]+$ bat --map-syntax :bash --paging=never --color=always %s
+```
 
 #### A Note on RegEx matching
 
-When Pistol parses your configuration file, as soon as it finds a match, it
-stops parsing it and it invokes the command written on the rest of the line.
-Therefor, if you wish to use the examples from above which use `w3m` and `bat`,
-you'll need to put `w3m`'s line **before** `bat`'s line. Since otherwise,
-`text/*` will be matched first and `text/html` won't be checked at all.
+When Pistol parses your configuration file, as soon as it finds a match be it
+a file path match or a mime type match, it stops parsing it and it invokes the
+command written on the rest of the line. Therefor, if you wish to use the
+examples from above which use `w3m` and `bat`, you'll need to put `w3m`'s line
+**before** `bat`'s line. Since otherwise, `text/*` will be matched first and
+`text/html` won't be checked at all.
+
+Similarly, you'd probably want to put `fpath` lines at the top.
 
 Of course that this is a mere example, the same may apply to any regular
 expressions you'd choose to match against.
@@ -206,6 +229,7 @@ For a list of the internal regular expressions tested against when Pistol
 reverts to it's native previewers, read the file
 [`internal_writers/map.go`](https://github.com/doronbehar/pistol/blob/master/internal_writers/map.go#L8-L12).
 
+More examples can be found in [this WiKi page](https://github.com/doronbehar/pistol/wiki/Config-examples).
 
 ### Environmental Variables
 
