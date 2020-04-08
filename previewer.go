@@ -120,6 +120,7 @@ func (p *Previewer) Write(w io.Writer) (error) {
 	if p.command != "" {
 		cmd := exec.Command(p.command, p.args...)
 		cmd.Stdout = w
+		cmd.Stderr = os.Stderr
 		if err := cmd.Start(); err != nil {
 			return err
 		}
