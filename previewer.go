@@ -72,7 +72,6 @@ func NewPreviewer(filePath, configPath string) (Previewer, error) {
 					p.args = append(p.args, arg)
 				}
 			}
-			log.Infof("previewer's command is %s %s\n", p.command, p.args)
 			return p, nil
 		}
 		// Test if fpath keyword is used at the beginning, indicating it's a
@@ -107,7 +106,6 @@ func NewPreviewer(filePath, configPath string) (Previewer, error) {
 					p.args = append(p.args, arg)
 				}
 			}
-			log.Infof("previewer's command is %s %s\n", p.command, p.args)
 			return p, nil
 		}
 	}
@@ -118,8 +116,16 @@ func NewPreviewer(filePath, configPath string) (Previewer, error) {
 func (p *Previewer) Write(w io.Writer) (error) {
 	// if a match was encountered when the configuration file was read
 	if p.command != "" {
-		cmd := exec.Command(p.command, p.args...)
+		var cmd *exec.Cmd
+		if p.command == "sh:" {
+			log.Infof("previewer's command is (shell interpreted): %s\n", p.args[0:])
+			cmd = exec.Command("sh", "-c", strings.Join(p.args[0:], " "))
+		} else {
+			log.Infof("previewer's command is %s %s\n", p.command, strings.Join(p.args, " "))
+			cmd = exec.Command(p.command, p.args...)
+		}
 		cmd.Stdout = w
+		cmd.Stderr = os.Stderr
 		if err := cmd.Start(); err != nil {
 			return err
 		}
