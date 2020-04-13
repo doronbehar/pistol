@@ -152,7 +152,7 @@ Although Pistol previews files of certain MIME types by default, it doesn't
 force you to use these internal previewers for these MIME types. You can change
 this behaviour by writing a configuration file in
 `$XDG_CONFIG_HOME/pistol/pistol.conf` (or `~/.config/pistol/pistol.conf`) with
-a dumb simple syntax as explained below.
+the syntax as explained below.
 
 ### Syntax
 
@@ -230,6 +230,59 @@ reverts to it's native previewers, read the file
 [`internal_writers/map.go`](https://github.com/doronbehar/pistol/blob/master/internal_writers/map.go#L8-L12).
 
 More examples can be found in [this WiKi page](https://github.com/doronbehar/pistol/wiki/Config-examples).
+
+#### Quoting and Shell Piping
+
+Pistol is pretty dumb when it parses your config, it splits all line by spaces,
+meaning that e.g:
+
+```config
+application/json jq '.' %s
+```
+
+This will result in an error by [`jq`](https://github.com/stedolan/jq):
+
+```
+jq: error: syntax error, unexpected INVALID_CHARACTER, expecting $end (Unix shell quoting issues?) at <top-level>, line 1:
+'.'
+jq: 1 compile error
+```
+
+Indicating that `jq` got a literal `'.'`. When you run in your shell `jq '.'
+file.json` you don't get an error because your shell is stripping the quotes
+around `.`. However, Pistol is not smarter then your shell because if you'd try
+for example:
+
+```config
+application/json jq '.[] | .' %s
+```
+
+That would be equivalent to running in the typical shell:
+
+```sh
+jq "\'.[]" "|" ".'" file.json
+```
+
+That's because Pistol doesn't consider your quotes as interesting instructions,
+it just splits words by spaces. Hence, to overcome this disability, you can
+use:
+
+```config
+application/json sh: jq '.' %s
+```
+
+Thanks to the `sh:` keyword at the beginning of the command's definition, the
+rest of the line goes straight as a single argument to `sh -c`.
+
+You can worry not about quoting / escaping the rest of the line - it's not like when
+you run e.g `sh -c 'command'` in your shell where you need to make sure single
+quotes are escaped or not used at all inside `command`.
+
+More over, with `sh:` you can use shell pipes:
+
+```config
+fpath .*.md$ sh: bat --paging=never --color=always %s | head -8
+```
 
 ### Environmental Variables
 
