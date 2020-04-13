@@ -22,7 +22,7 @@ func main() {
 	cmd.Parse(os.Args)
 
 	if cmd.IsOptionSet("version") {
-		print("v0.0.3 (2019-12-13)\n")
+		print("v0.0.5 (2020-04-13) (corona edition)\n")
 		os.Exit(0)
 	}
 
