@@ -9,10 +9,9 @@ require (
 	github.com/andybalholm/brotli v1.0.0 // indirect
 	github.com/dlclark/regexp2 v1.2.0 // indirect
 	github.com/dustin/go-humanize v1.0.0
+	github.com/frankban/quicktest v1.9.0 // indirect
 	github.com/galdor/go-cmdline v1.1.0
-	github.com/golang/gddo v0.0.0-20200219175727-df439dd5819e // indirect
 	github.com/klauspost/compress v1.10.1 // indirect
-	github.com/klauspost/cpuid v1.2.3 // indirect
 	github.com/konsorten/go-windows-terminal-sequences v1.0.2 // indirect
 	github.com/mattn/go-isatty v0.0.8 // indirect
 	github.com/mholt/archiver v0.0.0-20190623220050-33320f6f7306
@@ -20,5 +19,7 @@ require (
 	github.com/pierrec/lz4 v2.4.1+incompatible // indirect
 	github.com/rakyll/magicmime v0.1.0
 	github.com/sirupsen/logrus v1.4.2
+	github.com/stretchr/testify v1.4.0 // indirect
 	golang.org/x/sys v0.0.0-20200219091948-cb0a6d8edb6c // indirect
+	gopkg.in/check.v1 v1.0.0-20190902080502-41f04d3bba15 // indirect
 )
