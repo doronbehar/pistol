@@ -22,3 +22,4 @@
 
 # End of https://www.gitignore.io/api/go
 /cmd/pistol/pistol
+/pistol
