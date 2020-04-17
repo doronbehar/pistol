@@ -30,10 +30,12 @@ intended to replace the file previewer
 [`scope.sh`](https://github.com/ranger/ranger/blob/v1.9.2/ranger/data/scope.sh)
 commonly used with them.
 
-`scope.sh` is a Bash script that uses `case` switches and external programs to decide how to preview every file it encounters. It knows how to handle every file according to it's [MIME
-type](https://en.wikipedia.org/wiki/Media_type) and/or file extension using
-`case` switches and external programs. This design makes it hard to configure
-/ maintain and it makes it slow for startup and heavy when running.
+`scope.sh` is a Bash script that uses `case` switches and external programs to
+decide how to preview every file it encounters. It knows how to handle every
+file according to it's [MIME type](https://en.wikipedia.org/wiki/Media_type)
+and/or file extension using `case` switches and external programs. This design
+makes it hard to configure / maintain and it makes it slow for startup and
+heavy when running.
 
 Pistol is a Go program (with (almost) 0 dependencies) and it's MIME type detection is
 internal. Moreover, it features native preview support for almost any archive
@@ -56,7 +58,8 @@ executable might be:
 ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=a34861a1ae5358dc1079bc239df9dfe4830a8403, for GNU/Linux 3.2.0, not stripped
 ```
 
-This feature is available out of the box just like the previews for the common mime types mentioned above.
+This feature is available out of the box just like the previews for the common
+mime types mentioned above.
 
 ### A Note on MIME type Detection
 
@@ -225,8 +228,8 @@ inode/directory ls -l --color %s
 
 #### Matching File Path
 
-For example, say you wish to preview all files that reside in a certain `./bin` directory with
-[bat](https://github.com/sharkdp/bat)'s syntax highlighting for
+For example, say you wish to preview all files that reside in a certain `./bin`
+directory with [bat](https://github.com/sharkdp/bat)'s syntax highlighting for
 bash. You could use:
 
 ```
