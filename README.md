@@ -190,8 +190,8 @@ argument is interpreted as a file path regex, such as:
 `/var/src/.*/README.md`.
 
 On every line, whether you used `fpath` or not, the next arguments are the
-command's arguments, where `%s` is substituted by `pistol` to the file at
-question. You'll see more examples in the following sections.
+command's arguments, where `%pistol-filename%` is substituted by `pistol` to
+the file at question. You'll see more examples in the following sections.
 
 Both regular expressions (for file paths and for mime types) are interpreted by
 the [built-in library's `regexp.match`](https://golang.org/pkg/regexp/#Match).
@@ -208,7 +208,7 @@ of [bat](https://github.com/sharkdp/bat)'s, you'd put the following in your
 `pistol.conf`:
 
 ```
-text/* bat --paging=never --color=always %s
+text/* bat --paging=never --color=always %pistol-filename%
 ```
 
 Naturally, your configuration file overrides the internal previewers.
@@ -217,13 +217,13 @@ Here's another example which features [w3m](http://w3m.sourceforge.net/) as an
 HTML previewer:
 
 ```
-text/html w3m -T text/html -dump %s
+text/html w3m -T text/html -dump %pistol-filename%
 ```
 
 And here's an example that leverages `ls` for printing directories' contents:
 
 ```
-inode/directory ls -l --color %s
+inode/directory ls -l --color %pistol-filename%
 ```
 
 #### Matching File Path
@@ -233,7 +233,7 @@ directory with [bat](https://github.com/sharkdp/bat)'s syntax highlighting for
 bash. You could use:
 
 ```
-fpath /var/src/my-bash-project/bin/[^/]+$ bat --map-syntax :bash --paging=never --color=always %s
+fpath /var/src/my-bash-project/bin/[^/]+$ bat --map-syntax :bash --paging=never --color=always %pistol-filename%
 ```
 
 #### A Note on RegEx matching
@@ -262,7 +262,7 @@ Pistol is pretty dumb when it parses your config, it splits all line by spaces,
 meaning that e.g:
 
 ```config
-application/json jq '.' %s
+application/json jq '.' %pistol-filename%
 ```
 
 This will result in an error by [`jq`](https://github.com/stedolan/jq):
@@ -279,7 +279,7 @@ around `.`. However, Pistol is not smarter then your shell because if you'd try
 for example:
 
 ```config
-application/json jq '.[] | .' %s
+application/json jq '.[] | .' %pistol-filename%
 ```
 
 That would be equivalent to running in the typical shell:
@@ -293,7 +293,7 @@ it just splits words by spaces. Hence, to overcome this disability, you can
 use:
 
 ```config
-application/json sh: jq '.' %s
+application/json sh: jq '.' %pistol-filename%
 ```
 
 Thanks to the `sh:` keyword at the beginning of the command's definition, the
@@ -306,7 +306,7 @@ quotes are escaped or not used at all inside `command`.
 More over, with `sh:` you can use shell pipes:
 
 ```config
-fpath .*.md$ sh: bat --paging=never --color=always %s | head -8
+fpath .*.md$ sh: bat --paging=never --color=always %pistol-filename% | head -8
 ```
 
 ### Environmental Variables
