@@ -94,7 +94,7 @@ func NewPreviewer(filePath, configPath string) (Previewer, error) {
 		if match {
 			log.Infof("matched file path against absFpath: %s", absFpath)
 			p.command = def[2]
-			p.args = def[2:]
+			p.args = def[3:]
 			return p, nil
 		}
 	}
@@ -105,7 +105,6 @@ func NewPreviewer(filePath, configPath string) (Previewer, error) {
 func (p *Previewer) Write(w io.Writer) (error) {
 	// if a match was encountered when the configuration file was read
 	if p.command != "" {
-		var argsOut []string
 		if match, _ := regexp.MatchString("%pistol-filename%", strings.Join(p.args, " ")); !match {
 			return errors.New("no %pistol-filename% found in definition command")
 		}
@@ -115,15 +114,16 @@ func (p *Previewer) Write(w io.Writer) (error) {
 		} else {
 			replStr = p.filePath
 		}
+		var cmd *exec.Cmd
+		var argsOut []string
 		for _, arg := range p.args {
 			argsOut = append(argsOut, strings.ReplaceAll(arg, "%pistol-filename%", replStr))
 		}
-		var cmd *exec.Cmd
 		if p.command == "sh:" {
-			log.Infof("previewer's command is (shell interpreted): %#v\n", strings.Join(argsOut, " "))
+			log.Infof("previewer's command is (shell interpreted): %#v\n", argsOut)
 			cmd = exec.Command("sh", "-c", strings.Join(argsOut, " "))
 		} else {
-			log.Infof("previewer's command is %s %s\n", p.command, argsOut)
+			log.Infof("previewer's command is (no shell) %#v with args: %#v\n", p.command, argsOut)
 			cmd = exec.Command(p.command, argsOut...)
 		}
 		cmd.Stdout = w
