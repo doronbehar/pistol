@@ -38,12 +38,10 @@ deps:
 	go get github.com/c4milo/github-release
 	go get github.com/mitchellh/gox
 
-release:
+changelog:
 	@latest_tag=$$(git describe --tags `git rev-list --tags --max-count=1`); \
 	comparison="$$latest_tag..HEAD"; \
 	if [ -z "$$latest_tag" ]; then comparison=""; fi; \
-	changelog=$$(git log $$comparison --oneline --no-merges); \
-	echo github-release doronbehar/$(NAME) $(version) "$$(git rev-parse --abbrev-ref HEAD)" "**Changelog**<br/>$$changelog" 'dist/*'; \
-	echo git pull
+	git --no-pager log $$comparison --oneline --no-merges
 
-.PHONY: build compile install deps dist release
+.PHONY: build install changelog
