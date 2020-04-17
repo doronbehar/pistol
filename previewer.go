@@ -5,11 +5,13 @@ import (
 	"os"
 	"io"
 	"os/exec"
-	"fmt"
+	// "fmt"
 	"strings"
 	"regexp"
 	"path/filepath"
+	"errors"
 
+	she "gopkg.in/alessio/shellescape.v1"
 	log "github.com/sirupsen/logrus"
 	"github.com/doronbehar/pistol/internal_writers"
 	"github.com/rakyll/magicmime"
@@ -65,14 +67,16 @@ func NewPreviewer(filePath, configPath string) (Previewer, error) {
 		}
 		if match && len(def) > 1 {
 			p.command = def[1]
-			for _, arg := range def[2:] {
-				if match, _ := regexp.MatchString("%s", arg); match {
-					p.args = append(p.args, fmt.Sprintf(arg, filePath))
-				} else {
-					p.args = append(p.args, arg)
-				}
-			}
+			p.args = def[2:]
 			return p, nil
+		}
+		match, err = regexp.MatchString("^#", def[0])
+		if err != nil {
+			return p, err
+		}
+		if match {
+			// This is a comment, line skipped
+			continue
 		}
 		// Test if fpath keyword is used at the beginning, indicating it's a
 		// file path match we should be looking for
@@ -98,14 +102,7 @@ func NewPreviewer(filePath, configPath string) (Previewer, error) {
 		if match {
 			log.Infof("matched file path against absFpath: %s", absFpath)
 			p.command = def[2]
-			for _, arg := range def[3:] {
-				if match, _ := regexp.MatchString("%s", arg); match {
-					// Question: Should we use filePath instead here?
-					p.args = append(p.args, fmt.Sprintf(arg, absFpath))
-				} else {
-					p.args = append(p.args, arg)
-				}
-			}
+			p.args = def[3:]
 			return p, nil
 		}
 	}
@@ -116,17 +113,31 @@ func NewPreviewer(filePath, configPath string) (Previewer, error) {
 func (p *Previewer) Write(w io.Writer) (error) {
 	// if a match was encountered when the configuration file was read
 	if p.command != "" {
-		var cmd *exec.Cmd
+		if match, _ := regexp.MatchString("%pistol-filename%", strings.Join(p.args, " ")); !match {
+			return errors.New("no %pistol-filename% found in definition command")
+		}
+		var replStr string
 		if p.command == "sh:" {
-			log.Infof("previewer's command is (shell interpreted): %s\n", p.args[0:])
-			cmd = exec.Command("sh", "-c", strings.Join(p.args[0:], " "))
+			replStr = she.Quote(p.filePath)
 		} else {
-			log.Infof("previewer's command is %s %s\n", p.command, strings.Join(p.args, " "))
-			cmd = exec.Command(p.command, p.args...)
+			replStr = p.filePath
+		}
+		var cmd *exec.Cmd
+		var argsOut []string
+		for _, arg := range p.args {
+			argsOut = append(argsOut, strings.ReplaceAll(arg, "%pistol-filename%", replStr))
+		}
+		if p.command == "sh:" {
+			log.Infof("previewer's command is (shell interpreted): %#v\n", argsOut)
+			cmd = exec.Command("sh", "-c", strings.Join(argsOut, " "))
+		} else {
+			log.Infof("previewer's command is (no shell) %#v with args: %#v\n", p.command, argsOut)
+			cmd = exec.Command(p.command, argsOut...)
 		}
 		cmd.Stdout = w
 		cmd.Stderr = os.Stderr
 		if err := cmd.Start(); err != nil {
+			log.Fatalf("We've had issues running your command: %v, %s", p.command, p.args)
 			return err
 		}
 		cmd.Wait()

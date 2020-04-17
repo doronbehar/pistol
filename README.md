@@ -1,5 +1,27 @@
 # Pistol
 
+## NOTE TO EXISTING USERS
+
+If you've updated to [v0.1](https://github.com/doronbehar/pistol/releases) or
+higher, you may experience errors with custom commands set in your config,
+similar to:
+
+```
+[bat error]: '%pistol-filename%': No such file or directory (os error 2)
+```
+
+Basically, after hitting [issue #16](https://github.com/doronbehar/pistol/issues/16),
+I realised that the old way Pistol substituted the file name in your config was
+not scalable. So now, please replace every occurrence of `%s` with
+`%pistol-filename%`. Or with:
+
+```sh
+sed -i 's/%s/%pistol-filename%/g ~/.config/pistol/pistol.conf
+```
+
+If you want to know more details, read
+[this](https://github.com/doronbehar/pistol/issues/16#issuecomment-614471555).
+
 ## Introduction
 
 Pistol is a file previewer for command line file managers such as
@@ -8,10 +30,12 @@ intended to replace the file previewer
 [`scope.sh`](https://github.com/ranger/ranger/blob/v1.9.2/ranger/data/scope.sh)
 commonly used with them.
 
-`scope.sh` is a Bash script that uses `case` switches and external programs to decide how to preview every file it encounters. It knows how to handle every file according to it's [MIME
-type](https://en.wikipedia.org/wiki/Media_type) and/or file extension using
-`case` switches and external programs. This design makes it hard to configure
-/ maintain and it makes it slow for startup and heavy when running.
+`scope.sh` is a Bash script that uses `case` switches and external programs to
+decide how to preview every file it encounters. It knows how to handle every
+file according to it's [MIME type](https://en.wikipedia.org/wiki/Media_type)
+and/or file extension using `case` switches and external programs. This design
+makes it hard to configure / maintain and it makes it slow for startup and
+heavy when running.
 
 Pistol is a Go program (with (almost) 0 dependencies) and it's MIME type detection is
 internal. Moreover, it features native preview support for almost any archive
@@ -34,7 +58,8 @@ executable might be:
 ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=a34861a1ae5358dc1079bc239df9dfe4830a8403, for GNU/Linux 3.2.0, not stripped
 ```
 
-This feature is available out of the box just like the previews for the common mime types mentioned above.
+This feature is available out of the box just like the previews for the common
+mime types mentioned above.
 
 ### A Note on MIME type Detection
 
@@ -104,17 +129,17 @@ env GO111MODULE=on go get -u github.com/doronbehar/pistol/cmd/pistol
 
 ```
 $ pistol --help
-Usage: pistol OPTIONS <file>
+Usage: pistol OPTIONS [<file> ...]
 
 OPTIONS
 
--c, --config <config>  configuration file to use (defaults to ~/.config/pistol/pistol.conf)
--h, --help             print help and exit
--v, --verbosity        increase verbosity
+-V, --version               Print version date and exit
+-c, --config <config file>  configuration file to use (defaults to ~/.config/pistol/pistol.conf)
+-h, --help                  print help and exit
 
 ARGUMENTS
 
-file                   the file to preview
+file                        the file to preview
 ```
 
 ### Integrations
@@ -165,8 +190,8 @@ argument is interpreted as a file path regex, such as:
 `/var/src/.*/README.md`.
 
 On every line, whether you used `fpath` or not, the next arguments are the
-command's arguments, where `%s` is substituted by `pistol` to the file at
-question. You'll see more examples in the following sections.
+command's arguments, where `%pistol-filename%` is substituted by `pistol` to
+the file at question. You'll see more examples in the following sections.
 
 Both regular expressions (for file paths and for mime types) are interpreted by
 the [built-in library's `regexp.match`](https://golang.org/pkg/regexp/#Match).
@@ -183,7 +208,7 @@ of [bat](https://github.com/sharkdp/bat)'s, you'd put the following in your
 `pistol.conf`:
 
 ```
-text/* bat --paging=never --color=always %s
+text/* bat --paging=never --color=always %pistol-filename%
 ```
 
 Naturally, your configuration file overrides the internal previewers.
@@ -192,23 +217,23 @@ Here's another example which features [w3m](http://w3m.sourceforge.net/) as an
 HTML previewer:
 
 ```
-text/html w3m -T text/html -dump %s
+text/html w3m -T text/html -dump %pistol-filename%
 ```
 
 And here's an example that leverages `ls` for printing directories' contents:
 
 ```
-inode/directory ls -l --color %s
+inode/directory ls -l --color %pistol-filename%
 ```
 
 #### Matching File Path
 
-For example, say you wish to preview all files that reside in a certain `./bin` directory with
-[bat](https://github.com/sharkdp/bat)'s syntax highlighting for
+For example, say you wish to preview all files that reside in a certain `./bin`
+directory with [bat](https://github.com/sharkdp/bat)'s syntax highlighting for
 bash. You could use:
 
 ```
-fpath /var/src/my-bash-project/bin/[^/]+$ bat --map-syntax :bash --paging=never --color=always %s
+fpath /var/src/my-bash-project/bin/[^/]+$ bat --map-syntax :bash --paging=never --color=always %pistol-filename%
 ```
 
 #### A Note on RegEx matching
@@ -237,7 +262,7 @@ Pistol is pretty dumb when it parses your config, it splits all line by spaces,
 meaning that e.g:
 
 ```config
-application/json jq '.' %s
+application/json jq '.' %pistol-filename%
 ```
 
 This will result in an error by [`jq`](https://github.com/stedolan/jq):
@@ -254,7 +279,7 @@ around `.`. However, Pistol is not smarter then your shell because if you'd try
 for example:
 
 ```config
-application/json jq '.[] | .' %s
+application/json jq '.[] | .' %pistol-filename%
 ```
 
 That would be equivalent to running in the typical shell:
@@ -268,7 +293,7 @@ it just splits words by spaces. Hence, to overcome this disability, you can
 use:
 
 ```config
-application/json sh: jq '.' %s
+application/json sh: jq '.' %pistol-filename%
 ```
 
 Thanks to the `sh:` keyword at the beginning of the command's definition, the
@@ -281,7 +306,7 @@ quotes are escaped or not used at all inside `command`.
 More over, with `sh:` you can use shell pipes:
 
 ```config
-fpath .*.md$ sh: bat --paging=never --color=always %s | head -8
+fpath .*.md$ sh: bat --paging=never --color=always %pistol-filename% | head -8
 ```
 
 ### Environmental Variables
@@ -334,6 +359,17 @@ a specific style set `PISTOL_CHROMA_STYLE` in your environment, e.g:
 ```sh
 export PISTOL_CHROMA_STYLE=monokai
 ```
+
+
+## Debugging
+
+Can't figure out way does Pistol acts the way he does? You can run pistol with:
+
+```sh
+env PISTOL_DEBUG=1 pistol test-file
+```
+
+And you should be able to see messages that may give you a clue.
 
 ## Footnotes
 

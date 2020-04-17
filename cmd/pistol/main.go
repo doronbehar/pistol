@@ -9,6 +9,10 @@ import (
 	"github.com/adrg/xdg"
 )
 
+var (
+	VERSION string
+)
+
 func main() {
 	// Setup logger
 	log.SetFlags(0)
@@ -22,7 +26,7 @@ func main() {
 	cmd.Parse(os.Args)
 
 	if cmd.IsOptionSet("version") {
-		print("v0.0.5 (2020-04-13) (corona edition)\n")
+		print(VERSION, "\n")
 		os.Exit(0)
 	}
 

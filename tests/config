@@ -1,0 +1,8 @@
+# detects: fpath, sh: no
+fpath .*/tests/fpath-no-sh$ bat --map-syntax :Markdown --paging=never --style=numbers --color=always %pistol-filename%
+# detects: fpath, sh: yes
+fpath .*/tests/fpath-with-sh$ sh: bat --map-syntax :Markdown --paging=never --style=numbers --color=always %pistol-filename% | head -2
+# detects: mimetype, sh: no
+text/html elinks -dump -dump-color-mode 1 %pistol-filename%
+# detects: mimetype, sh: yes
+text/plain sh: bat --map-syntax :Markdown --paging=never --style=numbers --color=always %pistol-filename% | head -1
