@@ -16,7 +16,7 @@ not scalable. So now, please replace every occurrence of `%s` with
 `%pistol-filename%`. Or with:
 
 ```sh
-sed -i 's/%s/%pistol-filename%/g ~/.config/pistol/pistol.conf
+sed -i 's/%s/%pistol-filename%/g' ~/.config/pistol/pistol.conf
 ```
 
 If you want to know more details, read
