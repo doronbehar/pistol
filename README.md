@@ -360,6 +360,17 @@ a specific style set `PISTOL_CHROMA_STYLE` in your environment, e.g:
 export PISTOL_CHROMA_STYLE=monokai
 ```
 
+
+## Debugging
+
+Can't figure out way does Pistol acts the way he does? You can run pistol with:
+
+```sh
+env PISTOL_DEBUG=1 pistol test-file
+```
+
+And you should be able to see messages that may give you a clue.
+
 ## Footnotes
 
 <b id="f1">1</b> Considering Pistol's indirect dependence on
