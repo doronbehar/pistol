@@ -129,17 +129,17 @@ env GO111MODULE=on go get -u github.com/doronbehar/pistol/cmd/pistol
 
 ```
 $ pistol --help
-Usage: pistol OPTIONS <file>
+Usage: pistol OPTIONS [<file> ...]
 
 OPTIONS
 
--c, --config <config>  configuration file to use (defaults to ~/.config/pistol/pistol.conf)
--h, --help             print help and exit
--v, --verbosity        increase verbosity
+-V, --version               Print version date and exit
+-c, --config <config file>  configuration file to use (defaults to ~/.config/pistol/pistol.conf)
+-h, --help                  print help and exit
 
 ARGUMENTS
 
-file                   the file to preview
+file                        the file to preview
 ```
 
 ### Integrations
