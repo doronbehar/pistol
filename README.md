@@ -1,5 +1,27 @@
 # Pistol
 
+## NOTE TO EXISTING USERS
+
+If you've updated to [v0.1](https://github.com/doronbehar/pistol/releases) or
+higher, you may experience errors with custom commands set in your config,
+similar to:
+
+```
+[bat error]: '%pistol-filename%': No such file or directory (os error 2)
+```
+
+Basically, after hitting [issue #16](https://github.com/doronbehar/pistol/issues/16),
+I realised that the old way Pistol substituted the file name in your config was
+not scalable. So now, please replace every occurrence of `%s` with
+`%pistol-filename%`. Or with:
+
+```sh
+sed -i 's/%s/%pistol-filename%/g ~/.config/pistol/pistol.conf
+```
+
+If you want to know more details, read
+[this](https://github.com/doronbehar/pistol/issues/16#issuecomment-614471555).
+
 ## Introduction
 
 Pistol is a file previewer for command line file managers such as
