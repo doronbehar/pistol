@@ -70,6 +70,14 @@ func NewPreviewer(filePath, configPath string) (Previewer, error) {
 			p.args = def[2:]
 			return p, nil
 		}
+		match, err = regexp.MatchString("^#", def[0])
+		if err != nil {
+			return p, err
+		}
+		if match {
+			// This is a comment, line skipped
+			continue
+		}
 		// Test if fpath keyword is used at the beginning, indicating it's a
 		// file path match we should be looking for
 		if def[0] == "fpath" {

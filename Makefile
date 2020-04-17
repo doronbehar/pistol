@@ -12,6 +12,28 @@ build:
 install:
 	go install -ldflags "-X 'main.VERSION=$(VERSION)'" ./cmd/pistol
 
+# requires: bat (https://github.com/sharkdp/bat), elinks
+test: pistol
+	@echo -------------------
+	@echo fpath
+	@echo -------------------
+	@./pistol --config tests/config tests/fpath-no-sh
+	@tput sgr0
+	@echo -------------------
+	@echo fpath + sh:
+	@echo -------------------
+	@./pistol --config tests/config tests/fpath-with-sh
+	@tput sgr0
+	@echo -------------------
+	@echo mimetype
+	@echo -------------------
+	@./pistol --config tests/config tests/mimetype-no-sh
+	@tput sgr0
+	@echo -------------------
+	@echo mimetype + sh:
+	@echo -------------------
+	@./pistol --config tests/config tests/mimetype-with-sh
+
 deps:
 	go get github.com/c4milo/github-release
 	go get github.com/mitchellh/gox
