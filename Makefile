@@ -3,14 +3,14 @@
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 NAME := pistol
-VERSION := v0.1 (2020-04-17) (breaking release, see README)
-version := $(word 1, $(VERSION))
+VERSION := v0.1.1 (2020-04-17) (breaking release, see README)
+# version := $(word 1, $(VERSION))
 
 build:
-	go build -ldflags "-X 'main.VERSION=$(VERSION)'" ./cmd/pistol
+	go build -ldflags "-X 'main.Version=$(VERSION)'" ./cmd/pistol
 
 install:
-	go install -ldflags "-X 'main.VERSION=$(VERSION)'" ./cmd/pistol
+	go install -ldflags "-X 'main.Version=$(VERSION)'" ./cmd/pistol
 
 # requires: bat (https://github.com/sharkdp/bat), elinks
 test: pistol

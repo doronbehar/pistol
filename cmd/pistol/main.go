@@ -3,6 +3,7 @@ package main
 import (
 	"os"
 	"log"
+	"fmt"
 
 	"github.com/doronbehar/pistol"
 	"github.com/galdor/go-cmdline"
@@ -10,7 +11,7 @@ import (
 )
 
 var (
-	VERSION string
+	Version string
 )
 
 func main() {
@@ -26,7 +27,7 @@ func main() {
 	cmd.Parse(os.Args)
 
 	if cmd.IsOptionSet("version") {
-		print(VERSION, "\n")
+		fmt.Println(Version)
 		os.Exit(0)
 	}
 
