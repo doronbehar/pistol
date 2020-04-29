@@ -88,7 +88,12 @@ https://github.com/rakyll/magicmime[magicmime].
 
 Note that this choice also features compatibility with the standard
 command `file` which is available by default on most GNU/Linux
-distributions link:#f1[1].
+distributions.footnote:[Considering Pistol’s indirect dependence on
+http://linux.die.net/man/3/libmagic[libmagic(3)], I will never take the
+trouble to personally try and make it work on Windows natively. If
+you’ll succeed in the heroic task of compiling libmagic for Windows and
+teach https://github.com/rakyll/magicmime[magicmime] to use it, please
+let me know.]
 
 ==== A Note on Archive Previews
 
@@ -108,7 +113,8 @@ compressed a `.tar` file, Pistol lists the files themselves.
 
 https://en.wikipedia.org/wiki/Brotli[brotli] compressed archives,
 (`.tar.br`) and brotli compressed files (`.br`) are not detected by
-libmagic so Pistol doesn’t know how to handle them. link:#f2[2]
+libmagic so Pistol doesn’t know how to handle them.footnote:[https://bugs.astron.com/view.php?id=111[`file` bug report];
+https://github.com/google/brotli/issues/727[`brotli` bug report].]
 
 === Install
 
@@ -135,7 +141,9 @@ following command to install Pistol to `$GOPATH/bin/pistol`:
 env GO111MODULE=on go get -u github.com/doronbehar/pistol/cmd/pistol
 ----
 
-link:#f3[3]
+footnote:[`env GO111MODULE=on` is needed due to a recent bug / issue
+https://github.com/golang/go/issues/31529[with Go], see
+https://github.com/doronbehar/pistol/issues/6[#6] for more details.]
 
 === Usage
 
@@ -367,7 +375,9 @@ export PISTOL_CHROMA_FORMATTER=terminal16m
 
 Recent versions of https://github.com/gokcehan/lf[Lf] support
 https://github.com/gokcehan/lf/pull/93[256 colors] in it’s preview
-window. AFAIKlink:#f4[4], https://ranger.github.io/[Ranger] supports 8
+window. AFAIKfootnote:[I don’t use Ranger anymore, ever since I moved to Lf. If you have
+evidence it does support 256 colors, let me know and I’ll change the
+default.], https://ranger.github.io/[Ranger] supports 8
 colors and Lf’s `color256` isn’t enabled by default.
 
 Therefor, I decided that it’ll be best to keep this variable unset in
@@ -400,25 +410,3 @@ env PISTOL_DEBUG=1 pistol test-file
 ----
 
 And you should be able to see messages that may give you a clue.
-
-=== Footnotes
-
-1 Considering Pistol’s indirect dependence on
-http://linux.die.net/man/3/libmagic[libmagic(3)], I will never take the
-trouble to personally try and make it work on Windows natively. If
-you’ll succeed in the heroic task of compiling libmagic for Windows and
-teach https://github.com/rakyll/magicmime[magicmime] to use it, please
-let me know. link:#a1[↩]
-
-2 https://bugs.astron.com/view.php?id=111[`file` bug report];
-https://github.com/google/brotli/issues/727[`brotli` bug report].
-link:#a2[↩]
-
-3 `env GO111MODULE=on` is needed due to a recent bug / issue
-https://github.com/golang/go/issues/31529[with Go], see
-https://github.com/doronbehar/pistol/issues/6[#6] for more details.
-link:#a3[↩]
-
-4 I don’t use Ranger anymore, ever since I moved to Lf. If you have
-evidence it does support 256 colors, let me know and I’ll change the
-default. link:#a4[↩]
