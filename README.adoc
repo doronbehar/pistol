@@ -1,4 +1,5 @@
-== Pistol
+= Pistol
+:toc:
 
 === NOTE TO EXISTING USERS
 
@@ -24,7 +25,7 @@ sed -i 's/%s/%pistol-filename%/g' ~/.config/pistol/pistol.conf
 If you want to know more details, read
 https://github.com/doronbehar/pistol/issues/16#issuecomment-614471555[this].
 
-=== Introduction
+== Introduction
 
 Pistol is a file previewer for command line file managers such as
 https://ranger.github.io/[Ranger] and https://github.com/gokcehan/lf[Lf]
@@ -70,7 +71,7 @@ ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked, interpr
 This feature is available out of the box just like the previews for the
 common mime types mentioned above.
 
-==== A Note on MIME type Detection
+=== A Note on MIME type Detection
 
 Some _pure_ Go libraries provide MIME type detection. Here are the top
 search results I got using a common web search engine:
@@ -95,7 +96,7 @@ you’ll succeed in the heroic task of compiling libmagic for Windows and
 teach https://github.com/rakyll/magicmime[magicmime] to use it, please
 let me know.]
 
-==== A Note on Archive Previews
+=== A Note on Archive Previews
 
 Pistol previews all archive / compression formats supported by the Go
 library https://github.com/mholt/archiver[`archiver`]. Some formats do
@@ -116,7 +117,7 @@ https://en.wikipedia.org/wiki/Brotli[brotli] compressed archives,
 libmagic so Pistol doesn’t know how to handle them.footnote:[https://bugs.astron.com/view.php?id=111[`file` bug report];
 https://github.com/google/brotli/issues/727[`brotli` bug report].]
 
-=== Install
+== Install
 
 If someone has packaged Pistol for your distribution, you might find a
 package for of it linked
@@ -124,7 +125,7 @@ https://github.com/doronbehar/pistol/wiki/GNU-Linux-Distributions'-Packages[in
 the WiKi]. If not, you can install it from source according to the
 following instructions:
 
-==== Prerequisites
+=== Prerequisites
 
 Since Pistol depends on https://github.com/rakyll/magicmime[magicmime],
 you’ll need a `libmagic` package installed. Please refer to
@@ -145,7 +146,7 @@ footnote:[`env GO111MODULE=on` is needed due to a recent bug / issue
 https://github.com/golang/go/issues/31529[with Go], see
 https://github.com/doronbehar/pistol/issues/6[#6] for more details.]
 
-=== Usage
+== Usage
 
 ....
 $ pistol --help
@@ -162,9 +163,9 @@ ARGUMENTS
 file                        the file to preview
 ....
 
-==== Integrations
+=== Integrations
 
-===== Ranger / Lf
+==== Ranger / Lf
 
 You can use Pistol as a file previewer in
 https://ranger.github.io/[Ranger] and
@@ -181,7 +182,7 @@ The same goes for Lf, but in `lfrc`:
 set previewer ~/.go/bin/pistol
 ....
 
-===== fzf
+==== fzf
 
 If you use https://github.com/junegunn/fzf[fzf] to search for files, you
 can tell it to use `pistol` as the previewer. For example, the following
@@ -193,7 +194,7 @@ as a previewer:
 $EDITOR "$(find -name '*.py' | fzf --preview='pistol {}')"
 ----
 
-=== Configuration
+== Configuration
 
 Although Pistol previews files of certain MIME types by default, it
 doesn’t force you to use these internal previewers for these MIME types.
@@ -201,7 +202,7 @@ You can change this behaviour by writing a configuration file in
 `$XDG_CONFIG_HOME/pistol/pistol.conf` (or
 `~/.config/pistol/pistol.conf`) with the syntax as explained below.
 
-==== Syntax
+=== Syntax
 
 You can configure preview commands according to file path or mime type
 regex. The 1st word may is always interpreted first as a mime type regex
@@ -222,7 +223,7 @@ library’s `regexp.match`]. Please refer to
 https://golang.org/pkg/regexp/syntax[this link] for the full reference
 regarding syntax.
 
-===== Matching Mime Types
+==== Matching Mime Types
 
 You can inspect the MIME type of any file on a GNU/Linux OS and on Mac
 OS with the command `file --mime-type <file>`.
@@ -251,7 +252,7 @@ contents:
 inode/directory ls -l --color %pistol-filename%
 ....
 
-===== Matching File Path
+==== Matching File Path
 
 For example, say you wish to preview all files that reside in a certain
 `./bin` directory with https://github.com/sharkdp/bat[bat]’s syntax
@@ -261,7 +262,7 @@ highlighting for bash. You could use:
 fpath /var/src/my-bash-project/bin/[^/]+$ bat --map-syntax :bash --paging=never --color=always %pistol-filename%
 ....
 
-===== A Note on RegEx matching
+==== A Note on RegEx matching
 
 When Pistol parses your configuration file, as soon as it finds a match
 be it a file path match or a mime type match, it stops parsing it and it
@@ -283,7 +284,7 @@ More examples can be found in
 https://github.com/doronbehar/pistol/wiki/Config-examples[this WiKi
 page].
 
-===== Quoting and Shell Piping
+==== Quoting and Shell Piping
 
 Pistol is pretty dumb when it parses your config, it splits all line by
 spaces, meaning that e.g:
@@ -343,14 +344,14 @@ More over, with `sh:` you can use shell pipes:
 fpath .*.md$ sh: bat --paging=never --color=always %pistol-filename% | head -8
 ----
 
-==== Environmental Variables
+=== Environmental Variables
 
 Pistol’s internal previewer for text files includes syntax highlighting
 thanks to the Go library https://github.com/alecthomas/chroma[chroma].
 You can customize Pistol’s syntax highlighting formatting and style
 through environmental variables.
 
-===== Chroma Formatters
+==== Chroma Formatters
 
 The term _formatter_ refers to the way the given file is presented in
 the terminal. These include:
@@ -384,7 +385,7 @@ Therefor, I decided that it’ll be best to keep this variable unset in
 your general environment. If you do set `color256` in your `lfrc`, you
 may feel free to set `PISTOL_CHROMA_FORMATTER` in your environment.
 
-===== Chroma Styles
+==== Chroma Styles
 
 The term _style_ refers to the set of colors used to print a given file.
 the chroma project documents all styles
@@ -399,7 +400,7 @@ specific style set `PISTOL_CHROMA_STYLE` in your environment, e.g:
 export PISTOL_CHROMA_STYLE=monokai
 ----
 
-=== Debugging
+== Debugging
 
 Can’t figure out way does Pistol acts the way he does? You can run
 pistol with:
