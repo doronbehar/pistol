@@ -34,6 +34,8 @@ github.com/frankban/quicktest v1.9.0 h1:jfEA+Psfr/pHsRJYPpHiNu7PGJnGctNxvTaM3K1E
 github.com/frankban/quicktest v1.9.0/go.mod h1:ui7WezCLWMWxVWr1GETZY3smRy0G4KWq9vcPtJmFl7Y=
 github.com/galdor/go-cmdline v1.1.0 h1:r9w9qQwgx4Oms9Y+9R1BZBGV+TLa50b8Tkwk8Gs3R28=
 github.com/galdor/go-cmdline v1.1.0/go.mod h1:7T9Fsb7p6o2E/uV6qZIgqLRDGdfmkHzzg+LvEQrmsm0=
+github.com/galdor/go-cmdline v1.1.1 h1:+mvSjZo4ZNterLC8Ft4zt9J5TgXJPfnoHZbTy1hYEUA=
+github.com/galdor/go-cmdline v1.1.1/go.mod h1:4F4ylJ9bgyWjcqjGgFYPoDCeKlGSCllihrWoHnQ9eHU=
 github.com/golang/gddo v0.0.0-20190419222130-af0f2af80721 h1:KRMr9A3qfbVM7iV/WcLY/rL5LICqwMHLhwRXKu99fXw=
 github.com/golang/gddo v0.0.0-20190419222130-af0f2af80721/go.mod h1:xEhNfoBDX1hzLm2Nf80qUvZ2sVwoMZ8d6IE2SrsQfh4=
 github.com/golang/snappy v0.0.1 h1:Qgr9rKW7uDUkrbSmQeiDsGa8SjGyCOGtuasMWwvp2P4=

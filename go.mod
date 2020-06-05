@@ -10,7 +10,7 @@ require (
 	github.com/andybalholm/brotli v1.0.0 // indirect
 	github.com/dustin/go-humanize v1.0.0
 	github.com/frankban/quicktest v1.9.0 // indirect
-	github.com/galdor/go-cmdline v1.1.0
+	github.com/galdor/go-cmdline v1.1.1
 	github.com/klauspost/compress v1.10.8 // indirect
 	github.com/klauspost/pgzip v1.2.4 // indirect
 	github.com/mholt/archiver v0.0.0-20190623220050-33320f6f7306
