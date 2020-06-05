@@ -3,7 +3,7 @@ module github.com/doronbehar/pistol
 go 1.12
 
 require (
-	github.com/adrg/xdg v0.0.0-20190319220657-88e5137d2444
+	github.com/adrg/xdg v0.2.1
 	github.com/alecthomas/chroma v0.7.3
 	github.com/alecthomas/repr v0.0.0-20181024024818-d37bc2a10ba1 // indirect
 	github.com/alessio/shellescape v1.2.2 // indirect
