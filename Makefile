@@ -3,7 +3,7 @@
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 NAME := pistol
-VERSION := v0.1.1 (2020-04-17) (breaking release, see README)
+VERSION := v0.1.2
 # version := $(word 1, $(VERSION))
 
 build:
