@@ -1,5 +1,3 @@
-github.com/adrg/xdg v0.0.0-20190319220657-88e5137d2444 h1:LFWged5Fa7JSlGV5GzKt8qEwPBUtLV65aIEaD+Ver+8=
-github.com/adrg/xdg v0.0.0-20190319220657-88e5137d2444/go.mod h1:ZuOshBmzV4Ta+s23hdfFZnBsdzmoR3US0d7ErpqSbTQ=
 github.com/adrg/xdg v0.2.1 h1:VSVdnH7cQ7V+B33qSJHTCRlNgra1607Q8PzEmnvb2Ic=
 github.com/adrg/xdg v0.2.1/go.mod h1:ZuOshBmzV4Ta+s23hdfFZnBsdzmoR3US0d7ErpqSbTQ=
 github.com/alecthomas/assert v0.0.0-20170929043011-405dbfeb8e38 h1:smF2tmSOzy2Mm+0dGI2AIUHY+w0BUc+4tn40djz7+6U=
@@ -32,8 +30,8 @@ github.com/dustin/go-humanize v1.0.0 h1:VSnTsYCnlFHaM2/igO1h6X3HA71jcobQuxemgkq4
 github.com/dustin/go-humanize v1.0.0/go.mod h1:HtrtbFcZ19U5GC7JDqmcUSB87Iq5E25KnS6fMYU6eOk=
 github.com/frankban/quicktest v1.9.0 h1:jfEA+Psfr/pHsRJYPpHiNu7PGJnGctNxvTaM3K1EyXk=
 github.com/frankban/quicktest v1.9.0/go.mod h1:ui7WezCLWMWxVWr1GETZY3smRy0G4KWq9vcPtJmFl7Y=
-github.com/galdor/go-cmdline v1.1.0 h1:r9w9qQwgx4Oms9Y+9R1BZBGV+TLa50b8Tkwk8Gs3R28=
-github.com/galdor/go-cmdline v1.1.0/go.mod h1:7T9Fsb7p6o2E/uV6qZIgqLRDGdfmkHzzg+LvEQrmsm0=
+github.com/galdor/go-cmdline v1.1.1 h1:+mvSjZo4ZNterLC8Ft4zt9J5TgXJPfnoHZbTy1hYEUA=
+github.com/galdor/go-cmdline v1.1.1/go.mod h1:4F4ylJ9bgyWjcqjGgFYPoDCeKlGSCllihrWoHnQ9eHU=
 github.com/golang/gddo v0.0.0-20190419222130-af0f2af80721 h1:KRMr9A3qfbVM7iV/WcLY/rL5LICqwMHLhwRXKu99fXw=
 github.com/golang/gddo v0.0.0-20190419222130-af0f2af80721/go.mod h1:xEhNfoBDX1hzLm2Nf80qUvZ2sVwoMZ8d6IE2SrsQfh4=
 github.com/golang/snappy v0.0.1 h1:Qgr9rKW7uDUkrbSmQeiDsGa8SjGyCOGtuasMWwvp2P4=
