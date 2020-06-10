@@ -28,10 +28,11 @@ https://github.com/doronbehar/pistol/issues/16#issuecomment-614471555[this].
 == Introduction
 
 Pistol is a file previewer for command line file managers such as
-https://ranger.github.io/[Ranger] and https://github.com/gokcehan/lf[Lf]
-intended to replace the file previewer
+https://ranger.github.io/[Ranger], https://github.com/gokcehan/lf[Lf] and
+https://github.com/jarun/nnn[nnn], intended to replace the file previewer shell
+script
 https://github.com/ranger/ranger/blob/v1.9.2/ranger/data/scope.sh[`scope.sh`]
-commonly used with them.
+commonly used with Ranger and other previewing methods.
 
 `scope.sh` is a Bash script that uses `case` switches and external
 programs to decide how to preview every file it encounters. It knows how
@@ -70,6 +71,10 @@ ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked, interpr
 
 This feature is available out of the box just like the previews for the
 common mime types mentioned above.
+
+See also the WiKi article:
+https://github.com/doronbehar/pistol/wiki/Pistol-out-in-the-wild[Pistol out in
+the Wild].
 
 === A Note on MIME type Detection
 
