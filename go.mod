@@ -21,6 +21,6 @@ require (
 	github.com/stretchr/testify v1.4.0 // indirect
 	github.com/ulikunitz/xz v0.5.7 // indirect
 	golang.org/x/sys v0.0.0-20200602225109-6fdc65e7d980 // indirect
-	gopkg.in/alessio/shellescape.v1 v1.0.0-20170105083845-52074bc9df61
+	gopkg.in/alessio/shellescape.v1 v1.2.2
 	gopkg.in/check.v1 v1.0.0-20190902080502-41f04d3bba15 // indirect
 )
