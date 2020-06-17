@@ -13,7 +13,7 @@ require (
 	github.com/galdor/go-cmdline v1.1.1
 	github.com/klauspost/compress v1.10.8 // indirect
 	github.com/klauspost/pgzip v1.2.4 // indirect
-	github.com/mholt/archiver v0.0.0-20190623220050-33320f6f7306
+	github.com/mholt/archiver/v3/v3 v3.3.0
 	github.com/nwaples/rardecode v1.1.0
 	github.com/pierrec/lz4 v2.5.2+incompatible // indirect
 	github.com/rakyll/magicmime v0.1.0
