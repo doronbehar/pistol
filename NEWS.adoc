@@ -1,0 +1,33 @@
+= Change Log / News
+
+== 0.1.3
+
+Dependencies were updated to their latest, thanks to
+https://renovate.whitesourcesoftware.com/[renovate] for the reminder, and a
+small bug in config file parsing was fixed,
+(https://github.com/doronbehar/pistol/issues/31[#31]).
+
+== 0.1
+
+https://github.com/doronbehar/pistol/releases[v0.1] Introduced a breaking
+change to the config format, which you may have experienced when using Pistol
+with a custom command:
+
+....
+[bat error]: '%pistol-filename%': No such file or directory (os error 2)
+....
+
+Basically, after hitting
+https://github.com/doronbehar/pistol/issues/16[issue #16], I realised
+that the old way Pistol substituted the file name in your config was not
+scalable. So now, please replace every occurrence of `%s` with
+`%pistol-filename%`. Or with:
+
+[source,sh]
+----
+sed -i 's/%s/%pistol-filename%/g' ~/.config/pistol/pistol.conf
+----
+
+If you want to know more details, read
+https://github.com/doronbehar/pistol/issues/16#issuecomment-614471555[this].
+

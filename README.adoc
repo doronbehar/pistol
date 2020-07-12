@@ -1,30 +1,6 @@
 = Pistol
 :toc:
 
-=== NOTE TO EXISTING USERS
-
-If you’ve updated to https://github.com/doronbehar/pistol/releases[v0.1]
-or higher, you may experience errors with custom commands set in your
-config, similar to:
-
-....
-[bat error]: '%pistol-filename%': No such file or directory (os error 2)
-....
-
-Basically, after hitting
-https://github.com/doronbehar/pistol/issues/16[issue #16], I realised
-that the old way Pistol substituted the file name in your config was not
-scalable. So now, please replace every occurrence of `%s` with
-`%pistol-filename%`. Or with:
-
-[source,sh]
-----
-sed -i 's/%s/%pistol-filename%/g' ~/.config/pistol/pistol.conf
-----
-
-If you want to know more details, read
-https://github.com/doronbehar/pistol/issues/16#issuecomment-614471555[this].
-
 == Introduction
 
 Pistol is a file previewer for command line file managers such as
@@ -416,3 +392,7 @@ env PISTOL_DEBUG=1 pistol test-file
 ----
 
 And you should be able to see messages that may give you a clue.
+
+== NEWS
+
+See xref:./NEWS.adoc[NEWS].
