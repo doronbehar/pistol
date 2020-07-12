@@ -11,7 +11,7 @@ import (
 	"path/filepath"
 	"errors"
 
-	she "gopkg.in/alessio/shellescape.v1"
+	she "github.com/alessio/shellescape"
 	log "github.com/sirupsen/logrus"
 	"github.com/doronbehar/pistol/internal_writers"
 	"github.com/rakyll/magicmime"
