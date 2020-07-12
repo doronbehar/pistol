@@ -60,7 +60,7 @@ func NewPreviewer(filePath, configPath string) (Previewer, error) {
 	scanner := bufio.NewScanner(file)
 	scanner.Split(bufio.ScanLines)
 	for scanner.Scan() {
-		def := strings.Split(scanner.Text(), " ")
+		def := strings.Fields(scanner.Text())
 		match, err := regexp.MatchString(def[0], p.mimeType)
 		if err != nil {
 			return p, err
