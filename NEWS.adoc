@@ -1,5 +1,9 @@
 = Change Log / News
 
+== 0.1.4
+
+Empty lines are now skipped when config file is parsed, and not crashing Pistol.
+
 == 0.1.3
 
 Dependencies were updated to their latest, thanks to
