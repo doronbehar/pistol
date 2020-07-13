@@ -61,6 +61,10 @@ func NewPreviewer(filePath, configPath string) (Previewer, error) {
 	scanner.Split(bufio.ScanLines)
 	for scanner.Scan() {
 		def := strings.Fields(scanner.Text())
+		if len(def) == 0 {
+			// Empty lines are skipped
+			continue
+		}
 		match, err := regexp.MatchString(def[0], p.mimeType)
 		if err != nil {
 			return p, err
