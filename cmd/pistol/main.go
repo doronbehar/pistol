@@ -21,7 +21,7 @@ func main() {
 
 	// Setup cmdline arguments
 	cmd := cmdline.New()
-	cmd.AddOption("c", "config", "config file", "configuration file to use (defaults to ~/.config/pistol/pistol.conf)")
+	cmd.AddOption("c", "config", "config file", fmt.Sprintf("configuration file to use (defaults to %s/pistol/pistol.conf)", xdg.ConfigHome))
 	cmd.AddFlag("V", "version", "Print version date and exit")
 	cmd.AddTrailingArguments("file", "the file to preview")
 	cmd.Parse(os.Args)
