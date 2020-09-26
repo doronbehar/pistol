@@ -7,6 +7,8 @@ import (
 
 var internalWritersRegexMap = map[string] func(string, string) (func(w io.Writer) error, error) {
 	"text/*": NewChromaWriter,
+	// https://github.com/doronbehar/pistol/issues/34
+	"application/json": NewChromaWriter,
 	"application/zip": NewArchiveLister,
 	"application/x-rar-compressed": NewArchiveLister,
 	"application/x-tar": NewArchiveLister,

@@ -32,6 +32,11 @@ test: pistol
 	@echo mimetype + sh:
 	@echo -------------------
 	@./pistol --config tests/config tests/mimetype-with-sh
+	@tput sgr0
+	@echo -------------------
+	@echo application/json \(issue '#'34\):
+	@echo -------------------
+	@./pistol --config tests/config tests/34.json
 
 deps:
 	go get github.com/c4milo/github-release
