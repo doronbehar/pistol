@@ -1,0 +1,7 @@
+{
+  postUpdateOptions: [ "gomodTidy" ],
+  // Came by default
+  extends: [
+    "config:base"
+  ]
+}
