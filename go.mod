@@ -16,7 +16,7 @@ require (
 	github.com/mholt/archiver/v3 v3.3.1
 	github.com/nwaples/rardecode v1.1.0
 	github.com/rakyll/magicmime v0.1.0
-	github.com/sirupsen/logrus v1.6.0
+	github.com/sirupsen/logrus v1.7.0
 	github.com/ulikunitz/xz v0.5.8 // indirect
 	golang.org/x/sys v0.0.0-20200923182605-d9f96fdee20d // indirect
 )
