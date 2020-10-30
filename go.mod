@@ -14,7 +14,7 @@ require (
 	github.com/golang/snappy v0.0.2 // indirect
 	github.com/klauspost/compress v1.11.1 // indirect
 	github.com/klauspost/pgzip v1.2.5 // indirect
-	github.com/mholt/archiver/v3 v3.4.0
+	github.com/mholt/archiver/v3 v3.5.0
 	github.com/nwaples/rardecode v1.1.0
 	github.com/rakyll/magicmime v0.1.0
 	github.com/sirupsen/logrus v1.7.0
