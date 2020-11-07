@@ -6,7 +6,7 @@ require (
 	github.com/adrg/xdg v0.2.2
 	github.com/alecthomas/chroma v0.8.1
 	github.com/alecthomas/repr v0.0.0-20181024024818-d37bc2a10ba1 // indirect
-	github.com/alessio/shellescape v1.3.0
+	github.com/alessio/shellescape v1.3.1
 	github.com/andybalholm/brotli v1.0.1 // indirect
 	github.com/dlclark/regexp2 v1.4.0 // indirect
 	github.com/dustin/go-humanize v1.0.0
