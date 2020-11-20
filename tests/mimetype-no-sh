@@ -17,7 +17,7 @@
 </head>
 <body dir=auto>
 
-<p style="color: green">Mimetype text/html detected, elinks is used to print this</p>
+<p style="color: green">Mimetype text/html detected, w3m is used to print this in green</p>
 
 </body>
 </html>

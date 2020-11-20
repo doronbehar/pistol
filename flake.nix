@@ -25,7 +25,7 @@
         in rec {
           devShell = pkgs.mkShell {
             buildInputs = pistol.buildInputs ++ [
-              pkgs.w3m
+              pkgs.elinks
             ];
           };
           packages.pistol = pistol;
