@@ -4,7 +4,7 @@ go 1.12
 
 require (
 	github.com/adrg/xdg v0.2.2
-	github.com/alecthomas/chroma v0.8.1
+	github.com/alecthomas/chroma v0.8.2
 	github.com/alecthomas/repr v0.0.0-20181024024818-d37bc2a10ba1 // indirect
 	github.com/alessio/shellescape v1.3.0
 	github.com/andybalholm/brotli v1.0.1 // indirect
