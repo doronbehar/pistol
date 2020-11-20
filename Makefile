@@ -3,7 +3,7 @@
 # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 NAME := pistol
-VERSION := v0.1.6
+VERSION := v$(shell cat VERSION)-git
 
 build:
 	go build -ldflags "-X 'main.Version=$(VERSION)'" ./cmd/pistol
