@@ -11,30 +11,36 @@
     flake = false;
   };
 
-  outputs = { self, nixpkgs, flake-utils, flake-compat }:
-    flake-utils.lib.eachDefaultSystem
-      (system:
-        let
-          pkgs = nixpkgs.legacyPackages.${system};
-          pistol = pkgs.pistol.overrideAttrs(oldAttrs: rec {
-            version = "${builtins.readFile ./VERSION}-flake";
-            buildFlagsArray = [
-              "-ldflags=-s -w -X main.Version=${version}"
-            ];
-          });
-        in rec {
-          devShell = pkgs.mkShell {
-            buildInputs = pistol.buildInputs ++ [
-              pkgs.elinks
-            ];
-          };
-          packages.pistol = pistol;
-          defaultPackage = pistol;
-          apps.pistol = {
-            type = "app";
-            program = "${pistol}/bin/pistol";
-          };
-          defaultApp = apps.pistol;
-        }
-      );
+  outputs = { self
+    , nixpkgs
+    , flake-utils
+    , flake-compat
+  }:
+  flake-utils.lib.eachDefaultSystem (system:
+    let
+      pkgs = nixpkgs.legacyPackages.${system};
+      pistol = pkgs.pistol.overrideAttrs(oldAttrs: rec {
+        version = "${builtins.readFile ./VERSION}-flake";
+        src = builtins.filterSource
+          (path: type: type != "directory" || baseNameOf path != ".git")
+          ./.;
+        buildFlagsArray = [
+          "-ldflags=-s -w -X main.Version=${version}"
+        ];
+      });
+    in rec {
+      devShell = pkgs.mkShell {
+        buildInputs = pistol.buildInputs ++ [
+          pkgs.elinks
+        ];
+      };
+      packages.pistol = pistol;
+      defaultPackage = pistol;
+      apps.pistol = {
+        type = "app";
+        program = "${pistol}/bin/pistol";
+      };
+      defaultApp = apps.pistol;
+    }
+  );
 }
