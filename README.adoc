@@ -106,6 +106,10 @@ https://github.com/doronbehar/pistol/wiki/Distributions'-Packages[in
 the WiKi]. If not, you can install it from source according to the
 following instructions:
 
+Ideally there should also be prebuilt binaries in every release's assests, but
+I don't know yet how to do that - help is wanted :raising_hand:, see
+https://github.com/doronbehar/pistol/issues/23[#23].
+
 === Prerequisites
 
 Since Pistol depends on https://github.com/rakyll/magicmime[magicmime],
