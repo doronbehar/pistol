@@ -37,6 +37,11 @@ test: pistol
 	@echo application/json \(issue '#'34\):
 	@echo -------------------
 	@./pistol --config tests/config tests/34.json
+	@tput sgr0
+	@echo -------------------
+	@echo exit code \(issue '#'52\):
+	@echo -------------------
+	@./tests/exit-code.sh
 
 deps:
 	go get github.com/c4milo/github-release

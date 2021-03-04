@@ -171,7 +171,7 @@ func (p *Previewer) Write(w io.Writer) (error) {
 			log.Fatalf("We've had issues running your command: %v, %s", p.Command, p.Args)
 			return err
 		}
-		cmd.Wait()
+		return cmd.Wait()
 	} else {
 		// try to match with internal writers
 		internal_writer, err := pistol.MatchInternalWriter(p.MimeType, p.FilePath)
