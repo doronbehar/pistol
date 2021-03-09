@@ -42,6 +42,17 @@ test: pistol
 	@echo exit code \(issue '#'52\):
 	@echo -------------------
 	@./tests/exit-code.sh
+	@tput sgr0
+	@echo -------------------
+	@echo ./tests/VERSION.bz2 should appear along with license of bz2
+	@echo -------------------
+	@./pistol --config tests/config tests/VERSION.bz2 -v -L
+	@tput sgr0
+	@echo -------------------
+	@echo ./tests/renovate.json5.bz2 should appear without a license of bz2
+	@echo or verbosity, although the arguments are passed to pistol
+	@echo -------------------
+	@./pistol --config tests/config tests/renovate.json5.bz2 -v -L
 
 deps:
 	go get github.com/c4milo/github-release

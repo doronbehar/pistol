@@ -6,6 +6,7 @@ import (
 	"io"
 	"os/exec"
 	// "fmt"
+	"strconv"
 	"strings"
 	"regexp"
 	"path/filepath"
@@ -21,6 +22,8 @@ import (
 type Previewer struct {
 	// The file to be previewed
 	FilePath string
+	// Extra arguments passed to pistol
+	Extras []string
 	// The mime type detected
 	MimeType string
 	// The command that will be used to print the file. If empty, internal
@@ -50,7 +53,7 @@ type Previewer struct {
 //
 // Many mime types are handled internally by Pistol, see table here:
 // https://github.com/doronbehar/pistol#introduction
-func NewPreviewer(filePath, configPath string) (Previewer, error) {
+func NewPreviewer(filePath, configPath string, extras []string) (Previewer, error) {
 	verbose := os.Getenv("PISTOL_DEBUG")
 	if verbose != "" {
 		log.SetLevel(log.InfoLevel)
@@ -72,6 +75,7 @@ func NewPreviewer(filePath, configPath string) (Previewer, error) {
 	p.MimeType = mimetype
 	log.Infof("detected mimetype is %s", p.MimeType)
 	p.FilePath = filePath
+	p.Extras = extras
 	// If configuration file doesn't exist, we don't try to read it
 	if configPath == "" {
 		log.Warnf("configuration file was not supplied")
@@ -155,9 +159,24 @@ func (p *Previewer) Write(w io.Writer) (error) {
 		}
 		var cmd *exec.Cmd
 		var argsOut []string
+
+		re := regexp.MustCompile(`%pistol-extra([0-9]+)%`)
+
 		for _, arg := range p.Args {
-			argsOut = append(argsOut, strings.ReplaceAll(arg, "%pistol-filename%", replStr))
+			if(re.MatchString(arg)) {
+				auxStr := re.ReplaceAllString(arg, "$1")
+				auxInt, err := strconv.Atoi(auxStr);
+				if (err == nil && len(p.Extras) > auxInt) {
+					arg = re.ReplaceAllString(arg, p.Extras[auxInt])
+				} else {
+					continue
+				}
+			} else {
+				arg = strings.ReplaceAll(arg, "%pistol-filename%", replStr)
+			}
+			argsOut = append(argsOut, arg)
 		}
+
 		if p.Command == "sh:" {
 			log.Infof("previewer's command is (shell interpreted): %#v\n", argsOut)
 			cmd = exec.Command("sh", "-c", strings.Join(argsOut, " "))
