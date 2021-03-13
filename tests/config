@@ -6,6 +6,10 @@ fpath .*/tests/fpath-with-sh$ sh: bat --map-syntax :Markdown --paging=never --st
 text/html elinks -dump -dump-color-mode 1 %pistol-filename%
 # detects: mimetype, sh: yes
 text/plain sh: bat --map-syntax :Markdown --paging=never --style=numbers --color=always %pistol-filename% | head -1
+# Test extra arguments
+fpath .*/tests/VERSION.bz2$ bzcat %pistol-extra0% %pistol-extra1% %pistol-filename%
+# Test extra arguments
+fpath .*/tests/renovate.json5.bz2$ bzcat %pistol-filename%
 # Test exit code is non-zero in case a command does not exist:
 application/x-bzip2 not-a-real-command %pistol-filename%
 # Test exit code is non-zero in case a command starts but fails to finish

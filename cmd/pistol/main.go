@@ -23,7 +23,8 @@ func main() {
 	cmd := cmdline.New()
 	cmd.AddOption("c", "config", "config file", fmt.Sprintf("configuration file to use (defaults to %s/pistol/pistol.conf)", xdg.ConfigHome))
 	cmd.AddFlag("V", "version", "Print version date and exit")
-	cmd.AddTrailingArguments("file", "the file to preview")
+	cmd.AddArgument("file", "the file to preview")
+	cmd.AddTrailingArguments("extras", "extra arguments passed to the command")
 	cmd.Parse(os.Args)
 
 	if cmd.IsOptionSet("version") {
@@ -42,13 +43,15 @@ func main() {
 		}
 	}
 	configPath := cmd.OptionValue("config")
+	var extras []string
+	extras = cmd.TrailingArgumentsValues("extras")
 
 	// handle file argument with configuration
-	if len(cmd.TrailingArgumentsValues("file")) == 0 {
+	if len(cmd.ArgumentValue("file")) == 0 {
 		log.Fatalf("no arguments!")
 		os.Exit(1)
 	}
-	previewer, err := pistol.NewPreviewer(cmd.TrailingArgumentsValues("file")[0], configPath)
+	previewer, err := pistol.NewPreviewer(cmd.ArgumentValue("file"), configPath, extras)
 	if err != nil {
 		log.Fatal(err)
 		os.Exit(2)

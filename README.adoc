@@ -135,7 +135,7 @@ https://github.com/doronbehar/pistol/issues/6[#6] for more details.]
 
 ....
 $ pistol --help
-Usage: pistol OPTIONS [<file> ...]
+Usage: pistol OPTIONS <file> [<extras> ...]
 
 OPTIONS
 
@@ -146,6 +146,7 @@ OPTIONS
 ARGUMENTS
 
 file                        the file to preview
+extras                      extra arguments passed to the command
 ....
 
 === Integrations
@@ -328,6 +329,46 @@ More over, with `sh:` you can use shell pipes:
 ----
 fpath .*.md$ sh: bat --paging=never --color=always %pistol-filename% | head -8
 ----
+
+==== Passing arbitrary extra arguments to commands
+
+Pistol is capable of passing extra arguments to commands if the config says so.
+The arguments `%pistol-extra0%`, `%pistol-extra1%` and so on, are substituted
+by the extra arguments given to `pistol`, if these present in invokation and if
+they are present in the config. Example usage:
+
+With this config:
+
+....
+fpath /problematic-bz2/.*.bz2 bzip2 %pistol-filename% %pistol-extra0%
+fpath /working-bz2/.*.bz2     bzip2 %pistol-filename%
+....
+
+Running:
+
+....
+pistol /problematic-bz2/example.bz2 --test
+....
+
+Will run bzip2 while testing the integrity of the compressed file. However,
+running: 
+
+....
+pistol /working-bz2/example.bz2 --test
+....
+
+Will not pass the `--test` argument to bzip, due to `%pistol-extra0` not
+present in the config for the files at `/working-bz2`. This feature is mainly
+present for usage with https://github.com/gokcehan/lf[Lf] and
+https://ranger.github.io/[Ranger] which can pass width height and x, y
+coordinates for image previews.
+
+Here's an example usage for image previews that works with Lf:
+footnote:[`pv` script refers to https://github.com/neeshy/lfimg/blob/e9154721514a1384a89f2713092c15dc77992f37/pv[this script].]
+
+....
+image/.* pv %pistol-filename% %pistol-extra0% %pistol-extra1% %pistol-extra2% %pistol-extra3%
+....
 
 === Environmental Variables
 
