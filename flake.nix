@@ -11,27 +11,44 @@
     flake = false;
   };
 
+  inputs.gomod2nix-flake.url = "github:tweag/gomod2nix";
+
   outputs = { self
     , nixpkgs
     , flake-utils
     , flake-compat
+    , gomod2nix-flake
   }:
   flake-utils.lib.eachDefaultSystem (system:
     let
-      pkgs = nixpkgs.legacyPackages.${system};
-      pistol = pkgs.pistol.overrideAttrs(oldAttrs: rec {
-        version = "${builtins.readFile ./VERSION}-flake";
+      pkgs = import nixpkgs {
+        overlays = [
+          gomod2nix-flake.overlay
+        ];
+        inherit system;
+        config = {};
+      };
+      pistol = pkgs.buildGoApplication rec {
+        pname = "pistol";
+        version = "${pkgs.lib.strings.removeSuffix "\n" (builtins.readFile ./VERSION)}-flake";
         src = builtins.filterSource
           (path: type: type != "directory" || baseNameOf path != ".git")
           ./.;
-        buildFlagsArray = [
-          "-ldflags=-s -w -X main.Version=${version}"
-        ];
-      });
+        modules = ./gomod2nix.toml;
+        inherit (pkgs.pistol)
+          meta
+          passthru
+          subPackages
+          buildInputs
+        ;
+        buildFlagsArray = [ "-ldflags=-s -w -X main.Version=${version}" ];
+      };
     in rec {
       devShell = pkgs.mkShell {
-        buildInputs = pistol.buildInputs ++ [
+        buildInputs = [
+          pkgs.file
           pkgs.elinks
+          pkgs.gomod2nix
         ];
       };
       packages.pistol = pistol;
