@@ -14,3 +14,5 @@ fpath .*/tests/renovate.json5.bz2$ bzcat %pistol-filename%
 application/x-bzip2 not-a-real-command %pistol-filename%
 # Test exit code is non-zero in case a command starts but fails to finish
 fpath .*/tests$ bat %pistol-filename%
+# Test substitution of multiple extra arguments without spaces between (#56)
+fpath .*/tests/multi-extra echo %pistol-filename% %pistol-extra0%x%pistol-extra1%
