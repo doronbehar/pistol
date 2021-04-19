@@ -53,6 +53,14 @@ test: pistol
 	@echo or verbosity, although the arguments are passed to pistol
 	@echo -------------------
 	@./pistol --config tests/config tests/renovate.json5.bz2 -v -L
+	@echo -------------------
+	@echo Checks substitution of multiple pistol-extra arguments without
+	@echo a space between them \(issue 56\). The output should be:
+	@echo
+	@echo "     tests/multi-extra AxB"
+	@echo
+	@echo -------------------
+	@./pistol --config tests/config tests/multi-extra A B
 
 deps:
 	go get github.com/c4milo/github-release

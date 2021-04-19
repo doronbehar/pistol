@@ -5,7 +5,7 @@ import (
 	"os"
 	"io"
 	"os/exec"
-	// "fmt"
+	"fmt"
 	"strconv"
 	"strings"
 	"regexp"
@@ -163,18 +163,29 @@ func (p *Previewer) Write(w io.Writer) (error) {
 		re := regexp.MustCompile(`%pistol-extra([0-9]+)%`)
 
 		for _, arg := range p.Args {
+			argAux := arg
 			if(re.MatchString(arg)) {
-				auxStr := re.ReplaceAllString(arg, "$1")
-				auxInt, err := strconv.Atoi(auxStr);
-				if (err == nil && len(p.Extras) > auxInt) {
-					arg = re.ReplaceAllString(arg, p.Extras[auxInt])
-				} else {
-					continue
+				// We iterate all indices of matches in every command line
+				// argument written in the config, because the match can occur
+				// in multiple arguments, see #56.
+				allIndexes := re.FindAllStringSubmatchIndex(arg, -1)
+				for _, loc := range allIndexes {
+					// We try to convert the string found in the argument to a
+					// number.
+					auxInt, err := strconv.Atoi(arg[loc[2]:loc[3]])
+					if (err == nil && len(p.Extras) > auxInt) {
+						// substitute the %pistol-extra[#]% argument in the
+						// final CLI string.
+						current := fmt.Sprintf("%%pistol-extra%d%%", auxInt)
+						argAux = strings.ReplaceAll(argAux, current, p.Extras[auxInt])
+					} else {
+						continue
+					}
 				}
 			} else {
-				arg = strings.ReplaceAll(arg, "%pistol-filename%", replStr)
+				argAux = strings.ReplaceAll(argAux, "%pistol-filename%", replStr)
 			}
-			argsOut = append(argsOut, arg)
+			argsOut = append(argsOut, argAux)
 		}
 
 		if p.Command == "sh:" {
