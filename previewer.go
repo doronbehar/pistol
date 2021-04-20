@@ -5,7 +5,7 @@ import (
 	"os"
 	"io"
 	"os/exec"
-	"fmt"
+	// "fmt"
 	"strconv"
 	"strings"
 	"regexp"
@@ -176,7 +176,7 @@ func (p *Previewer) Write(w io.Writer) (error) {
 					if (err == nil && len(p.Extras) > auxInt) {
 						// substitute the %pistol-extra[#]% argument in the
 						// final CLI string.
-						current := fmt.Sprintf("%%pistol-extra%d%%", auxInt)
+						current := arg[loc[0]:loc[1]]
 						argAux = strings.ReplaceAll(argAux, current, p.Extras[auxInt])
 					} else {
 						continue
