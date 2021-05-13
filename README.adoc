@@ -440,4 +440,4 @@ And you should be able to see messages that may give you a clue.
 
 == NEWS
 
-See xref:./NEWS.adoc[NEWS].
+See https://github.com/doronbehar/pistol/releases[previous releases].
