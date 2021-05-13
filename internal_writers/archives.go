@@ -104,7 +104,9 @@ func NewArchiveLister(mimeType, filePath string) (func(w io.Writer) error, error
 			err := walker.Walk(filePath, func(f archiver.File) error {
 				fPerm := fmt.Sprintf("%v", f.Mode())
 				fSize := humanize.Bytes(uint64(f.Size()))
-				fModt := fmt.Sprintf("%v", f.ModTime())
+				fModtS := f.ModTime()
+				fModt := fmt.Sprintf("%04d-%02d-%02d %02d:%02d", fModtS.Year(), fModtS.Month(),
+				fModtS.Day(), fModtS.Hour(), fModtS.Minute())
 				var fName string
 				switch h := f.Header.(type) {
 				case zip.FileHeader:
