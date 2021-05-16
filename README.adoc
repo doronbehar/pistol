@@ -1,7 +1,24 @@
+ifdef::env-github[]
 = Pistol
 :toc:
+endif::[]
+ifndef::env-github[]
+// If processed locally, the README will be processed as a manpage
+= pistol(1)
+:doctype: manpage
+:manmanual: Pistol
+:mansource: Pistol
+:man-linkstyle: pass:[blue R < >]
+
+
+== Name
+
+pistol - General purpose file previewer designed for Ranger, Lf to make scope.sh redundant.
+endif::[]
 
 == Introduction
+
+ifdef::env-github[]
 
 Pistol is a file previewer for command line file managers such as
 https://ranger.github.io/[Ranger], https://github.com/gokcehan/lf[Lf] and
@@ -23,6 +40,14 @@ detection is internal. Moreover, it features native preview support for
 almost any archive file and for text files along with syntax
 highlighting while `scope.sh` relies on external programs to do these
 basic tasks.
+
+endif::[]
+ifndef::env-github[]
+
+Pistol features native preview support for almost any archive file and text
+files along with syntax highlighting.
+
+endif::[]
 
 The following table lists Pistol’s native previewing support:
 
@@ -48,9 +73,13 @@ ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked, interpr
 This feature is available out of the box just like the previews for the
 common mime types mentioned above.
 
+ifdef::env-github[]
 See also the WiKi article:
 https://github.com/doronbehar/pistol/wiki/Pistol-out-in-the-wild[Pistol out in
 the Wild].
+endif::[]
+
+ifdef::env-github[]
 
 === A Note on MIME type Detection
 
@@ -103,8 +132,7 @@ https://github.com/google/brotli/issues/727[`brotli` bug report].]
 If someone has packaged Pistol for your distribution, you might find a
 package for of it linked
 https://github.com/doronbehar/pistol/wiki/Distributions'-Packages[in
-the WiKi]. If not, you can install it from source according to the
-following instructions:
+the WiKi]. If not, you can install it from source.
 
 Ideally there should also be prebuilt binaries in every release's assests, but
 I don't know yet how to do that - help is wanted :raising_hand:, see
@@ -130,6 +158,31 @@ env GO111MODULE=on go get -u github.com/doronbehar/pistol/cmd/pistol
 footnote:[`env GO111MODULE=on` is needed due to a recent bug / issue
 https://github.com/golang/go/issues/31529[with Go], see
 https://github.com/doronbehar/pistol/issues/6[#6] for more details.]
+
+Besides `libmagic`,
+https://repology.org/project/asciidoctor/information[`asciidoctor`] is also
+recommended, in order to compile the README as a manpage and install it. NixOS
+For instance, does it like this:
+
+[source,nix]
+----
+  # ...
+  nativeBuildInputs = [
+    installShellFiles
+    asciidoctor
+  ];
+  postBuild = ''
+    asciidoctor -b manpage -d manpage README.adoc
+    installManPage pistol.1
+  '';
+  # ...
+----
+
+https://github.com/NixOS/nixpkgs/blob/master/pkgs/tools/misc/pistol/default.nix[Link
+to currently evaluated file on NixOS]. Packagers for other distros should do
+something similar.
+
+endif::[]
 
 == Usage
 
