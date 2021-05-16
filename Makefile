@@ -8,6 +8,12 @@ VERSION := v$(shell cat VERSION)-git
 build:
 	go build -ldflags "-X 'main.Version=$(VERSION)'" ./cmd/pistol
 
+# Manpage
+pistol.1: README.adoc
+	asciidoctor -b manpage -d manpage README.adoc
+
+manpage: pistol.1
+
 install:
 	go install -ldflags "-X 'main.Version=$(VERSION)'" ./cmd/pistol
 
