@@ -14,7 +14,7 @@ require (
 	github.com/klauspost/compress v1.13.1 // indirect
 	github.com/klauspost/pgzip v1.2.5 // indirect
 	github.com/mholt/archiver/v3 v3.5.0
-	github.com/nwaples/rardecode v1.1.0
+	github.com/nwaples/rardecode v1.1.2
 	github.com/pierrec/lz4/v4 v4.1.8 // indirect
 	github.com/rakyll/magicmime v0.1.0
 	github.com/sirupsen/logrus v1.8.1
