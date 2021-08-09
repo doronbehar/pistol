@@ -241,7 +241,7 @@ You can change this behaviour by writing a configuration file in
 `~/.config/pistol/pistol.conf` (or `$XDG_CONFIG_HOME/pistol/pistol.conf`) On
 GNU systems, with the syntax as explained below.
 
-::NOTE:: On OS X, this location defaults to:
+NOTE: On OS X, this location defaults to:
 `~/Library/Preferences/pistol/pistol.conf`, as the XDG specification imposes.
 
 === Syntax
