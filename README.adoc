@@ -193,7 +193,7 @@ Usage: pistol OPTIONS <file> [<extras> ...]
 OPTIONS
 
 -V, --version               Print version date and exit
--c, --config <config file>  configuration file to use (defaults to ~/.config/pistol/pistol.conf)
+-c, --config <config file>  configuration file to use (defaults to ~/.config/pistol/pistol.conf on Linux)
 -h, --help                  print help and exit
 
 ARGUMENTS
@@ -238,8 +238,11 @@ $EDITOR "$(find -name '*.py' | fzf --preview='pistol {}')"
 Although Pistol previews files of certain MIME types by default, it
 doesn’t force you to use these internal previewers for these MIME types.
 You can change this behaviour by writing a configuration file in
-`$XDG_CONFIG_HOME/pistol/pistol.conf` (or
-`~/.config/pistol/pistol.conf`) with the syntax as explained below.
+`~/.config/pistol/pistol.conf` (or `$XDG_CONFIG_HOME/pistol/pistol.conf`) On
+GNU systems, with the syntax as explained below.
+
+::NOTE:: On OS X, this location defaults to:
+`~/Library/Preferences/pistol/pistol.conf`, as the XDG specification imposes.
 
 === Syntax
 
