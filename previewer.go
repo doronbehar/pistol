@@ -173,19 +173,21 @@ func (p *Previewer) Write(w io.Writer) (error) {
 					// We try to convert the string found in the argument to a
 					// number.
 					auxInt, err := strconv.Atoi(arg[loc[2]:loc[3]])
+					current := arg[loc[0]:loc[1]]
 					if (err == nil && len(p.Extras) > auxInt) {
 						// substitute the %pistol-extra[#]% argument in the
 						// final CLI string.
-						current := arg[loc[0]:loc[1]]
 						argAux = strings.ReplaceAll(argAux, current, p.Extras[auxInt])
 					} else {
-						continue
+						argAux = strings.ReplaceAll(argAux, current, "")
 					}
 				}
 			} else {
 				argAux = strings.ReplaceAll(argAux, "%pistol-filename%", replStr)
 			}
-			argsOut = append(argsOut, argAux)
+			if(len(argAux) > 0) {
+				argsOut = append(argsOut, argAux)
+			}
 		}
 
 		if p.Command == "sh:" {
