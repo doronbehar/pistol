@@ -1,5 +1,6 @@
 {
   postUpdateOptions: [ "gomodTidy" ],
+  dependencyDashboard: true,
   // Came by default
   extends: [
     "config:base"
