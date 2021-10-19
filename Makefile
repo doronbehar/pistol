@@ -52,13 +52,13 @@ test: pistol
 	@echo -------------------
 	@echo ./tests/VERSION.bz2 should appear along with license of bz2
 	@echo -------------------
-	@./pistol --config tests/config tests/VERSION.bz2 -v -L
+	@./pistol --config tests/config tests/VERSION.bz2 -- -v -L
 	@tput sgr0
 	@echo -------------------
 	@echo ./tests/renovate.json5.bz2 should appear without a license of bz2
 	@echo or verbosity, although the arguments are passed to pistol
 	@echo -------------------
-	@./pistol --config tests/config tests/renovate.json5.bz2 -v -L
+	@./pistol --config tests/config tests/renovate.json5.bz2 -- -v -L
 	@echo -------------------
 	@echo Checks substitution of multiple pistol-extra arguments without
 	@echo a space between them \(issue 56\). The output should be:

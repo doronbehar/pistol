@@ -3,34 +3,29 @@ package main
 import (
 	"os"
 	"log"
-	"fmt"
 
 	"github.com/doronbehar/pistol"
-	"github.com/galdor/go-cmdline"
+	"github.com/alexflint/go-arg"
 	"github.com/adrg/xdg"
 )
+type args struct {
+	Config string `arg:"-c" help:"configuration file to use"`
+	FilePath string `arg:"positional"`
+	Extras []string `arg:"positional" help:"extra arguments passed to the command"`
+}
 
 var (
 	Version string
 )
+func (args) Version() string {
+	return Version
+}
 
 func main() {
 	// Setup logger
 	log.SetFlags(0)
 	log.SetPrefix(os.Args[0] + ": ")
-
-	// Setup cmdline arguments
-	cmd := cmdline.New()
-	cmd.AddOption("c", "config", "config file", fmt.Sprintf("configuration file to use (defaults to %s/pistol/pistol.conf)", xdg.ConfigHome))
-	cmd.AddFlag("V", "version", "Print version date and exit")
-	cmd.AddArgument("file", "the file to preview")
-	cmd.AddTrailingArguments("extras", "extra arguments passed to the command")
-	cmd.Parse(os.Args)
-
-	if cmd.IsOptionSet("version") {
-		fmt.Println(Version)
-		os.Exit(0)
-	}
+	var args args
 
 	// Handle configuration file path
 	xdgPaths := []string{"pistol/pistol.conf", "pistol.conf"}
@@ -38,20 +33,19 @@ func main() {
 		defaultConfigPath, err := xdg.SearchConfigFile(xdgPath)
 		// if a file was found
 		if err == nil {
-			cmd.SetOptionDefault("config", defaultConfigPath)
+			args.Config = defaultConfigPath
 			break
 		}
 	}
-	configPath := cmd.OptionValue("config")
-	var extras []string
-	extras = cmd.TrailingArgumentsValues("extras")
+	// Setup cmdline arguments
+	arg.MustParse(&args)
 
 	// handle file argument with configuration
-	if len(cmd.ArgumentValue("file")) == 0 {
+	if len(args.FilePath) == 0 {
 		log.Fatalf("no arguments!")
 		os.Exit(1)
 	}
-	previewer, err := pistol.NewPreviewer(cmd.ArgumentValue("file"), configPath, extras)
+	previewer, err := pistol.NewPreviewer(args.FilePath, args.Config, args.Extras)
 	if err != nil {
 		log.Fatal(err)
 		os.Exit(2)
