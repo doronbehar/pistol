@@ -11,7 +11,8 @@
     flake = false;
   };
   inputs.gomod2nix = {
-    url = "github:tweag/gomod2nix";
+    # For static compilation I need: https://github.com/tweag/gomod2nix/pull/24
+    url = "github:doronbehar/gomod2nix/go-stdenv";
     inputs.nixpkgs.follows = "nixpkgs";
     inputs.utils.follows = "flake-utils";
   };
@@ -39,6 +40,9 @@
       # https://discourse.nixos.org/t/passing-git-commit-hash-and-tag-to-build-with-flakes/11355/2
       version_rev = if (self ? rev) then (builtins.substring 0 8 self.rev) else "dirty";
       version = "${pkgs.lib.fileContents ./VERSION}-${version_rev}-flake";
+      buildGoApplicationStatic = pkgs.buildGoApplication.override {
+        stdenv = pkgs.pkgsStatic.stdenv;
+      };
       pistol = pkgs.buildGoApplication {
         pname = "pistol";
         inherit version;
@@ -79,6 +83,42 @@
         ;
         CGO_ENABLED = 1;
       };
+      MAGIC_DB = "${pkgs.pkgsStatic.file}/share/misc/magic.mgc";
+      pistol-static = buildGoApplicationStatic {
+        inherit (pistol)
+          pname
+          version
+          src
+          subPackages
+          postBuild
+          CGO_ENABLED
+          modules
+          meta
+        ;
+        nativeBuildInputs = pistol.nativeBuildInputs ++ [
+          pkgs.removeReferencesTo
+        ];
+        buildInputs = [
+          pkgs.pkgsStatic.file
+          pkgs.pkgsStatic.zlib
+        ];
+        # From some reason even though zlib is static we need this, but it
+        # doesn't create a real reference to zlib.
+        NIX_LDFLAGS = "-lz";
+        preBuild = ''
+          cp ${MAGIC_DB} ./cmd/pistol/magic.mgc
+        '';
+        postFixup = ''
+          # Remove unnecessary references to zlib.
+          rm -r $out/nix-support
+          # Remove more unnecessary references which I don't know the source of
+          # which. I guess they are due to features of some go modules I don't
+          # use.
+          remove-references-to -t ${pkgs.mailcap} $out/bin/pistol
+          remove-references-to -t ${pkgs.iana-etc} $out/bin/pistol
+          remove-references-to -t ${pkgs.tzdata} $out/bin/pistol
+        '';
+      };
     in rec {
       devShell = pkgs.mkShell {
         inherit (pistol) buildInputs;
@@ -87,8 +127,14 @@
           pkgs.elinks
           pkgs.gomod2nix
         ];
+        inherit MAGIC_DB;
       };
-      packages.pistol = pistol;
+      packages = {
+        inherit
+          pistol
+          pistol-static
+        ;
+      };
       defaultPackage = pistol;
       apps.pistol = {
         type = "app";

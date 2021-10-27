@@ -21,7 +21,7 @@ type archiveFileInfo struct {
 	FileName string
 }
 
-func NewArchiveLister(mimeType, filePath string) (func(w io.Writer) error, error) {
+func NewArchiveLister(magic_db, mimeType, filePath string) (func(w io.Writer) error, error) {
 	log.Infof("listing files in archive %s\n", filePath)
 	return func (w io.Writer) error {
 		var wIface interface{}

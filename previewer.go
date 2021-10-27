@@ -15,11 +15,13 @@ import (
 	she "github.com/alessio/shellescape"
 	log "github.com/sirupsen/logrus"
 	"github.com/doronbehar/pistol/internal_writers"
-	"github.com/rakyll/magicmime"
+	"github.com/doronbehar/magicmime"
 )
 
 // A type NewPreviewer returns
 type Previewer struct {
+	// The path to the magic.mgc database, usually empty
+	MagicDb string
 	// The file to be previewed
 	FilePath string
 	// Extra arguments passed to pistol
@@ -49,11 +51,11 @@ type Previewer struct {
 // `pistol`, the command line tool, searches for a default configuration file
 // in ~/.config/pistol/pistol.conf. The API doesn't include this functionality.
 //
-// Mime type detection is provided by libmagic (through github.com/rakyll/magicmime)
+// Mime type detection is provided by libmagic (through github.com/doronbehar/magicmime)
 //
 // Many mime types are handled internally by Pistol, see table here:
 // https://github.com/doronbehar/pistol#introduction
-func NewPreviewer(filePath, configPath string, extras []string) (Previewer, error) {
+func NewPreviewer(magic_db_path, filePath, configPath string, extras []string) (Previewer, error) {
 	verbose := os.Getenv("PISTOL_DEBUG")
 	if verbose != "" {
 		log.SetLevel(log.InfoLevel)
@@ -63,9 +65,10 @@ func NewPreviewer(filePath, configPath string, extras []string) (Previewer, erro
 	// create an empty Previewer
 	p := Previewer{}
 	// opens the magic library
-	if err := magicmime.Open(magicmime.MAGIC_MIME_TYPE | magicmime.MAGIC_SYMLINK); err != nil {
+	if err := magicmime.OpenWithPath(magic_db_path, magicmime.MAGIC_MIME_TYPE | magicmime.MAGIC_SYMLINK); err != nil {
 		return p, err
 	}
+	p.MagicDb = magic_db_path
 	// get mimetype of given file, we don't care about the extension
 	mimetype, err := magicmime.TypeByFile(filePath)
 	defer magicmime.Close()
@@ -206,7 +209,7 @@ func (p *Previewer) Write(w io.Writer) (error) {
 		return cmd.Wait()
 	} else {
 		// try to match with internal writers
-		internal_writer, err := pistol.MatchInternalWriter(p.MimeType, p.FilePath)
+		internal_writer, err := pistol.MatchInternalWriter(p.MagicDb, p.MimeType, p.FilePath)
 		if err != nil {
 			return err
 		}

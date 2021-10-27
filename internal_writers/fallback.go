@@ -4,11 +4,10 @@ import (
 	"io"
 	"fmt"
 
-	"github.com/rakyll/magicmime"
+	"github.com/doronbehar/magicmime"
 )
-
-func NewFallbackWriter(mimeType, filePath string) (func(w io.Writer) error, error) {
-	if err := magicmime.Open(magicmime.MAGIC_SYMLINK); err != nil {
+func NewFallbackWriter(magic_db, mimeType, filePath string) (func(w io.Writer) error, error) {
+	if err := magicmime.OpenWithPath(magic_db, magicmime.MAGIC_SYMLINK); err != nil {
 		return emptyWriter, err
 	}
 	complete_filetype_description, err := magicmime.TypeByFile(filePath)

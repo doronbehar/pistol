@@ -4,9 +4,19 @@
 
 NAME := pistol
 VERSION := v$(shell cat VERSION)-git
+ifdef MAGIC_DB
+	MAGIC_DB := $(MAGIC_DB)
+else
+	MAGIC_DB := /usr/share/misc/magic.mgc
+endif
 
 build:
 	go build -ldflags "-X 'main.Version=$(VERSION)'" ./cmd/pistol
+build-static:
+	@echo copying magic db for compilation from:
+	@echo "    $(MAGIC_DB)"
+	@cp --no-preserve=mode,ownership -f $(MAGIC_DB) ./cmd/pistol/magic.mgc
+	go build -tags EMBED_MAGIC_DB -ldflags "-X 'main.Version=$(VERSION)'" ./cmd/pistol
 
 # Manpage
 pistol.1: README.adoc
