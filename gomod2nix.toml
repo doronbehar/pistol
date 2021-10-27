@@ -1,10 +1,10 @@
 ["github.com/adrg/xdg"]
-  sumVersion = "v0.3.3"
+  sumVersion = "v0.4.0"
   ["github.com/adrg/xdg".fetch]
     type = "git"
     url = "https://github.com/adrg/xdg"
-    rev = "11bedc8a87ab263bb3cba51d10e5ac70a0a7e3f2"
-    sha256 = "1h11myyy426qrz96h9jrl7r1n8xwd5ybcr9c4s8l2pxn86dn5jsy"
+    rev = "4ec40e24f0cf1039f93c773f2984decdea9719b5"
+    sha256 = "1xbkb8wmr6phj2ppr75akc58jdzrv20gc3mkxa1mmb968isy8s6c"
 
 ["github.com/akamensky/argparse"]
   sumVersion = "v1.3.1"
@@ -215,12 +215,12 @@
     sha256 = "178r0fa2dpzxf0sabs7dn0c8fa7vs87zlxk6spkn374ls9pir7nq"
 
 ["golang.org/x/sys"]
-  sumVersion = "v0.0.0-20211015200801-69063c4bb744"
+  sumVersion = "v0.0.0-20211025201205-69cdffdb9359"
   ["golang.org/x/sys".fetch]
     type = "git"
     url = "https://go.googlesource.com/sys"
-    rev = "69063c4bb744bc56492b1a0533d73a23406b0bc2"
-    sha256 = "1a7i6cklsa0x8bv71vqf8x5wmzf6vdsy9iycr656wsa4bp54g0vy"
+    rev = "69cdffdb9359ff97d91e4f4fbb6b2714c3898eae"
+    sha256 = "12jw69gy1pdvfq4xsnwyyl1djs0ffg274lg7rlzym2q5ky34sfsw"
 
 ["gopkg.in/check.v1"]
   sumVersion = "v0.0.0-20161208181325-20d25e280405"
