@@ -152,12 +152,14 @@ following command to install Pistol to `$GOPATH/bin/pistol`:
 
 [source,sh]
 ----
-env GO111MODULE=on go get -u github.com/doronbehar/pistol/cmd/pistol
+env CGO_ENABLED=1 GO111MODULE=on go get -u github.com/doronbehar/pistol/cmd/pistol
 ----
 
 footnote:[`env GO111MODULE=on` is needed due to a recent bug / issue
 https://github.com/golang/go/issues/31529[with Go], see
-https://github.com/doronbehar/pistol/issues/6[#6] for more details.]
+https://github.com/doronbehar/pistol/issues/6[#6] for more details.
+`CGO_ENABLED=1` is needed for https://github.com/rakyll/magicmime[magicmime],
+see https://github.com/doronbehar/pistol/issues/76[#76].]
 
 Besides `libmagic`,
 https://repology.org/project/asciidoctor/information[`asciidoctor`] is also
