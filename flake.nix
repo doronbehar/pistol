@@ -45,6 +45,9 @@
       buildGoApplicationStatic = buildGoApplication.override {
         stdenv = pkgs.pkgsStatic.stdenv;
       };
+      buildGoApplicationStatic-aarch64 = buildGoApplication.override {
+        stdenv = pkgs.pkgsCross.aarch64-multiplatform-musl.pkgsStatic.stdenv;
+      };
       # Used also in the devShell
       MAGIC_DB = "${pkgs.pkgsStatic.file}/share/misc/magic.mgc";
       # arguments used in many derivation arguments calls
@@ -123,6 +126,15 @@
           remove-references-to -t ${pkgs.pkgsStatic.file} $out/bin/pistol
         '';
       });
+      pistol-static-aarch64 = buildGoApplicationStatic-aarch64 (common-static-drv-args // {
+        buildInputs = [
+          pkgs.pkgsCross.aarch64-multiplatform-musl.pkgsStatic.file
+          pkgs.pkgsCross.aarch64-multiplatform-musl.pkgsStatic.zlib
+        ];
+        postFixup = common-static-drv-args.postFixup + ''
+          remove-references-to -t ${pkgs.pkgsCross.aarch64-multiplatform-musl.pkgsStatic.file} $out/bin/pistol
+        '';
+      });
     in rec {
       devShell = pkgs.mkShell {
         inherit (pistol) buildInputs;
@@ -137,6 +149,7 @@
         inherit
           pistol
           pistol-static
+          pistol-static-aarch64
         ;
       };
       defaultPackage = pistol;
