@@ -131,14 +131,24 @@ https://github.com/google/brotli/issues/727[`brotli` bug report].]
 
 If someone has packaged Pistol for your distribution, you might find a
 package for of it linked
-https://github.com/doronbehar/pistol/wiki/Distributions'-Packages[in
-the WiKi]. If not, you can install it from source.
+https://github.com/doronbehar/pistol/wiki/Distributions'-Packages[in the WiKi].
 
-Ideally there should also be prebuilt binaries in every release's assests, but
-I don't know yet how to do that - help is wanted :raising_hand:, see
-https://github.com/doronbehar/pistol/issues/23[#23].
+If not, use the following instructions, or grab a statically compiled version
+of it from https://github.com/doronbehar/pistol/releases[the releases page],
+available since version `0.3.1`. The releases assests include also the manual
+page `pistol.1.gz`.
 
-=== Prerequisites
+NOTE: For a statically compiled Pistol to be functional, it needs to read a libmagic database
+(usually found in `/usr/share/misc/magic.mgc`) and the static executable
+includes the contents of this database found on https://github.com/NixOS/nixpkgs/blob/nixos-unstable/pkgs/tools/misc/file/default.nix[Nixpkgs'
+`file`]
+package. The content of the `magic.mgc` database is copied to
+`~/.local/share/pistol/${libmagic-version}.mgc` when you first run the executable.
+Hence using this executable might not be desirable due to this behaviour which
+a regular compilation of `pistol` does not include. This behaviour is compiled
+into `pistol` if you use `go {build,install}` with `-tags EMBED_MAGIC_DB`.
+
+=== From Source
 
 Since Pistol depends on https://github.com/rakyll/magicmime[magicmime],
 you’ll need a `libmagic` package installed. Please refer to
@@ -183,6 +193,7 @@ For instance, does it like this:
 https://github.com/NixOS/nixpkgs/blob/master/pkgs/tools/misc/pistol/default.nix[Link
 to currently evaluated file on NixOS]. Packagers for other distros should do
 something similar.
+
 
 endif::[]
 
