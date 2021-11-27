@@ -40,10 +40,15 @@
       # https://discourse.nixos.org/t/passing-git-commit-hash-and-tag-to-build-with-flakes/11355/2
       version_rev = if (self ? rev) then (builtins.substring 0 8 self.rev) else "dirty";
       version = "${pkgs.lib.fileContents ./VERSION}-${version_rev}-flake";
-      buildGoApplicationStatic = pkgs.buildGoApplication.override {
+      # Create the buildGoApplication variants
+      inherit (pkgs) buildGoApplication;
+      buildGoApplicationStatic = buildGoApplication.override {
         stdenv = pkgs.pkgsStatic.stdenv;
       };
-      pistol = pkgs.buildGoApplication {
+      # Used also in the devShell
+      MAGIC_DB = "${pkgs.pkgsStatic.file}/share/misc/magic.mgc";
+      # arguments used in many derivation arguments calls
+      common-drv-args = {
         pname = "pistol";
         inherit version;
         src = pkgs.lib.cleanSourceWith {
@@ -76,37 +81,24 @@
         modules = ./gomod2nix.toml;
         inherit (pkgs.pistol)
           nativeBuildInputs
-          buildInputs
           subPackages
           postBuild
           meta
         ;
         CGO_ENABLED = 1;
       };
-      MAGIC_DB = "${pkgs.pkgsStatic.file}/share/misc/magic.mgc";
-      pistol-static = buildGoApplicationStatic {
-        inherit (pistol)
-          pname
-          version
-          src
-          subPackages
-          postBuild
-          CGO_ENABLED
-          modules
-          meta
-        ;
-        nativeBuildInputs = pistol.nativeBuildInputs ++ [
+      common-static-drv-args = (common-drv-args // {
+        nativeBuildInputs = common-drv-args.nativeBuildInputs ++ [
           pkgs.removeReferencesTo
-        ];
-        buildInputs = [
-          pkgs.pkgsStatic.file
-          pkgs.pkgsStatic.zlib
         ];
         # From some reason even though zlib is static we need this, but it
         # doesn't create a real reference to zlib.
         NIX_LDFLAGS = "-lz";
         preBuild = ''
           cp ${MAGIC_DB} ./cmd/pistol/magic.mgc
+        '';
+        buildFlags = ''
+          -tags EMBED_MAGIC_DB
         '';
         postFixup = ''
           # Remove unnecessary references to zlib.
@@ -118,7 +110,19 @@
           remove-references-to -t ${pkgs.iana-etc} $out/bin/pistol
           remove-references-to -t ${pkgs.tzdata} $out/bin/pistol
         '';
-      };
+      });
+      pistol = buildGoApplication (common-drv-args // {
+        inherit (pkgs.pistol) buildInputs;
+      });
+      pistol-static = buildGoApplicationStatic (common-static-drv-args // {
+        buildInputs = [
+          pkgs.pkgsStatic.file
+          pkgs.pkgsStatic.zlib
+        ];
+        postFixup = common-static-drv-args.postFixup + ''
+          remove-references-to -t ${pkgs.pkgsStatic.file} $out/bin/pistol
+        '';
+      });
     in rec {
       devShell = pkgs.mkShell {
         inherit (pistol) buildInputs;
