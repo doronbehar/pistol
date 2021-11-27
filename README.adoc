@@ -61,7 +61,7 @@ https://github.com/alecthomas/chroma[`chroma`].
 https://github.com/mholt/archiver[`archiver`].
 |===
 
-In case Pistol encounters a MIME type it doesn’t know how to handle
+In case Pistol encounters a MIME type it doesn't know how to handle
 natively and you haven’t configured a program to handle it, it’ll print
 a general description of the file type it encountered. For example, the
 preview for an executable might be:
@@ -102,7 +102,7 @@ command `file` which is available by default on most GNU/Linux
 distributions.footnote:[Considering Pistol’s indirect dependence on
 http://linux.die.net/man/3/libmagic[libmagic(3)], I will never take the
 trouble to personally try and make it work on Windows natively. If
-you’ll succeed in the heroic task of compiling libmagic for Windows and
+you’ll succeed in the heroic task of compiling `libmagic` for Windows and
 teach https://github.com/rakyll/magicmime[magicmime] to use it, please
 let me know.]
 
@@ -118,13 +118,13 @@ For example, a `.gz` file is a _single_ file compressed with `gzip`. A
 `.tar.gz` is a `.tar` file compressed using `gzip`.
 
 When pistol encounters a single file compressed using a known
-compression algorithm, it doesn’t know how to handle it’s content, it
+compression algorithm, it doesn't know how to handle it’s content, it
 displays the type of the archive. If a known compression algorithm has
 compressed a `.tar` file, Pistol lists the files themselves.
 
 https://en.wikipedia.org/wiki/Brotli[brotli] compressed archives,
-(`.tar.br`) and brotli compressed files (`.br`) are not detected by
-libmagic so Pistol doesn’t know how to handle them.footnote:[https://bugs.astron.com/view.php?id=111[`file` bug report];
+(`.tar.br`) and Brotli compressed files (`.br`) are not detected by
+`libmagic` so Pistol doesn't know how to handle them.footnote:[https://bugs.astron.com/view.php?id=111[`file` bug report];
 https://github.com/google/brotli/issues/727[`brotli` bug report].]
 
 == Install
@@ -135,10 +135,10 @@ https://github.com/doronbehar/pistol/wiki/Distributions'-Packages[in the WiKi].
 
 If not, use the following instructions, or grab a statically compiled version
 of it from https://github.com/doronbehar/pistol/releases[the releases page],
-available since version `0.3.1`. The releases assests include also the manual
+available since version `0.3.1`. The releases assets include also the manual
 page `pistol.1.gz`.
 
-NOTE: For a statically compiled Pistol to be functional, it needs to read a libmagic database
+NOTE: For a statically compiled Pistol to be functional, it needs to read a `libmagic` database
 (usually found in `/usr/share/misc/magic.mgc`) and the static executable
 includes the contents of this database found on https://github.com/NixOS/nixpkgs/blob/nixos-unstable/pkgs/tools/misc/file/default.nix[Nixpkgs'
 `file`]
@@ -153,10 +153,10 @@ into `pistol` if you use `go {build,install}` with `-tags EMBED_MAGIC_DB`.
 Since Pistol depends on https://github.com/rakyll/magicmime[magicmime],
 you’ll need a `libmagic` package installed. Please refer to
 https://github.com/rakyll/magicmime/tree/v0.1.0#prerequisites[this
-section in magicmime’s README] for the appropriate commands for every
+section in `magicmime`'s README] for the appropriate commands for every
 OS.
 
-Assuming you’ve installed `libmagic` properly and you have
+Assuming you've installed `libmagic` properly and you have
 https://golang.org/doc/install[setup a Go environment], Use the
 following command to install Pistol to `$GOPATH/bin/pistol`:
 
@@ -249,7 +249,7 @@ $EDITOR "$(find -name '*.py' | fzf --preview='pistol {}')"
 == Configuration
 
 Although Pistol previews files of certain MIME types by default, it
-doesn’t force you to use these internal previewers for these MIME types.
+doesn't force you to use these internal previewers for these MIME types.
 You can change this behaviour by writing a configuration file in
 `~/.config/pistol/pistol.conf` (or `$XDG_CONFIG_HOME/pistol/pistol.conf`) On
 GNU systems, with the syntax as explained below.
@@ -374,7 +374,7 @@ That would be equivalent to running in the typical shell:
 jq "\'.[]" "|" ".'" file.json
 ----
 
-That’s because Pistol doesn’t consider your quotes as interesting
+That’s because Pistol doesn't consider your quotes as interesting
 instructions, it just splits words by spaces. Hence, to overcome this
 disability, you can use:
 
@@ -403,7 +403,7 @@ fpath .*.md$ sh: bat --paging=never --color=always %pistol-filename% | head -8
 
 Pistol is capable of passing extra arguments to commands if the config says so.
 The arguments `%pistol-extra0%`, `%pistol-extra1%` and so on, are substituted
-by the extra arguments given to `pistol`, if these present in invokation and if
+by the extra arguments given to `pistol`, if these present in invocation and if
 they are present in the config. Example usage:
 
 With this config:
@@ -426,7 +426,7 @@ running:
 pistol /working-bz2/example.bz2 --test
 ....
 
-Will not pass the `--test` argument to bzip, due to `%pistol-extra0` not
+Will not pass the `--test` argument to `bzip`, due to `%pistol-extra0` not
 present in the config for the files at `/working-bz2`. This feature is mainly
 present for usage with https://github.com/gokcehan/lf[Lf] and
 https://ranger.github.io/[Ranger] which can pass width height and x, y
@@ -471,10 +471,10 @@ export PISTOL_CHROMA_FORMATTER=terminal16m
 
 Recent versions of https://github.com/gokcehan/lf[Lf] support
 https://github.com/gokcehan/lf/pull/93[256 colors] in it’s preview
-window. AFAIKfootnote:[I don’t use Ranger anymore, ever since I moved to Lf. If you have
+window. AFAIK, footnote:[I don’t use Ranger anymore, ever since I moved to Lf. If you have
 evidence it does support 256 colors, let me know and I’ll change the
 default.], https://ranger.github.io/[Ranger] supports 8
-colors and Lf’s `color256` isn’t enabled by default.
+colors and Lf’s `color256` isn't enabled by default.
 
 Therefor, I decided that it’ll be best to keep this variable unset in
 your general environment. If you do set `color256` in your `lfrc`, you
@@ -483,7 +483,7 @@ may feel free to set `PISTOL_CHROMA_FORMATTER` in your environment.
 ==== Chroma Styles
 
 The term _style_ refers to the set of colors used to print a given file.
-the chroma project documents all styles
+The chroma project documents all styles
 https://xyproto.github.io/splash/docs/all.html[here] and
 https://xyproto.github.io/splash/docs/longer/all.html[here].
 
