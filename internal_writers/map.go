@@ -5,7 +5,7 @@ import (
 	"regexp"
 )
 
-var internalWritersRegexMap = map[string] func(string, string) (func(w io.Writer) error, error) {
+var internalWritersRegexMap = map[string] func(string, string, string) (func(w io.Writer) error, error) {
 	"text/*": NewChromaWriter,
 	// https://github.com/doronbehar/pistol/issues/34
 	"application/json": NewChromaWriter,
@@ -25,21 +25,21 @@ var emptyWriter = func(w io.Writer) error {
 	return nil
 }
 
-func MatchInternalWriter(mimeType, filePath string) (func(w io.Writer) error, error) {
+func MatchInternalWriter(magic_db, mimeType, filePath string) (func(w io.Writer) error, error) {
 	for regex, writerCreator := range internalWritersRegexMap {
 		match, err := regexp.MatchString(regex, mimeType)
 		if err != nil {
 			return emptyWriter, err
 		}
 		if match {
-			writer, err := writerCreator(mimeType, filePath)
+			writer, err := writerCreator(magic_db, mimeType, filePath)
 			if err != nil {
 				return emptyWriter, err
 			}
 			return writer, nil
 		}
 	}
-	writer, err := NewFallbackWriter(mimeType, filePath)
+	writer, err := NewFallbackWriter(magic_db, mimeType, filePath)
 	if err != nil {
 		return emptyWriter, err
 	}

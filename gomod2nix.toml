@@ -6,14 +6,6 @@
     rev = "4ec40e24f0cf1039f93c773f2984decdea9719b5"
     sha256 = "1xbkb8wmr6phj2ppr75akc58jdzrv20gc3mkxa1mmb968isy8s6c"
 
-["github.com/akamensky/argparse"]
-  sumVersion = "v1.3.1"
-  ["github.com/akamensky/argparse".fetch]
-    type = "git"
-    url = "https://github.com/akamensky/argparse"
-    rev = "6bd6f07ff2a3fe7ef2d1f5c627566ba386fd54a7"
-    sha256 = "0h3wyskisr2m0ygnl7dsq7r43s88iqdd2j8gcilf3g8p530gwgy2"
-
 ["github.com/alecthomas/chroma"]
   sumVersion = "v0.9.4"
   ["github.com/alecthomas/chroma".fetch]
@@ -47,12 +39,12 @@
     sha256 = "1996wynw6xl99q1glciqckddncclp9hzp2jdvl6d1vw41svc4z2z"
 
 ["github.com/andybalholm/brotli"]
-  sumVersion = "v1.0.3"
+  sumVersion = "v1.0.4"
   ["github.com/andybalholm/brotli".fetch]
     type = "git"
     url = "https://github.com/andybalholm/brotli"
-    rev = "5376c15dde3fd4247febd5a3b4ac9708d2d6faff"
-    sha256 = "16y3z6rpi0a699vh9sxmdj4w2hvb5dvmci8wc9y6dsi8j6sxpmw3"
+    rev = "1d750214c25205863625bb3eb8190a51b2cef26d"
+    sha256 = "1zvmj7gbnkq9xwv1bvcxk9acxl06y902148qwbd2kqwgs52wy2c0"
 
 ["github.com/davecgh/go-spew"]
   sumVersion = "v1.1.1"
@@ -70,13 +62,21 @@
     rev = "955551b554999d8e80dba0184eab21e642786508"
     sha256 = "1irfv89b7lfkn7k3zgx610ssil6k61qs1wjj31kvqpxb3pdx4kry"
 
+["github.com/doronbehar/magicmime"]
+  sumVersion = "v0.1.1-0.20211127135329-3de4ff29dc49"
+  ["github.com/doronbehar/magicmime".fetch]
+    type = "git"
+    url = "https://github.com/doronbehar/magicmime"
+    rev = "3de4ff29dc49ea8f07b0c361193d3137b9c2c6db"
+    sha256 = "1llga0pspaghlywvcniw97m2nh1742i7a7gayw92518bmjx0zk56"
+
 ["github.com/dsnet/compress"]
-  sumVersion = "v0.0.1"
+  sumVersion = "v0.0.2-0.20210315054119-f66993602bf5"
   ["github.com/dsnet/compress".fetch]
     type = "git"
     url = "https://github.com/dsnet/compress"
-    rev = "da652975a8eea9fa0735aba8056747a751db0bd3"
-    sha256 = "1wwjaymzb1xxq3ybch3nwn72xhi2s40cvz0cl986yad3w1xwzj91"
+    rev = "f66993602bf5da07ef49d35b08e7264ae9fe2b6e"
+    sha256 = "15acshlr2h2gl7q114f600h4d3mld5x4zj1hiygaxlv1pfvmz8sz"
 
 ["github.com/dsnet/golib"]
   sumVersion = "v0.0.0-20171103203638-1ea166775780"
@@ -94,14 +94,6 @@
     rev = "9f541cc9db5d55bce703bd99987c9d5cb8eea45e"
     sha256 = "1kqf1kavdyvjk7f8kx62pnm7fbypn9z1vbf8v2qdh3y7z7a0cbl3"
 
-["github.com/galdor/go-cmdline"]
-  sumVersion = "v1.1.1"
-  ["github.com/galdor/go-cmdline".fetch]
-    type = "git"
-    url = "https://github.com/galdor/go-cmdline"
-    rev = "17577d202b866492c6c289c5d078a33baf840f85"
-    sha256 = "0vkmqbz8zhqifcdwwlwi1ba7v5kb71k1pxqpkcf9p99v002q84m1"
-
 ["github.com/golang/snappy"]
   sumVersion = "v0.0.4"
   ["github.com/golang/snappy".fetch]
@@ -109,6 +101,14 @@
     url = "https://github.com/golang/snappy"
     rev = "544b4180ac705b7605231d4a4550a1acb22a19fe"
     sha256 = "004cw699yz3pdpawhjhpa0y94c4w479nw1rf39zj6h6027kpwv2j"
+
+["github.com/google/go-cmp"]
+  sumVersion = "v0.5.5"
+  ["github.com/google/go-cmp".fetch]
+    type = "git"
+    url = "https://github.com/google/go-cmp"
+    rev = "8fa37b4dd109f12e42b131e485268768f18bcbf8"
+    sha256 = "12fmkdhyv5d4is8s57k78j097zb0phlgnrkqc03agiszxlid69x7"
 
 ["github.com/klauspost/compress"]
   sumVersion = "v1.13.6"
@@ -135,12 +135,12 @@
     sha256 = "0m66jcsz27076qvi5qzagzlbyd1sdzh6kbf1njj0sswx86026rx3"
 
 ["github.com/mholt/archiver/v3"]
-  sumVersion = "v3.5.0"
+  sumVersion = "v3.5.1"
   ["github.com/mholt/archiver/v3".fetch]
     type = "git"
     url = "https://github.com/mholt/archiver"
-    rev = "25e050dbb4e3c591402916201098241bb661a2f7"
-    sha256 = "0fdkqfs87svpijccz8m11gvby8pvmznq6fs9k94vbzak0kxhw1wg"
+    rev = "cc194d2e4af2dc09a812aa0ff61adc4813ea6c69"
+    sha256 = "1py186hfy4p69wghqmbsyi1r3xvw1nyl55pz8f97a5qhmwxb3mwp"
 
 ["github.com/nwaples/rardecode"]
   sumVersion = "v1.1.2"
@@ -151,12 +151,12 @@
     sha256 = "1v89hkai3qr5kizqhdsn4kg5vskpxbxz7fpbldfvn8g7756q0v6z"
 
 ["github.com/pierrec/lz4/v4"]
-  sumVersion = "v4.1.8"
+  sumVersion = "v4.1.11"
   ["github.com/pierrec/lz4/v4".fetch]
     type = "git"
     url = "https://github.com/pierrec/lz4"
-    rev = "2c1550e56c43e875151468b8f6380ac8d706e88e"
-    sha256 = "1ffsm2ny2v6nasc3zww5f2bl0jqi2jmiyqm8x2cvyzrd0clay1wl"
+    rev = "007008ea0e9a5c20f0b924d7f4a39e0c9e124bc8"
+    sha256 = "021lzlkhkv53sfpcppmlhclkhx23ddy9mgjki0cpjj4gv4anmrcb"
 
 ["github.com/pmezard/go-difflib"]
   sumVersion = "v1.0.0"
@@ -215,12 +215,20 @@
     sha256 = "178r0fa2dpzxf0sabs7dn0c8fa7vs87zlxk6spkn374ls9pir7nq"
 
 ["golang.org/x/sys"]
-  sumVersion = "v0.0.0-20211025201205-69cdffdb9359"
+  sumVersion = "v0.0.0-20211124211545-fe61309f8881"
   ["golang.org/x/sys".fetch]
     type = "git"
     url = "https://go.googlesource.com/sys"
-    rev = "69cdffdb9359ff97d91e4f4fbb6b2714c3898eae"
-    sha256 = "12jw69gy1pdvfq4xsnwyyl1djs0ffg274lg7rlzym2q5ky34sfsw"
+    rev = "fe61309f888157de161a48facf03d9412635cffe"
+    sha256 = "0m1qhxwks9dvkf41k7hhac1a1k53saxnsjy6jmf7akk4dnc7fk1v"
+
+["golang.org/x/xerrors"]
+  sumVersion = "v0.0.0-20191204190536-9bdfabe68543"
+  ["golang.org/x/xerrors".fetch]
+    type = "git"
+    url = "https://go.googlesource.com/xerrors"
+    rev = "9bdfabe68543c54f90421aeb9a60ef8061b5b544"
+    sha256 = "1yjfi1bk9xb81lqn85nnm13zz725wazvrx3b50hx19qmwg7a4b0c"
 
 ["gopkg.in/check.v1"]
   sumVersion = "v0.0.0-20161208181325-20d25e280405"

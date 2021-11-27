@@ -12,7 +12,7 @@ import (
 	cstyles "github.com/alecthomas/chroma/styles"
 )
 
-func NewChromaWriter(mimeType, filePath string) (func(w io.Writer) error, error) {
+func NewChromaWriter(magic_db, mimeType, filePath string) (func(w io.Writer) error, error) {
 	log.Infof("using chroma to print %s with syntax highlighting\n", filePath)
 	lexer := clexers.Match(filePath)
 	if lexer == nil {

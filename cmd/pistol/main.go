@@ -5,6 +5,7 @@ import (
 	"log"
 
 	"github.com/doronbehar/pistol"
+	"github.com/doronbehar/magicmime"
 	"github.com/alexflint/go-arg"
 	"github.com/adrg/xdg"
 )
@@ -45,7 +46,12 @@ func main() {
 		log.Fatalf("no arguments!")
 		os.Exit(1)
 	}
-	previewer, err := pistol.NewPreviewer(args.FilePath, args.Config, args.Extras)
+	magic_db_path, err := GetDbPath(magicmime.Version())
+	if err != nil {
+		log.Fatal(err)
+		os.Exit(2)
+	}
+	previewer, err := pistol.NewPreviewer(magic_db_path, args.FilePath, args.Config, args.Extras)
 	if err != nil {
 		log.Fatal(err)
 		os.Exit(2)
