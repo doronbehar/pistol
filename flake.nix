@@ -65,6 +65,7 @@
             # Evaluated but not used for the build itself
             "gomod2nix.toml"
             "VERSION"
+            "bump-version.sh"
             # CI files
             "renovate.json5"
             # Git files

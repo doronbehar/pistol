@@ -10,13 +10,17 @@ else
 	MAGIC_DB := /usr/share/misc/magic.mgc
 endif
 
+pistol: build
+
 build:
 	go build -ldflags "-X 'main.Version=$(VERSION)'" ./cmd/pistol
+
 build-static:
-	@echo copying magic db for compilation from:
-	@echo "    $(MAGIC_DB)"
-	@cp --no-preserve=mode,ownership -f $(MAGIC_DB) ./cmd/pistol/magic.mgc
-	go build -tags EMBED_MAGIC_DB -ldflags "-X 'main.Version=$(VERSION)'" ./cmd/pistol
+	nix build -L ".#pistol-static"
+	ldd ./result/bin/pistol 2>&1 | grep -q 'not a dynamic executable'
+
+release:
+	./bump-version.sh
 
 # Manpage
 pistol.1: README.adoc
@@ -77,15 +81,5 @@ test: pistol
 	@echo
 	@echo -------------------
 	@./pistol --config tests/config tests/multi-extra A B
-
-deps:
-	go get github.com/c4milo/github-release
-	go get github.com/mitchellh/gox
-
-changelog:
-	@latest_tag=$$(git describe --tags `git rev-list --tags --max-count=1`); \
-	comparison="$$latest_tag..HEAD"; \
-	if [ -z "$$latest_tag" ]; then comparison=""; fi; \
-	git --no-pager log $$comparison --oneline --no-merges
 
 .PHONY: build install changelog
