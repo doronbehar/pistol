@@ -4,7 +4,7 @@ go 1.16
 
 require (
 	github.com/adrg/xdg v0.4.0
-	github.com/alecthomas/chroma v0.9.4
+	github.com/alecthomas/chroma v0.10.0
 	github.com/alessio/shellescape v1.4.1
 	github.com/alexflint/go-arg v1.4.2
 	github.com/alexflint/go-scalar v1.1.0 // indirect
