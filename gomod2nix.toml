@@ -7,12 +7,12 @@
     sha256 = "1xbkb8wmr6phj2ppr75akc58jdzrv20gc3mkxa1mmb968isy8s6c"
 
 ["github.com/alecthomas/chroma"]
-  sumVersion = "v0.9.4"
+  sumVersion = "v0.10.0"
   ["github.com/alecthomas/chroma".fetch]
     type = "git"
     url = "https://github.com/alecthomas/chroma"
-    rev = "6520148857c2ae3106ff371e527abea815b23915"
-    sha256 = "1iy6mymdjxbl5wbll1mivv7gqdyqhl6xpfqps99z307m7y38r1ni"
+    rev = "36bdd4b98823bd1d7be96767cde3dd575e60b406"
+    sha256 = "0hjzb61m5lzx95xss82wil9s8f9hbw1zb3jj73ljfwkq5lqk76zq"
 
 ["github.com/alessio/shellescape"]
   sumVersion = "v1.4.1"
@@ -111,12 +111,12 @@
     sha256 = "12fmkdhyv5d4is8s57k78j097zb0phlgnrkqc03agiszxlid69x7"
 
 ["github.com/klauspost/compress"]
-  sumVersion = "v1.13.6"
+  sumVersion = "v1.14.1"
   ["github.com/klauspost/compress".fetch]
     type = "git"
     url = "https://github.com/klauspost/compress"
-    rev = "38d4ba985ac157cb858763e016645e14e74c13c4"
-    sha256 = "1bgqhv2pp56b8f5mfzpfjlm4cb262gjbqbp3235blhj9xf2wrynj"
+    rev = "8f61aab31a7d742056adc7c1bbe6f0ae00315358"
+    sha256 = "15aacja1nyqcj37377r2wdznh1bgs1ipcyr7m3hy0m6izgk9bib4"
 
 ["github.com/klauspost/cpuid"]
   sumVersion = "v1.2.0"
@@ -151,12 +151,12 @@
     sha256 = "1v89hkai3qr5kizqhdsn4kg5vskpxbxz7fpbldfvn8g7756q0v6z"
 
 ["github.com/pierrec/lz4/v4"]
-  sumVersion = "v4.1.11"
+  sumVersion = "v4.1.12"
   ["github.com/pierrec/lz4/v4".fetch]
     type = "git"
     url = "https://github.com/pierrec/lz4"
-    rev = "007008ea0e9a5c20f0b924d7f4a39e0c9e124bc8"
-    sha256 = "021lzlkhkv53sfpcppmlhclkhx23ddy9mgjki0cpjj4gv4anmrcb"
+    rev = "a134e63e138e8dcef0be0a90bb586bccf4e99651"
+    sha256 = "19xl67xbwfcd7bd85a3s1c1ybc3khvbihhfrskhbblmc3bi6cgdj"
 
 ["github.com/pmezard/go-difflib"]
   sumVersion = "v1.0.0"
@@ -165,14 +165,6 @@
     url = "https://github.com/pmezard/go-difflib"
     rev = "792786c7400a136282c1664665ae0a8db921c6c2"
     sha256 = "0c1cn55m4rypmscgf0rrb88pn58j3ysvc2d0432dp3c6fqg6cnzw"
-
-["github.com/rakyll/magicmime"]
-  sumVersion = "v0.1.0"
-  ["github.com/rakyll/magicmime".fetch]
-    type = "git"
-    url = "https://github.com/rakyll/magicmime"
-    rev = "9b99294d6b2216897632b9734769d8ce4568681e"
-    sha256 = "0agvbqy370v4qh3jb33f5h7jp3rg1y771aakk4y3din8kbkj7hc9"
 
 ["github.com/sirupsen/logrus"]
   sumVersion = "v1.8.1"
@@ -215,12 +207,12 @@
     sha256 = "178r0fa2dpzxf0sabs7dn0c8fa7vs87zlxk6spkn374ls9pir7nq"
 
 ["golang.org/x/sys"]
-  sumVersion = "v0.0.0-20211124211545-fe61309f8881"
+  sumVersion = "v0.0.0-20220111092808-5a964db01320"
   ["golang.org/x/sys".fetch]
     type = "git"
     url = "https://go.googlesource.com/sys"
-    rev = "fe61309f888157de161a48facf03d9412635cffe"
-    sha256 = "0m1qhxwks9dvkf41k7hhac1a1k53saxnsjy6jmf7akk4dnc7fk1v"
+    rev = "5a964db013201115fcba5c3d31ade965d0969335"
+    sha256 = "1r5vmmfk6apa86dr1ydpf1jy9xrw4gbrcrk0vv5in7vzz2cypbwi"
 
 ["golang.org/x/xerrors"]
   sumVersion = "v0.0.0-20191204190536-9bdfabe68543"
