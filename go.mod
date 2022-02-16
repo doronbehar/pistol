@@ -6,8 +6,7 @@ require (
 	github.com/adrg/xdg v0.4.0
 	github.com/alecthomas/chroma v0.10.0
 	github.com/alessio/shellescape v1.4.1
-	github.com/alexflint/go-arg v1.4.2
-	github.com/alexflint/go-scalar v1.1.0 // indirect
+	github.com/alexflint/go-arg v1.4.3
 	github.com/andybalholm/brotli v1.0.4 // indirect
 	github.com/doronbehar/magicmime v0.1.1-0.20211127135329-3de4ff29dc49
 	github.com/dustin/go-humanize v1.0.0
