@@ -13,7 +13,7 @@ require (
 	github.com/golang/snappy v0.0.4 // indirect
 	github.com/klauspost/compress v1.14.4 // indirect
 	github.com/mholt/archiver/v3 v3.5.1
-	github.com/nwaples/rardecode v1.1.2
+	github.com/nwaples/rardecode v1.1.3
 	github.com/pierrec/lz4/v4 v4.1.14 // indirect
 	github.com/sirupsen/logrus v1.8.1
 	github.com/ulikunitz/xz v0.5.10 // indirect
