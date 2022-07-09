@@ -119,7 +119,7 @@ func NewPreviewer(magic_db_path, filePath, configPath string, extras []string) (
 		if def[0] == "fpath" {
 			log.Infof("found 'fpath' at the beginning, testing match against file path")
 			if len(def) < 3 {
-				log.Warnf("found 'fpath' keyword but it's line contains less then 3 words:\n%s", def)
+				log.Warnf("found 'fpath' keyword but its line contains less then 3 words:\n%s", def)
 				log.Warnf("skipping")
 				continue
 			}

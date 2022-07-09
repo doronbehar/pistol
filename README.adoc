@@ -29,13 +29,13 @@ commonly used with Ranger and other previewing methods.
 
 `scope.sh` is a Bash script that uses `case` switches and external
 programs to decide how to preview every file it encounters. It knows how
-to handle every file according to it’s
+to handle every file according to its
 https://en.wikipedia.org/wiki/Media_type[MIME type] and/or file
 extension using `case` switches and external programs. This design makes
 it hard to configure / maintain and it makes it slow for startup and
 heavy when running.
 
-Pistol is a Go program (with (almost) 0 dependencies) and it’s MIME type
+Pistol is a Go program (with (almost) 0 dependencies) and its MIME type
 detection is internal. Moreover, it features native preview support for
 almost any archive file and for text files along with syntax
 highlighting while `scope.sh` relies on external programs to do these
@@ -118,7 +118,7 @@ For example, a `.gz` file is a _single_ file compressed with `gzip`. A
 `.tar.gz` is a `.tar` file compressed using `gzip`.
 
 When pistol encounters a single file compressed using a known
-compression algorithm, it doesn't know how to handle it’s content, it
+compression algorithm, it doesn't know how to handle its content, it
 displays the type of the archive. If a known compression algorithm has
 compressed a `.tar` file, Pistol lists the files themselves.
 
@@ -332,7 +332,7 @@ Of course that this is a mere example, the same may apply to any regular
 expressions you’d choose to match against.
 
 For a list of the internal regular expressions tested against when
-Pistol reverts to it’s native previewers, read the file
+Pistol reverts to its native previewers, read the file
 https://github.com/doronbehar/pistol/blob/master/internal_writers/map.go#L8-L12[`internal_writers/map.go`].
 
 More examples can be found in
@@ -470,7 +470,7 @@ export PISTOL_CHROMA_FORMATTER=terminal16m
 ----
 
 Recent versions of https://github.com/gokcehan/lf[Lf] support
-https://github.com/gokcehan/lf/pull/93[256 colors] in it’s preview
+https://github.com/gokcehan/lf/pull/93[256 colors] in its preview
 window. AFAIK, footnote:[I don’t use Ranger anymore, ever since I moved to Lf. If you have
 evidence it does support 256 colors, let me know and I’ll change the
 default.], https://ranger.github.io/[Ranger] supports 8
