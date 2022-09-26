@@ -1,6 +1,6 @@
 module github.com/doronbehar/pistol
 
-go 1.16
+go 1.19
 
 require (
 	github.com/adrg/xdg v0.4.0
