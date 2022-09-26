@@ -15,7 +15,6 @@ require (
 	github.com/mholt/archiver/v3 v3.5.1
 	github.com/nwaples/rardecode v1.1.3
 	github.com/pierrec/lz4/v4 v4.1.14 // indirect
-	github.com/sirupsen/logrus v1.8.1
+	github.com/sirupsen/logrus v1.9.0
 	github.com/ulikunitz/xz v0.5.10 // indirect
-	golang.org/x/sys v0.0.0-20220227234510-4e6760a101f9 // indirect
 )
