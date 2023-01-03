@@ -160,6 +160,15 @@ Assuming you've installed `libmagic` properly and you have
 https://golang.org/doc/install[setup a Go environment], Use the
 following command to install Pistol to `$GOPATH/bin/pistol`:
 
+==== Go 1.16 or later
+
+[source,sh]
+----
+go install github.com/doronbehar/pistol/cmd/pistol@latest
+----
+
+==== Go 1.15 or earlier
+
 [source,sh]
 ----
 env CGO_ENABLED=1 GO111MODULE=on go get -u github.com/doronbehar/pistol/cmd/pistol
