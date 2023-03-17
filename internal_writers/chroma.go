@@ -5,11 +5,11 @@ import (
 	"io"
 	"os"
 
-	"github.com/alecthomas/chroma"
+	"github.com/alecthomas/chroma/v2"
 	log "github.com/sirupsen/logrus"
-	cformatters "github.com/alecthomas/chroma/formatters"
-	clexers "github.com/alecthomas/chroma/lexers"
-	cstyles "github.com/alecthomas/chroma/styles"
+	cformatters "github.com/alecthomas/chroma/v2/formatters"
+	clexers "github.com/alecthomas/chroma/v2/lexers"
+	cstyles "github.com/alecthomas/chroma/v2/styles"
 )
 
 func NewChromaWriter(magic_db, mimeType, filePath string) (func(w io.Writer) error, error) {
