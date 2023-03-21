@@ -15,12 +15,12 @@
     sha256 = "1dn7ybd9grm3f2vcpx3ni2r1xxz50slfscch809l9wknp6939shq"
 
 ["github.com/alecthomas/chroma/v2"]
-  sumVersion = "v2.5.0"
+  sumVersion = "v2.7.0"
   ["github.com/alecthomas/chroma/v2".fetch]
     type = "git"
     url = "https://github.com/alecthomas/chroma"
-    rev = "4bfa1bbb7c2d8d8737f1ef9b87c0a3f63ae014f2"
-    sha256 = "1wjkpshq3301wc41v23118fjbik169wqbcnz6rxixalxg53a3vss"
+    rev = "b9e37581208ea7d7f167c59e6f635721617c381b"
+    sha256 = "0i4ck23gn0v7x6r8wa2k7qiwhxpxqqnaknb9iy9rz8pjcj14ai75"
 
 ["github.com/alecthomas/repr"]
   sumVersion = "v0.2.0"
