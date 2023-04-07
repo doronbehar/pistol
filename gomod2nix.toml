@@ -71,12 +71,12 @@
     sha256 = "0hka6hmyvp701adzag2g26cxdj47g21x6jz4sc6jjz1mn59d474y"
 
 ["github.com/dlclark/regexp2"]
-  sumVersion = "v1.8.1"
+  sumVersion = "v1.9.0"
   ["github.com/dlclark/regexp2".fetch]
     type = "git"
     url = "https://github.com/dlclark/regexp2"
-    rev = "31eacab0855c88536ba4e99d9c7502b886a80e0e"
-    sha256 = "0l9radxz72aw5fx8d5jvm9ck6kczbv3m17658aspvhp91bwhhvjy"
+    rev = "014f217cfa19b5c8a890f5bac7d189b18d924d78"
+    sha256 = "0g5djsjz099qhnq3d6bpgkqpyzjd08k15gib9fpbc2882bpmy8my"
 
 ["github.com/doronbehar/magicmime"]
   sumVersion = "v0.1.1-0.20211127135329-3de4ff29dc49"
@@ -135,12 +135,12 @@
     sha256 = "1vgq6w0cfhr76qlczgm5khsj1wnjkva0vhkh3qspaa1nkfw3jny1"
 
 ["github.com/klauspost/compress"]
-  sumVersion = "v1.16.3"
+  sumVersion = "v1.16.4"
   ["github.com/klauspost/compress".fetch]
     type = "git"
     url = "https://github.com/klauspost/compress"
-    rev = "8183f00311278ccf61e1805b35db90052d333d64"
-    sha256 = "1ygrmxv3kzwxbl4l77082w437ni8kjmfbvzw8yc35rhzx1rdgc69"
+    rev = "3c61d32490eb09e17e229559c73d2ab048cd0a8f"
+    sha256 = "14rszczq7565mdbam5y02imr6k4m4i4p0qydmnn5sl86h8nk9l8w"
 
 ["github.com/klauspost/cpuid"]
   sumVersion = "v1.2.0"
@@ -231,12 +231,12 @@
     sha256 = "178r0fa2dpzxf0sabs7dn0c8fa7vs87zlxk6spkn374ls9pir7nq"
 
 ["golang.org/x/sys"]
-  sumVersion = "v0.6.0"
+  sumVersion = "v0.7.0"
   ["golang.org/x/sys".fetch]
     type = "git"
     url = "https://go.googlesource.com/sys"
-    rev = "c7a1bf9a0b0aa7c0c0e35a435924dd68e64d1653"
-    sha256 = "13rcrp7gdng5wqh1qd4p21nwjxdjdcnw41gs3yjfshxi52snz81m"
+    rev = "64840c112d2335ed9874114aed48f946e778a769"
+    sha256 = "0y1kpm68x458c1q8dnmh81alpvb917y4gb7k3k9a9wm8x1l9j2f2"
 
 ["golang.org/x/xerrors"]
   sumVersion = "v0.0.0-20191204190536-9bdfabe68543"
