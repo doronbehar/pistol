@@ -69,9 +69,12 @@ if [ -f VERSION ]; then
     ./result/bin/pistol --version | grep $INPUT_STRING
     gh release create v$INPUT_STRING --generate-notes \
         "./result/bin/pistol#pistol-x86_64" \
-        ./result/share/man/man1/pistol.1.gz \
-        "$(nix build --print-out-paths --print-build-logs ".#pistol-static-aarch64")/bin/pistol#pistol.aarch64" \
-        "$(nix build --print-out-paths --print-build-logs ".#pistol-static-armv7l")/bin/pistol#pistol.armv7l"
+        ./result/share/man/man1/pistol.1.gz
+    # NOTE: There seems to be a bug currently in gh release - I'm getting 404 from some reason
+    cp "$(nix build --print-out-paths --print-build-logs ".#pistol-static-aarch64")/bin/pistol" pistol-aarch64
+    cp "$(nix build --print-out-paths --print-build-logs ".#pistol-static-armv7l")/bin/pistol" pistol-armv7l
+    gh release upload v$INPUT_STRING pistol-armvl
+    gh release upload v$INPUT_STRING pistol-aarch64
 else
     echo -e "${WARNING_FLAG} Could not find a VERSION file." >&2
     exit 1
