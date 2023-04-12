@@ -1,263 +1,63 @@
-["github.com/adrg/xdg"]
-  sumVersion = "v0.4.0"
-  ["github.com/adrg/xdg".fetch]
-    type = "git"
-    url = "https://github.com/adrg/xdg"
-    rev = "4ec40e24f0cf1039f93c773f2984decdea9719b5"
-    sha256 = "1xbkb8wmr6phj2ppr75akc58jdzrv20gc3mkxa1mmb968isy8s6c"
+schema = 3
 
-["github.com/alecthomas/assert/v2"]
-  sumVersion = "v2.2.1"
-  ["github.com/alecthomas/assert/v2".fetch]
-    type = "git"
-    url = "https://github.com/alecthomas/assert"
-    rev = "67233feedeb36853811f6b6607011e6955c7122a"
-    sha256 = "1dn7ybd9grm3f2vcpx3ni2r1xxz50slfscch809l9wknp6939shq"
-
-["github.com/alecthomas/chroma/v2"]
-  sumVersion = "v2.7.0"
-  ["github.com/alecthomas/chroma/v2".fetch]
-    type = "git"
-    url = "https://github.com/alecthomas/chroma"
-    rev = "b9e37581208ea7d7f167c59e6f635721617c381b"
-    sha256 = "0i4ck23gn0v7x6r8wa2k7qiwhxpxqqnaknb9iy9rz8pjcj14ai75"
-
-["github.com/alecthomas/repr"]
-  sumVersion = "v0.2.0"
-  ["github.com/alecthomas/repr".fetch]
-    type = "git"
-    url = "https://github.com/alecthomas/repr"
-    rev = "9e33c100269547ef15f1487594524eab0a4630a4"
-    sha256 = "0pryj28l9rvin58sg5amj8izp613k7pymrmd7pdp7zpl9xjvhyxq"
-
-["github.com/alessio/shellescape"]
-  sumVersion = "v1.4.1"
-  ["github.com/alessio/shellescape".fetch]
-    type = "git"
-    url = "https://github.com/alessio/shellescape"
-    rev = "be0896646a3f2d59dc1de4d149beb07c5b2c25c0"
-    sha256 = "14zypi8qdxl77lks5b9jshr17idrm4sri1rxgpw5q4dys1palddd"
-
-["github.com/alexflint/go-arg"]
-  sumVersion = "v1.4.3"
-  ["github.com/alexflint/go-arg".fetch]
-    type = "git"
-    url = "https://github.com/alexflint/go-arg"
-    rev = "f0f44b65d1179ccedb4c56f493f97ec569a6654e"
-    sha256 = "1ca7l6kf2v203pmh2jscdm0hp9rg3zfy8k5jnf9y9ga9pkxfhmvs"
-
-["github.com/alexflint/go-scalar"]
-  sumVersion = "v1.1.0"
-  ["github.com/alexflint/go-scalar".fetch]
-    type = "git"
-    url = "https://github.com/alexflint/go-scalar"
-    rev = "fd60e966956efb1720cbfbf449fb55971209b2db"
-    sha256 = "1996wynw6xl99q1glciqckddncclp9hzp2jdvl6d1vw41svc4z2z"
-
-["github.com/andybalholm/brotli"]
-  sumVersion = "v1.0.5"
-  ["github.com/andybalholm/brotli".fetch]
-    type = "git"
-    url = "https://github.com/andybalholm/brotli"
-    rev = "2848168f550a22ff691915d3d760b328244bfae8"
-    sha256 = "0mqahk30bxcj2wbm5xbakjr3pnwpqjmfp81kp5z04r9j9z0vr97y"
-
-["github.com/davecgh/go-spew"]
-  sumVersion = "v1.1.1"
-  ["github.com/davecgh/go-spew".fetch]
-    type = "git"
-    url = "https://github.com/davecgh/go-spew"
-    rev = "8991bc29aa16c548c550c7ff78260e27b9ab7c73"
-    sha256 = "0hka6hmyvp701adzag2g26cxdj47g21x6jz4sc6jjz1mn59d474y"
-
-["github.com/dlclark/regexp2"]
-  sumVersion = "v1.9.0"
-  ["github.com/dlclark/regexp2".fetch]
-    type = "git"
-    url = "https://github.com/dlclark/regexp2"
-    rev = "014f217cfa19b5c8a890f5bac7d189b18d924d78"
-    sha256 = "0g5djsjz099qhnq3d6bpgkqpyzjd08k15gib9fpbc2882bpmy8my"
-
-["github.com/doronbehar/magicmime"]
-  sumVersion = "v0.1.1-0.20211127135329-3de4ff29dc49"
-  ["github.com/doronbehar/magicmime".fetch]
-    type = "git"
-    url = "https://github.com/doronbehar/magicmime"
-    rev = "3de4ff29dc49ea8f07b0c361193d3137b9c2c6db"
-    sha256 = "1llga0pspaghlywvcniw97m2nh1742i7a7gayw92518bmjx0zk56"
-
-["github.com/dsnet/compress"]
-  sumVersion = "v0.0.2-0.20210315054119-f66993602bf5"
-  ["github.com/dsnet/compress".fetch]
-    type = "git"
-    url = "https://github.com/dsnet/compress"
-    rev = "f66993602bf5da07ef49d35b08e7264ae9fe2b6e"
-    sha256 = "15acshlr2h2gl7q114f600h4d3mld5x4zj1hiygaxlv1pfvmz8sz"
-
-["github.com/dsnet/golib"]
-  sumVersion = "v0.0.0-20171103203638-1ea166775780"
-  ["github.com/dsnet/golib".fetch]
-    type = "git"
-    url = "https://github.com/dsnet/golib"
-    rev = "1ea1667757804fdcccc5a1810e09aba618885ac2"
-    sha256 = "1pm5wkiyh8cilyrrw310ygyj3sdb2831aizym2cgs62aaa3iqrvc"
-
-["github.com/dustin/go-humanize"]
-  sumVersion = "v1.0.1"
-  ["github.com/dustin/go-humanize".fetch]
-    type = "git"
-    url = "https://github.com/dustin/go-humanize"
-    rev = "9ec74ab2f7a7161664182fd4e5e292fccffbc75f"
-    sha256 = "1iyhd90pnmxh64nhsh6k02c1b1glpmhh4whga9jgb9g0i5hz3sya"
-
-["github.com/golang/snappy"]
-  sumVersion = "v0.0.4"
-  ["github.com/golang/snappy".fetch]
-    type = "git"
-    url = "https://github.com/golang/snappy"
-    rev = "544b4180ac705b7605231d4a4550a1acb22a19fe"
-    sha256 = "004cw699yz3pdpawhjhpa0y94c4w479nw1rf39zj6h6027kpwv2j"
-
-["github.com/google/go-cmp"]
-  sumVersion = "v0.5.5"
-  ["github.com/google/go-cmp".fetch]
-    type = "git"
-    url = "https://github.com/google/go-cmp"
-    rev = "8fa37b4dd109f12e42b131e485268768f18bcbf8"
-    sha256 = "12fmkdhyv5d4is8s57k78j097zb0phlgnrkqc03agiszxlid69x7"
-
-["github.com/hexops/gotextdiff"]
-  sumVersion = "v1.0.3"
-  ["github.com/hexops/gotextdiff".fetch]
-    type = "git"
-    url = "https://github.com/hexops/gotextdiff"
-    rev = "d452d6cac8696043473399e78f17b5dddd24dfd1"
-    sha256 = "1vgq6w0cfhr76qlczgm5khsj1wnjkva0vhkh3qspaa1nkfw3jny1"
-
-["github.com/klauspost/compress"]
-  sumVersion = "v1.16.4"
-  ["github.com/klauspost/compress".fetch]
-    type = "git"
-    url = "https://github.com/klauspost/compress"
-    rev = "3c61d32490eb09e17e229559c73d2ab048cd0a8f"
-    sha256 = "14rszczq7565mdbam5y02imr6k4m4i4p0qydmnn5sl86h8nk9l8w"
-
-["github.com/klauspost/cpuid"]
-  sumVersion = "v1.2.0"
-  ["github.com/klauspost/cpuid".fetch]
-    type = "git"
-    url = "https://github.com/klauspost/cpuid"
-    rev = "e7e905edc00ea8827e58662220139109efea09db"
-    sha256 = "0cmyv3rwv5r5iqvvfhbiwp3jsfa40c6xfm42nxbngd5lygjcwwgf"
-
-["github.com/klauspost/pgzip"]
-  sumVersion = "v1.2.5"
-  ["github.com/klauspost/pgzip".fetch]
-    type = "git"
-    url = "https://github.com/klauspost/pgzip"
-    rev = "52335df0e96fa9c509c6fa2966697620beef6dc3"
-    sha256 = "0m66jcsz27076qvi5qzagzlbyd1sdzh6kbf1njj0sswx86026rx3"
-
-["github.com/mholt/archiver/v3"]
-  sumVersion = "v3.5.1"
-  ["github.com/mholt/archiver/v3".fetch]
-    type = "git"
-    url = "https://github.com/mholt/archiver"
-    rev = "cc194d2e4af2dc09a812aa0ff61adc4813ea6c69"
-    sha256 = "1py186hfy4p69wghqmbsyi1r3xvw1nyl55pz8f97a5qhmwxb3mwp"
-
-["github.com/nwaples/rardecode"]
-  sumVersion = "v1.1.3"
-  ["github.com/nwaples/rardecode".fetch]
-    type = "git"
-    url = "https://github.com/nwaples/rardecode"
-    rev = "434b4a38896d211779c5cc5e5933c9da424a5a21"
-    sha256 = "0s00b8a9gppka3yxkxh7z5wy0ahygl8wbb0fbyx2r0rj879a1c2z"
-
-["github.com/pierrec/lz4/v4"]
-  sumVersion = "v4.1.17"
-  ["github.com/pierrec/lz4/v4".fetch]
-    type = "git"
-    url = "https://github.com/pierrec/lz4"
-    rev = "d2b3f5d3e4659cc4fd720d1649c39b5627187261"
-    sha256 = "0bj9z8vsjq72rm0skp24q6ysj101kh1nc552ws038yqnb5fgbi26"
-
-["github.com/pmezard/go-difflib"]
-  sumVersion = "v1.0.0"
-  ["github.com/pmezard/go-difflib".fetch]
-    type = "git"
-    url = "https://github.com/pmezard/go-difflib"
-    rev = "792786c7400a136282c1664665ae0a8db921c6c2"
-    sha256 = "0c1cn55m4rypmscgf0rrb88pn58j3ysvc2d0432dp3c6fqg6cnzw"
-
-["github.com/sirupsen/logrus"]
-  sumVersion = "v1.9.0"
-  ["github.com/sirupsen/logrus".fetch]
-    type = "git"
-    url = "https://github.com/sirupsen/logrus"
-    rev = "f8bf7650dccb756cea26edaf9217aab85500fe07"
-    sha256 = "12i402dxq5js4npnncg043vx874h6nk4ffn4gswcccxrp6h10ivz"
-
-["github.com/stretchr/objx"]
-  sumVersion = "v0.1.0"
-  ["github.com/stretchr/objx".fetch]
-    type = "git"
-    url = "https://github.com/stretchr/objx"
-    rev = "facf9a85c22f48d2f52f2380e4efce1768749a89"
-    sha256 = "19ynspzjdynbi85xw06mh8ad5j0qa1vryvxjgvbnyrr8rbm4vd8w"
-
-["github.com/stretchr/testify"]
-  sumVersion = "v1.7.0"
-  ["github.com/stretchr/testify".fetch]
-    type = "git"
-    url = "https://github.com/stretchr/testify"
-    rev = "acba37e5db06f0093b465a7d47822bf13644b66c"
-    sha256 = "0ixgjsvafr3513pz3r6pmgk074s2dxkll0dadvl25gkf30rkmh10"
-
-["github.com/ulikunitz/xz"]
-  sumVersion = "v0.5.11"
-  ["github.com/ulikunitz/xz".fetch]
-    type = "git"
-    url = "https://github.com/ulikunitz/xz"
-    rev = "9d122a61c181b044e6b8b9c09979dfe7c513e2db"
-    sha256 = "1hbs3x7s7d5ch6ipaqi265w0fwpijs0j19xdbhbjjsyr4khxbqd0"
-
-["github.com/xi2/xz"]
-  sumVersion = "v0.0.0-20171230120015-48954b6210f8"
-  ["github.com/xi2/xz".fetch]
-    type = "git"
-    url = "https://github.com/xi2/xz"
-    rev = "48954b6210f8d154cb5f8484d3a3e1f83489309e"
-    sha256 = "178r0fa2dpzxf0sabs7dn0c8fa7vs87zlxk6spkn374ls9pir7nq"
-
-["golang.org/x/sys"]
-  sumVersion = "v0.7.0"
-  ["golang.org/x/sys".fetch]
-    type = "git"
-    url = "https://go.googlesource.com/sys"
-    rev = "64840c112d2335ed9874114aed48f946e778a769"
-    sha256 = "0y1kpm68x458c1q8dnmh81alpvb917y4gb7k3k9a9wm8x1l9j2f2"
-
-["golang.org/x/xerrors"]
-  sumVersion = "v0.0.0-20191204190536-9bdfabe68543"
-  ["golang.org/x/xerrors".fetch]
-    type = "git"
-    url = "https://go.googlesource.com/xerrors"
-    rev = "9bdfabe68543c54f90421aeb9a60ef8061b5b544"
-    sha256 = "1yjfi1bk9xb81lqn85nnm13zz725wazvrx3b50hx19qmwg7a4b0c"
-
-["gopkg.in/check.v1"]
-  sumVersion = "v0.0.0-20161208181325-20d25e280405"
-  ["gopkg.in/check.v1".fetch]
-    type = "git"
-    url = "https://gopkg.in/check.v1"
-    rev = "20d25e2804050c1cd24a7eea1e7a6447dd0e74ec"
-    sha256 = "0k1m83ji9l1a7ng8a7v40psbymxasmssbrrhpdv2wl4rhs0nc3np"
-
-["gopkg.in/yaml.v3"]
-  sumVersion = "v3.0.0-20200313102051-9f266ea9e77c"
-  ["gopkg.in/yaml.v3".fetch]
-    type = "git"
-    url = "https://gopkg.in/yaml.v3"
-    rev = "9f266ea9e77c4c7aab4cf02650570e7c7b3031a5"
-    sha256 = "1bbai3lzb50m0x2vwsdbagrbhvfylj9k1m32hgbqwldqx4p9ay35"
+[mod]
+  [mod."github.com/adrg/xdg"]
+    version = "v0.4.0"
+    hash = "sha256-zGjkdUQmrVqD6rMO9oDY+TeJCpuqnHyvkPCaXDlac/U="
+  [mod."github.com/alecthomas/chroma/v2"]
+    version = "v2.7.0"
+    hash = "sha256-mAbn3NZfN8m0fj594ODV2aWZrvaJHHRK4SwFqU6sYuI="
+  [mod."github.com/alessio/shellescape"]
+    version = "v1.4.1"
+    hash = "sha256-rTWqbtC+EVz4fT2HmDWpucUTMtQyraInPYf2hlG8/pM="
+  [mod."github.com/alexflint/go-arg"]
+    version = "v1.4.3"
+    hash = "sha256-elfo+rxJveSTs7JM5N0fL6cLQW1MSwHrHUBs4aahR7E="
+  [mod."github.com/alexflint/go-scalar"]
+    version = "v1.1.0"
+    hash = "sha256-X3zCtg6E79AM3U2K+2G6lDHb2mQ4MvoCTol2w63nJqU="
+  [mod."github.com/andybalholm/brotli"]
+    version = "v1.0.5"
+    hash = "sha256-/qS8wU8yZQJ+uTOg66rEl9s7spxq9VIXF5L1BcaEClc="
+  [mod."github.com/dlclark/regexp2"]
+    version = "v1.9.0"
+    hash = "sha256-viJf7xIICbauSyu+EiYCTX5/8Xx3mTawhTgl8KWWrTw="
+  [mod."github.com/doronbehar/magicmime"]
+    version = "v0.1.1-0.20211127135329-3de4ff29dc49"
+    hash = "sha256-pswPuqwLhSIS9+oddaIgJ0Ar6kk8Wra5p/Cpqy9Qj9I="
+  [mod."github.com/dsnet/compress"]
+    version = "v0.0.2-0.20210315054119-f66993602bf5"
+    hash = "sha256-GnSByoeb8UVVJwcxQhWitLihPly12l+zz+E7Lbk4Xbc="
+  [mod."github.com/dustin/go-humanize"]
+    version = "v1.0.1"
+    hash = "sha256-yuvxYYngpfVkUg9yAmG99IUVmADTQA0tMbBXe0Fq0Mc="
+  [mod."github.com/golang/snappy"]
+    version = "v0.0.4"
+    hash = "sha256-Umx+5xHAQCN/Gi4HbtMhnDCSPFAXSsjVbXd8n5LhjAA="
+  [mod."github.com/klauspost/compress"]
+    version = "v1.16.4"
+    hash = "sha256-nvSTPjVUHefNjhI8rMixsmmnh9L8tTomQgLHIwCITOw="
+  [mod."github.com/klauspost/pgzip"]
+    version = "v1.2.5"
+    hash = "sha256-o2cjgEGdaw2ktMGtaeBvOjS/6H/q4xI3Ngcc8TWTxlQ="
+  [mod."github.com/mholt/archiver/v3"]
+    version = "v3.5.1"
+    hash = "sha256-5SsQitpK1C/hZUJBgajJr1nkV15n8lSzmNOlMwcvQ1o="
+  [mod."github.com/nwaples/rardecode"]
+    version = "v1.1.3"
+    hash = "sha256-X7Cg0kEygyy6Xw6sxRF9HirgefkH9tn9UPPelxRaAGg="
+  [mod."github.com/pierrec/lz4/v4"]
+    version = "v4.1.17"
+    hash = "sha256-36L+GNhRrHBCyhbHCqweCk5rfmggdRtHqH6g5m1ViQI="
+  [mod."github.com/sirupsen/logrus"]
+    version = "v1.9.0"
+    hash = "sha256-xOwGFsYGIxNiurS8Zue8mhlFK/G7U1LVFFrv4vcr1GM="
+  [mod."github.com/ulikunitz/xz"]
+    version = "v0.5.11"
+    hash = "sha256-SUyrjc2wyN3cTGKe5JdBEXjtZC1rJySRxJHVUZ59row="
+  [mod."github.com/xi2/xz"]
+    version = "v0.0.0-20171230120015-48954b6210f8"
+    hash = "sha256-2J4cb9KUnGHn1WZ2+g/S+yiHGLDt6KU0cP3fJpQDGZ0="
+  [mod."golang.org/x/sys"]
+    version = "v0.7.0"
+    hash = "sha256-GotRHJaas/q3L+tFam0q3oQ1rc8GDStt7wnz9h8MTEU="

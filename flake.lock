@@ -61,16 +61,15 @@
         ]
       },
       "locked": {
-        "lastModified": 1638001840,
-        "narHash": "sha256-Qknxy+YjVA39v/LwiUNsAcMAg9Df8aYAuqkH+EiAHRA=",
-        "owner": "doronbehar",
+        "lastModified": 1677459247,
+        "narHash": "sha256-JbakfAiPYmCCV224yAMq/XO0udN5coWv/oazblMKdoY=",
+        "owner": "nix-community",
         "repo": "gomod2nix",
-        "rev": "242884158539d4cc0bdc74ab718c499bad785a14",
+        "rev": "3cbf3a51fe32e2f57af4c52744e7228bab22983d",
         "type": "github"
       },
       "original": {
-        "owner": "doronbehar",
-        "ref": "go-stdenv",
+        "owner": "nix-community",
         "repo": "gomod2nix",
         "type": "github"
       }
