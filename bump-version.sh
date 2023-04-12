@@ -55,23 +55,23 @@ if [ -f VERSION ]; then
     echo $INPUT_STRING > VERSION
     git add VERSION
     git commit -m "Bump version to ${INPUT_STRING}."
+    git push
     git tag -a -m "v$INPUT_STRING" "v$INPUT_STRING"
+    git push origin --tags "v$INPUT_STRING"
     if git status --short | grep -q '*'; then
         echo -e "${WARNING_FLAG} Git directory is dirty, refusing to compile pistol-static." >&2
         exit 2
     fi
-	nix build -L ".#pistol-static"
+    nix build -L ".#pistol-static"
     echo -e "${NOTICE_FLAG} Checking that the produced executable is not a dynamically linked"
-	ldd ./result/bin/pistol 2>&1 | grep 'not a dynamic executable'
+    ldd ./result/bin/pistol 2>&1 | grep 'not a dynamic executable'
     echo -e "${NOTICE_FLAG} Checking that the produced executable has the version string compiled into it"
     ./result/bin/pistol --version | grep $INPUT_STRING
-    # TODO: Support more executables once cross compilation works.
-	# https://cli.github.com/manual/gh_release_create
-	git log --pretty=format:"  - %s" "v$INPUT_STRING"...HEAD | gh release create v$INPUT_STRING \
-        --notes-file - \
-        './result/bin/pistol#pistol-x86_64' \
-        ./result/share/man/man1/pistol.1.gz
-    git push origin --tags
+    gh release create v$INPUT_STRING --generate-notes \
+        "./result/bin/pistol#pistol-x86_64" \
+        ./result/share/man/man1/pistol.1.gz \
+        "$(nix build --print-out-paths --print-build-logs ".#pistol-static-aarch64")/bin/pistol#pistol.aarch64" \
+        "$(nix build --print-out-paths --print-build-logs ".#pistol-static-armv7l")/bin/pistol#pistol.armv7l"
 else
     echo -e "${WARNING_FLAG} Could not find a VERSION file." >&2
     exit 1
