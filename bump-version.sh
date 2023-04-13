@@ -62,19 +62,23 @@ if [ -f VERSION ]; then
         echo -e "${WARNING_FLAG} Git directory is dirty, refusing to compile pistol-static." >&2
         exit 2
     fi
-    nix build -L ".#pistol-static"
-    echo -e "${NOTICE_FLAG} Checking that the produced executable is not a dynamically linked"
-    ldd ./result/bin/pistol 2>&1 | grep 'not a dynamic executable'
-    echo -e "${NOTICE_FLAG} Checking that the produced executable has the version string compiled into it"
-    ./result/bin/pistol --version | grep $INPUT_STRING
+    rm -f result
+    for target in pistol-static-{x86_64,aarch64,armv7l}; do
+        rm -f result-"$target"
+        nix build --print-build-logs --print-out-paths ".#$target" --out-link result-"$target"
+        echo -e "${NOTICE_FLAG} Checking that the produced executable is not a dynamically linked"
+        ldd ./result-"$target"/bin/pistol 2>&1 | grep 'not a dynamic executable'
+        echo -e "${NOTICE_FLAG} Checking that the produced executable has the version string compiled into it"
+    done
+    # Test the only executable that we can run that it has a good --version output
+    ./result-pistol-static-x86_64/bin/pistol --version | grep $INPUT_STRING
     gh release create v$INPUT_STRING --generate-notes \
-        "./result/bin/pistol#pistol-x86_64" \
-        ./result/share/man/man1/pistol.1.gz
-    # NOTE: There seems to be a bug currently in gh release - I'm getting 404 from some reason
-    cp "$(nix build --print-out-paths --print-build-logs ".#pistol-static-aarch64")/bin/pistol" pistol-aarch64
-    cp "$(nix build --print-out-paths --print-build-logs ".#pistol-static-armv7l")/bin/pistol" pistol-armv7l
-    gh release upload v$INPUT_STRING pistol-armvl
-    gh release upload v$INPUT_STRING pistol-aarch64
+        ./result-pistol-static-x86_64/share/man/man1/pistol.1.gz
+    for target in pistol-static-{x86_64,aarch64,armv7l}; do
+        ln -s result-"$target"/bin/pistol "$target"
+        gh release upload v$INPUT_STRING "$target"
+        rm "$target"
+    done
 else
     echo -e "${WARNING_FLAG} Could not find a VERSION file." >&2
     exit 1

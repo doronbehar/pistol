@@ -65,7 +65,8 @@
         inherit version src;
       };
       pistol = pkgs.callPackage ./pkg.nix pkgArgs;
-      pistol-static = pkgs.pkgsStatic.callPackage ./pkg.nix pkgArgs;
+      pistol-static-native = pkgs.pkgsStatic.callPackage ./pkg.nix pkgArgs;
+      pistol-static-x86_64 = pkgs.pkgsCross.gnu64.pkgsStatic.callPackage ./pkg.nix pkgArgs;
       pistol-static-aarch64 = pkgs.pkgsCross.aarch64-multiplatform-musl.pkgsStatic.callPackage ./pkg.nix pkgArgs;
       pistol-static-armv7l = pkgs.pkgsCross.armv7l-hf-multiplatform.pkgsStatic.callPackage ./pkg.nix pkgArgs;
       pistol-static-arm = pkgs.pkgsCross.arm-embedded.pkgsStatic.callPackage ./pkg.nix pkgArgs;
@@ -82,7 +83,8 @@
       packages = {
         inherit
           pistol
-          pistol-static
+          pistol-static-native
+          pistol-static-x86_64
           pistol-static-aarch64
           pistol-static-armv7l
           pistol-static-arm
