@@ -23,6 +23,6 @@
 # End of https://www.gitignore.io/api/go
 /cmd/pistol/pistol
 /pistol
-result
+result*
 pistol.1
 cmd/pistol/magic.mgc
