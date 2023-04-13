@@ -148,6 +148,10 @@ Hence using this executable might not be desirable due to this behaviour which
 a regular compilation of `pistol` does not include. This behaviour is compiled
 into `pistol` if you use `go {build,install}` with `-tags EMBED_MAGIC_DB`.
 
+Nix' superb https://nix.dev/tutorials/cross-compilation[cross compilation
+support] helped me a lot regarding supplying those cross compiled binaries in
+pistol's releases.
+
 === From Source
 
 Since Pistol depends on https://github.com/rakyll/magicmime[magicmime],
@@ -192,7 +196,7 @@ For instance, does it like this:
     installShellFiles
     asciidoctor
   ];
-  postBuild = ''
+  postInstall = ''
     asciidoctor -b manpage -d manpage README.adoc
     installManPage pistol.1
   '';
