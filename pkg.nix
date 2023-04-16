@@ -48,6 +48,7 @@ buildGoApplication {
     remove-references-to -t ${buildPackages.mailcap} $out/bin/pistol
     remove-references-to -t ${buildPackages.iana-etc} $out/bin/pistol
     remove-references-to -t ${buildPackages.tzdata} $out/bin/pistol
+    remove-references-to -t ${file} $out/bin/pistol
   '';
   meta = {
     description = "General purpose file previewer designed for Ranger, Lf to make scope.sh redundant";
