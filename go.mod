@@ -4,7 +4,7 @@ go 1.20
 
 require (
 	github.com/adrg/xdg v0.4.0
-	github.com/alecthomas/chroma/v2 v2.7.0
+	github.com/alecthomas/chroma/v2 v2.8.0
 	github.com/alessio/shellescape v1.4.1
 	github.com/alexflint/go-arg v1.4.3
 	github.com/doronbehar/magicmime v0.1.1-0.20211127135329-3de4ff29dc49
