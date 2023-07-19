@@ -8,8 +8,8 @@ schema = 3
     version = "v2.8.0"
     hash = "sha256-C2AAJ7FYEaFpNfVPthM4VZA88TZlF9YmQaJo3xs2cFY="
   [mod."github.com/alessio/shellescape"]
-    version = "v1.4.1"
-    hash = "sha256-rTWqbtC+EVz4fT2HmDWpucUTMtQyraInPYf2hlG8/pM="
+    version = "v1.4.2"
+    hash = "sha256-TOlNouGwNdaCddRwABb1qXp0HTMt6+G4uatzfAg3XFc="
   [mod."github.com/alexflint/go-arg"]
     version = "v1.4.3"
     hash = "sha256-elfo+rxJveSTs7JM5N0fL6cLQW1MSwHrHUBs4aahR7E="
@@ -35,8 +35,8 @@ schema = 3
     version = "v0.0.4"
     hash = "sha256-Umx+5xHAQCN/Gi4HbtMhnDCSPFAXSsjVbXd8n5LhjAA="
   [mod."github.com/klauspost/compress"]
-    version = "v1.16.6"
-    hash = "sha256-G5G2zC+KqHbzk9VonoEQ/P6tWtd4FAc4KWxkduypQIY="
+    version = "v1.16.7"
+    hash = "sha256-8miX/lnXyNLPSqhhn5BesLauaIAxETpQpWtr1cu2f+0="
   [mod."github.com/klauspost/pgzip"]
     version = "v1.2.6"
     hash = "sha256-qA1hjnVW/tqxY48JIWQVulwEwY7fwyvnasymZk3mScg="
@@ -59,5 +59,5 @@ schema = 3
     version = "v0.0.0-20171230120015-48954b6210f8"
     hash = "sha256-2J4cb9KUnGHn1WZ2+g/S+yiHGLDt6KU0cP3fJpQDGZ0="
   [mod."golang.org/x/sys"]
-    version = "v0.9.0"
-    hash = "sha256-++MDSczD7y9yLA3isjfNpXGl66snfb45wsNixGjebU4="
+    version = "v0.10.0"
+    hash = "sha256-eeifyHj8IcTAruekJAGMCcjFyU2GAIAgvxS36hPZM1U="
