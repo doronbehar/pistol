@@ -63,7 +63,7 @@ if [ -f VERSION ]; then
         exit 2
     fi
     rm -f result
-    nix search . pistol-static --json | jq --raw-output 'keys | .[]' | cut -d'.' -f3 | while read target; do
+    nix search . pistol-static --json | jq --raw-output 'keys | .[]' | cut -d'.' -f3 | grep -v native | while read target; do
         rm -f result-"$target"
         nix build --print-build-logs --print-out-paths ".#$target" --out-link result-"$target"
         echo -e "${NOTICE_FLAG} Checking that the produced executable is not a dynamically linked"
@@ -74,7 +74,7 @@ if [ -f VERSION ]; then
     ./result-pistol-static-linux-x86_64/bin/pistol --version | grep $INPUT_STRING
     gh release create v$INPUT_STRING --generate-notes \
         ./result-pistol-static-linux-x86_64/share/man/man1/pistol.1.gz
-    nix search . pistol-static --json | jq --raw-output 'keys | .[]' | cut -d'.' -f3 | while read target; do
+    nix search . pistol-static --json | jq --raw-output 'keys | .[]' | cut -d'.' -f3 | grep -v native | while read target; do
         ln -s result-"$target"/bin/pistol "$target"
         gh release upload v$INPUT_STRING "$target"
         rm "$target"
