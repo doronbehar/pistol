@@ -11,7 +11,6 @@
     flake = false;
   };
   inputs.gomod2nix = {
-    # For static compilation I need: https://github.com/tweag/gomod2nix/pull/24
     url = "github:nix-community/gomod2nix";
     inputs.nixpkgs.follows = "nixpkgs";
     inputs.utils.follows = "flake-utils";
