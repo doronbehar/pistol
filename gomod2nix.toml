@@ -5,8 +5,8 @@ schema = 3
     version = "v0.4.0"
     hash = "sha256-zGjkdUQmrVqD6rMO9oDY+TeJCpuqnHyvkPCaXDlac/U="
   [mod."github.com/alecthomas/chroma/v2"]
-    version = "v2.9.1"
-    hash = "sha256-rqRjAGKEBtCzoNe3zS9x+J3CM2EwzQAQli5/DWEGtJo="
+    version = "v2.10.0"
+    hash = "sha256-Bi8Q7WJzmcE6e8/DQ1XA9kdioOj2Z2TedpNfhKCpk1w="
   [mod."github.com/alessio/shellescape"]
     version = "v1.4.2"
     hash = "sha256-TOlNouGwNdaCddRwABb1qXp0HTMt6+G4uatzfAg3XFc="
@@ -17,8 +17,8 @@ schema = 3
     version = "v1.1.0"
     hash = "sha256-X3zCtg6E79AM3U2K+2G6lDHb2mQ4MvoCTol2w63nJqU="
   [mod."github.com/andybalholm/brotli"]
-    version = "v1.0.5"
-    hash = "sha256-/qS8wU8yZQJ+uTOg66rEl9s7spxq9VIXF5L1BcaEClc="
+    version = "v1.0.6"
+    hash = "sha256-sR8A4QNWLkFGHQgihEaxGuAoE60PHub9eoiFSlHELxI="
   [mod."github.com/dlclark/regexp2"]
     version = "v1.10.0"
     hash = "sha256-Jxzj/O/Q9tIWBOOgCkCibhrgJBzzfVIxYDsabt7O8ow="
@@ -35,8 +35,8 @@ schema = 3
     version = "v0.0.4"
     hash = "sha256-Umx+5xHAQCN/Gi4HbtMhnDCSPFAXSsjVbXd8n5LhjAA="
   [mod."github.com/klauspost/compress"]
-    version = "v1.16.7"
-    hash = "sha256-8miX/lnXyNLPSqhhn5BesLauaIAxETpQpWtr1cu2f+0="
+    version = "v1.17.2"
+    hash = "sha256-LlMbNhqmgQwUe4KKFK03R17S+gUo0/wPqmIFiwUb6Tg="
   [mod."github.com/klauspost/pgzip"]
     version = "v1.2.6"
     hash = "sha256-qA1hjnVW/tqxY48JIWQVulwEwY7fwyvnasymZk3mScg="
@@ -59,5 +59,5 @@ schema = 3
     version = "v0.0.0-20171230120015-48954b6210f8"
     hash = "sha256-2J4cb9KUnGHn1WZ2+g/S+yiHGLDt6KU0cP3fJpQDGZ0="
   [mod."golang.org/x/sys"]
-    version = "v0.12.0"
-    hash = "sha256-Ht/PhBJGWNBg4ksmdUu4+7hJjFypSwoUN/8DJricd+0="
+    version = "v0.13.0"
+    hash = "sha256-/+RDZ0a0oEfJ0k304VqpJpdrl2ZXa3yFlOxy4mjW7w0="
