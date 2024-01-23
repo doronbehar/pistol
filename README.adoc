@@ -158,10 +158,10 @@ into `pistol` if you use `go {build,install}` with `-tags EMBED_MAGIC_DB`.
 
 Since Pistol depends on https://github.com/rakyll/magicmime[magicmime],
 you’ll need a `libmagic` package installed. Please refer to
-https://github.com/rakyll/magicmime/tree/v0.1.0#prerequisites[this
-section in `magicmime`'s README] for the appropriate commands for every OS. In
-particular, if you installed `libmagic` using `brew` on a Darwin system, you
-may need to use the `CGO_FLAGS` environment variable to compile `pistol`. See
+https://github.com/rakyll/magicmime/tree/v0.1.0#prerequisites[this section in
+Magicmime's README] for the appropriate commands for every OS. In particular,
+if you installed `libmagic` using `brew` on a Darwin system, you may need to
+use the `CGO_FLAGS` environment variable to compile `pistol`. See
 https://github.com/doronbehar/pistol/issues/6#issuecomment-1576673173[#6] for
 more details.
 
