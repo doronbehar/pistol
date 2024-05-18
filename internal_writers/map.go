@@ -9,6 +9,10 @@ var internalWritersRegexMap = map[string] func(string, string, string) (func(w i
 	"text/*": NewChromaWriter,
 	// https://github.com/doronbehar/pistol/issues/34
 	"application/json": NewChromaWriter,
+	// See:
+	// - https://github.com/doronbehar/pistol/issues/106
+	// - https://stackoverflow.com/a/21098951/4935114
+	"application/javascript": NewChromaWriter,
 	"application/zip": NewArchiveLister,
 	"application/x-rar-compressed": NewArchiveLister,
 	"application/x-tar": NewArchiveLister,
