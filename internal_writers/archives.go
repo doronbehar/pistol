@@ -9,7 +9,7 @@ import (
 	"archive/zip"
 	"github.com/nwaples/rardecode"
 
-	"github.com/mholt/archiver/v3"
+	"github.com/mholt/archiver/v4"
 	log "github.com/sirupsen/logrus"
 	"github.com/dustin/go-humanize"
 )
