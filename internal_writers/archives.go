@@ -1,169 +1,220 @@
 package pistol
 
 import (
+	"os"
 	"io"
 	"fmt"
-	"math"
 	"regexp"
-	"archive/tar"
-	"archive/zip"
-	"github.com/nwaples/rardecode"
+	"context"
+	"golang.org/x/term"
 
-	"github.com/mholt/archiver/v3"
+	"github.com/mholt/archiver/v4"
+	"github.com/jedib0t/go-pretty/v6/table"
 	log "github.com/sirupsen/logrus"
 	"github.com/dustin/go-humanize"
+	"github.com/doronbehar/magicmime"
+
+	clexers "github.com/alecthomas/chroma/v2/lexers"
 )
 
-type archiveFileInfo struct {
-	Permissions string
-	Size string
-	ModifiedTime string
-	FileName string
-}
 
 func NewArchiveLister(magic_db, mimeType, filePath string) (func(w io.Writer) error, error) {
-	log.Infof("listing files in archive %s\n", filePath)
 	return func (w io.Writer) error {
-		var wIface interface{}
-		// We can count upon libmagic to give the right mime type and choose the appropriate uncompresser accordingly
+		isArchive := true
+		var singleFileFormat archiver.Decompressor
+		var format archiver.Archival
 		switch mimeType {
 		// zip
 		case "application/zip":
-			log.Infoln("Creating a new zip archiver walker interface")
-			wIface = archiver.NewZip()
+			format = archiver.Zip{}
 		case "application/x-rar-compressed":
-			log.Infoln("Creating a new rar archiver walker interface")
-			wIface = archiver.NewRar()
+			format = archiver.Rar{}
 		case "application/x-tar":
-			log.Infoln("Creating a new tar (no compression) archiver walker interface")
-			wIface = archiver.NewTar()
+			format = archiver.Tar{}
 		case "application/x-xz":
-			// Test file name for maybe it's a tar.xz file
-			if compressedTar(filePath) {
-				log.Infoln("Creating a new tar xz archiver walker interface")
-				wIface = archiver.NewTarXz()
+			if res, _ := regexp.MatchString(`.*\.tar\.xz`, filePath); res {
+				format = archiver.CompressedArchive{
+					Compression: archiver.Xz{},
+					Archival: archiver.Tar{},
+				}
+			} else {
+				singleFileFormat = archiver.Xz{}
+				isArchive = false
 			}
 		case "application/x-bzip2":
-			// Test file name for maybe it's a tar.bz2 file
-			if compressedTar(filePath) {
-				log.Infoln("Creating a new tar bz archiver walker interface")
-				wIface = archiver.NewTarBz2()
+			if res, _ := regexp.MatchString(`.*\.tar\.bz2`, filePath); res {
+				format = archiver.CompressedArchive{
+					Compression: archiver.Bz2{},
+					Archival: archiver.Tar{},
+				}
+			} else {
+				singleFileFormat = archiver.Bz2{}
+				isArchive = false
 			}
 		case "application/gzip":
-			// Test file name for maybe it's a tar.gz file
-			if compressedTar(filePath) {
-				log.Infoln("Creating a new tar gz archiver walker interface")
-				wIface = archiver.NewTarGz()
+			if res, _ := regexp.MatchString(`.*\.tar\.gz`, filePath); res {
+				format = archiver.CompressedArchive{
+					Compression: archiver.Gz{},
+					Archival: archiver.Tar{},
+				}
+			} else {
+				singleFileFormat = archiver.Gz{}
+				isArchive = false
 			}
 		case "application/x-lz4":
-			// Test file name for maybe it's a tar.lz file
-			if compressedTar(filePath) {
-				log.Infoln("Creating a new tar lz4 archiver walker interface")
-				wIface = archiver.NewTarLz4()
+			if res, _ := regexp.MatchString(`.*\.tar\.lz`, filePath); res {
+				format = archiver.CompressedArchive{
+					Compression: archiver.Lz4{},
+					Archival: archiver.Tar{},
+				}
+			} else {
+				singleFileFormat = archiver.Lz4{}
+				isArchive = false
 			}
 		case "application/x-snappy-framed":
-			// Test file name for maybe it's a tar.sz file
-			if compressedTar(filePath) {
-				log.Infoln("Creating a new tar snappy archiver walker interface")
-				wIface = archiver.NewTarSz()
+			if res, _ := regexp.MatchString(`.*\.tar\.sz`, filePath); res {
+				format = archiver.CompressedArchive{
+					Compression: archiver.Sz{},
+					Archival: archiver.Tar{},
+				}
+			} else {
+				singleFileFormat = archiver.Sz{}
+				isArchive = false
 			}
 		case "application/x-zstd":
-			if compressedTar(filePath) {
-				log.Infoln("Creating a new tar zstd archiver walker interface")
-				wIface = archiver.NewTarZstd()
+			if res, _ := regexp.MatchString(`.*\.tar\.zst`, filePath); res {
+				format = archiver.CompressedArchive{
+					Compression: archiver.Zstd{},
+					Archival: archiver.Tar{},
+				}
+			} else {
+				singleFileFormat = archiver.Zstd{}
+				isArchive = false
 			}
+		case "application/x-7z-compressed":
+			format = archiver.SevenZip{}
 		// brotli - currently unsupported by libmagic
 		// case "application/x-brotli":
 			// // This may be a brotli compressed file / tar
 			// if compressedTar(filePath) {
-				// wIface = archiver.NewTarBrotli()
+				// format := archiver.NewTarBrotli()
 			// }
-		// 7z - currently unsupported by archiver, see https://github.com/mholt/archiver/issues/53
-		// case "application/x-7z-compressed":
-			// wIface = archiver.New
 		}
-		walker, ok := wIface.(archiver.Walker)
-		if !ok {
-			log.Infof("format specified by archive filename (%s) is not a walker format: (%T)", filePath, wIface)
-			fmt.Fprintf(w, "%s compressed file\n", mimeType)
-			return nil
-		} else {
-			log.Infof("format specified by archive filename (%s) is: (%T)", filePath, wIface)
-			var count int
-			header := archiveFileInfo{
+		if isArchive {
+			t := table.NewWriter()
+			t.SetOutputMirror(w)
+			t.AppendHeader(table.Row{
 				"Permissions",
 				"Size",
 				"Modification Time",
 				"File Name",
+			})
+			if term.IsTerminal(0) {
+				width, _, err := term.GetSize(0)
+				if err == nil {
+					t.SetAllowedRowLength(width)
+				}
 			}
-			var filesInfo []archiveFileInfo
-			var fPermMaxWidth int = 11
-			var fSizeMaxWidth int = 4
-			var fModtMaxWidth int = 13
-
-			err := walker.Walk(filePath, func(f archiver.File) error {
+			archiveHandler := func(ctx context.Context, f archiver.File) error {
 				fPerm := fmt.Sprintf("%v", f.Mode())
 				fSize := humanize.Bytes(uint64(f.Size()))
 				fModtS := f.ModTime()
-				fModt := fmt.Sprintf("%04d-%02d-%02d %02d:%02d", fModtS.Year(), fModtS.Month(),
-				fModtS.Day(), fModtS.Hour(), fModtS.Minute())
-				var fName string
-				switch h := f.Header.(type) {
-				case zip.FileHeader:
-					fName = h.Name
-				case *tar.Header:
-					fName = h.Name
-				case *rardecode.FileHeader:
-					fName = h.Name
-				default:
-					// We don't know the full path when another type of archive
-					// file is read but we don't need it, as other archive
-					// types are not a collection of files but rather a single
-					// file compressed.
-					fName = f.Name()
-				}
-				fPermMaxWidth = int(math.Max(float64(fPermMaxWidth), float64(len(fPerm))))
-				fSizeMaxWidth = int(math.Max(float64(fSizeMaxWidth), float64(len(fSize))))
-				fModtMaxWidth = int(math.Max(float64(fModtMaxWidth), float64(len(fModt))))
-				filesInfo = append(filesInfo, archiveFileInfo{
+				fModt := fmt.Sprintf(
+					"%04d-%02d-%02d %02d:%02d",
+					fModtS.Year(),
+					fModtS.Month(),
+					fModtS.Day(),
+					fModtS.Hour(),
+					fModtS.Minute(),
+				)
+				t.AppendRow([]interface{}{
 					fPerm,
 					fSize,
 					fModt,
-					fName,
+					f.NameInArchive,
 				})
-				count++
 				return nil
-			})
-			fPermMaxWidthFmt := fmt.Sprintf("%%-%ds", fPermMaxWidth + 3)
-			fSizeMaxWidthFmt := fmt.Sprintf("%%-%ds", fSizeMaxWidth + 3)
-			fModtMaxWidthFmt := fmt.Sprintf("%%-%ds", fModtMaxWidth + 3)
-			lineFmt := fmt.Sprintf("%s%s%s%%s\n", fPermMaxWidthFmt, fSizeMaxWidthFmt, fModtMaxWidthFmt)
-			fmt.Fprintf(w, lineFmt, header.Permissions, header.Size, header.ModifiedTime, header.FileName)
-			for _, fMaxWidth := range []int{
-				fPermMaxWidth,
-				fSizeMaxWidth,
-				fModtMaxWidth,
-				// File name will always have a 9 = size header line
-				9,
-			} {
-				for i := 0; i <= fMaxWidth; i++ {
-					fmt.Fprintf(w, "=")
+			}
+			reader, err := os.Open(filePath)
+			if err != nil {
+				log.Fatalf(
+					"Encountered errors opening file %s: %v\n",
+					filePath,
+					err,
+				)
+				return err
+			}
+			err = format.Extract(context.TODO(), reader, nil, archiveHandler)
+			if err != nil {
+				log.Fatalf(
+					"Encountered errors extracting file %s: %v\n",
+					filePath,
+					err,
+				)
+				return err
+			}
+			defer reader.Close()
+			t.Render()
+		} else {
+			fCompressed, err := os.Open(filePath)
+			if err != nil {
+				log.Fatalf(
+					"Encountered errors opening compressed file %s: %v\n",
+					filePath,
+					err,
+				)
+				return err
+			}
+			fReader, err := singleFileFormat.OpenReader(fCompressed)
+			if err != nil {
+				panic(err)
+			}
+			// Why 512? https://stackoverflow.com/a/17741765/4935114
+			fBytes := make([]byte, 512)
+			nBytes, err := fReader.Read(fBytes)
+			var fContents []byte
+			if err != nil {
+				if err != io.EOF {
+					panic(err)
 				}
-				fmt.Fprintf(w, "  ")
+				fContents = fBytes[:nBytes]
+			} else {
+				// TODO: Perhaps put protections here against too large files
+				fRest,err := io.ReadAll(fReader)
+				if err != nil {
+					panic(err)
+				}
+				fContents = append(
+					fBytes[:nBytes],
+					fRest...
+				)
 			}
-			fmt.Fprintf(w, "\n")
-
-			for _, fileInfo := range filesInfo {
-				fmt.Fprintf(w, lineFmt, fileInfo.Permissions, fileInfo.Size, fileInfo.ModifiedTime, fileInfo.FileName)
+			if err := magicmime.OpenWithPath(magic_db, magicmime.MAGIC_MIME_TYPE | magicmime.MAGIC_SYMLINK); err != nil {
+				log.Fatalf("Failed to open database again from some reason %v", err)
+				return err
 			}
-			fmt.Fprintf(w, "total %d\n", count)
-			return err
+			innerMimeType, err := magicmime.TypeByBuffer(fBytes[:nBytes])
+			defer magicmime.Close()
+			log.Infof("Detected inner mimetype of compressed file as %s", innerMimeType)
+			if isText, _ := regexp.MatchString("text/*", innerMimeType); isText {
+				lexer := clexers.MatchMimeType(innerMimeType)
+				if lexer == nil {
+					lexer = clexers.Fallback
+				}
+				log.Infof(
+					"Using chroma to print inner contents of %s with lexer %s\n",
+					filePath,
+					lexer,
+				)
+				chromaPrint(w,string(fContents), lexer)
+			} else if isJson, _ := regexp.MatchString("application/json", innerMimeType); isJson {
+				jsonPrint(w, fContents)
+			} else {
+				fmt.Fprintf(w, "%s file compressed in a %s archive\n", innerMimeType, mimeType)
+			}
+			defer fReader.Close()
+			defer fCompressed.Close()
 		}
+		return nil
 	}, nil
-}
-
-// utility function to check if a given filepath ends with .tar.*
-func compressedTar(filePath string) bool {
-	res, _ := regexp.MatchString(`.*\.tar\.`, filePath)
-	return res
 }
