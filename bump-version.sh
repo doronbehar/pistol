@@ -53,11 +53,6 @@ if [ -f VERSION ]; then
     fi
     echo -e "${NOTICE_FLAG} Will set new version to be ${WHITE}$INPUT_STRING"
     echo $INPUT_STRING > VERSION
-    git add VERSION
-    git commit -m "Bump version to ${INPUT_STRING}."
-    git push
-    git tag -a -m "v$INPUT_STRING" "v$INPUT_STRING"
-    git push origin --tags "v$INPUT_STRING"
     if git status --short | grep -q '*'; then
         echo -e "${WARNING_FLAG} Git directory is dirty, refusing to compile pistol-static." >&2
         exit 2
@@ -74,6 +69,11 @@ if [ -f VERSION ]; then
     ./result-pistol-static-linux-x86_64/bin/pistol --version | grep $INPUT_STRING
     gh release create v$INPUT_STRING --generate-notes \
         ./result-pistol-static-linux-x86_64/share/man/man1/pistol.1.gz
+    git add VERSION
+    git commit -m "Bump version to ${INPUT_STRING}."
+    git tag -a -m "v$INPUT_STRING" "v$INPUT_STRING"
+    git push
+    git push origin --tags "v$INPUT_STRING"
     nix search . pistol-static --json | jq --raw-output 'keys | .[]' | cut -d'.' -f3 | grep -v native | while read target; do
         ln -s result-"$target"/bin/pistol "$target"
         gh release upload v$INPUT_STRING "$target"
