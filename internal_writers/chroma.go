@@ -1,7 +1,6 @@
 package pistol
 
 import (
-	"io/ioutil"
 	"io"
 	"os"
 
@@ -18,7 +17,7 @@ func NewChromaWriter(magic_db, mimeType, filePath string) (func(w io.Writer) err
 	if lexer == nil {
 		lexer = clexers.Fallback
 	}
-	contents, err := ioutil.ReadFile(filePath)
+	contents, err := os.ReadFile(filePath)
 	if err != nil {
 		return emptyWriter, err
 	}
