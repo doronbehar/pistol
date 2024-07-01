@@ -8,7 +8,7 @@ import (
 var internalWritersRegexMap = map[string] func(string, string, string) (func(w io.Writer) error, error) {
 	"text/*": NewChromaWriter,
 	// https://github.com/doronbehar/pistol/issues/34
-	"application/json": NewChromaWriter,
+	"application/json": NewJsonWriter,
 	// See:
 	// - https://github.com/doronbehar/pistol/issues/106
 	// - https://stackoverflow.com/a/21098951/4935114
@@ -20,6 +20,7 @@ var internalWritersRegexMap = map[string] func(string, string, string) (func(w i
 	"application/x-bzip2": NewArchiveLister,
 	"application/gzip": NewArchiveLister,
 	"application/x-lz4": NewArchiveLister,
+	"application/x-7z-compressed": NewArchiveLister,
 	"application/x-snappy-framed": NewArchiveLister,
 	"application/x-zstd": NewArchiveLister,
 	// TODO: Match brotli when libmagic supports it
