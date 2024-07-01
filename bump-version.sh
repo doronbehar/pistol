@@ -19,7 +19,7 @@
 # number), give user a chance to review and update the changelist
 # manually if needed and create a GIT tag.
 
-set -eu
+set -e
 
 NOW="$(date +'%B %d, %Y')"
 RED="\033[1;31m"
@@ -43,7 +43,10 @@ if [ -f VERSION ]; then
     BASE_LIST=(`echo $BASE_STRING | tr '.' ' '`)
     V_MAJOR=${BASE_LIST[0]}
     V_MINOR=${BASE_LIST[1]}
-    V_PATCH=${BASE_LIST[2]}
+    V_PATCH="${BASE_LIST[2]}"
+    if [[ -z "$V_PATCH" ]]; then
+        V_PATCH=0
+    fi
     echo -e "${NOTICE_FLAG} Current version: ${WHITE}$BASE_STRING"
     SUGGESTED_VERSION="$V_MAJOR.$V_MINOR.$((V_PATCH + 1))"
     echo -ne "${QUESTION_FLAG} ${CYAN}Enter a version number [${WHITE}$SUGGESTED_VERSION${CYAN}]: "
@@ -53,7 +56,9 @@ if [ -f VERSION ]; then
     fi
     echo -e "${NOTICE_FLAG} Will set new version to be ${WHITE}$INPUT_STRING"
     echo $INPUT_STRING > VERSION
-    if git status --short | grep -q '*'; then
+    git add VERSION
+    git commit -m "Bump version to ${INPUT_STRING}."
+    if ! git diff-index --quiet HEAD; then
         echo -e "${WARNING_FLAG} Git directory is dirty, refusing to compile pistol-static." >&2
         exit 2
     fi
@@ -69,8 +74,6 @@ if [ -f VERSION ]; then
     ./result-pistol-static-linux-x86_64/bin/pistol --version | grep $INPUT_STRING
     gh release create v$INPUT_STRING --generate-notes \
         ./result-pistol-static-linux-x86_64/share/man/man1/pistol.1.gz
-    git add VERSION
-    git commit -m "Bump version to ${INPUT_STRING}."
     git tag -a -m "v$INPUT_STRING" "v$INPUT_STRING"
     git push
     git push origin --tags "v$INPUT_STRING"
