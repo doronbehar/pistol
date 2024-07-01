@@ -59,6 +59,11 @@ test: pistol
 	@./pistol --config tests/config tests/34.json
 	@tput sgr0
 	@echo -------------------
+	@echo gzipped application/json
+	@echo -------------------
+	@./pistol --config tests/config tests/34.json.gz
+	@tput sgr0
+	@echo -------------------
 	@echo exit code \(issue '#'52\):
 	@echo -------------------
 	@./tests/exit-code.sh
