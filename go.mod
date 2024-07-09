@@ -22,7 +22,7 @@ require (
 	github.com/bodgit/plumbing v1.3.0 // indirect
 	github.com/bodgit/sevenzip v1.5.1 // indirect
 	github.com/bodgit/windows v1.0.1 // indirect
-	github.com/dlclark/regexp2 v1.11.0 // indirect
+	github.com/dlclark/regexp2 v1.11.1 // indirect
 	github.com/dsnet/compress v0.0.2-0.20210315054119-f66993602bf5 // indirect
 	github.com/fatih/color v1.17.0 // indirect
 	github.com/golang/snappy v0.0.4 // indirect

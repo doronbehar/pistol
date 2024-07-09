@@ -29,8 +29,8 @@ schema = 3
     version = "v1.0.1"
     hash = "sha256-GSpAGboli54A5wDMpDEdZDYh55o1Zs8dZzFIf7hYdMY="
   [mod."github.com/dlclark/regexp2"]
-    version = "v1.11.0"
-    hash = "sha256-iXBBgykYu9Dcd+7LMJyRYc3Ry47jmuLGZFW13zU6toU="
+    version = "v1.11.1"
+    hash = "sha256-phRef83CEZyp6vDNyzwWct2JFRQhbu/ozKGaTOm1w/I="
   [mod."github.com/doronbehar/magicmime"]
     version = "v0.1.1-0.20211127135329-3de4ff29dc49"
     hash = "sha256-pswPuqwLhSIS9+oddaIgJ0Ar6kk8Wra5p/Cpqy9Qj9I="
