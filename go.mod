@@ -3,7 +3,7 @@ module github.com/doronbehar/pistol
 go 1.20
 
 require (
-	github.com/adrg/xdg v0.4.0
+	github.com/adrg/xdg v0.5.0
 	github.com/alecthomas/chroma/v2 v2.14.0
 	github.com/alessio/shellescape v1.4.2
 	github.com/alexflint/go-arg v1.5.1
