@@ -12,7 +12,7 @@ import (
 	"path/filepath"
 	"errors"
 
-	she "github.com/alessio/shellescape"
+	she "al.essio.dev/pkg/shellescape"
 	log "github.com/sirupsen/logrus"
 	"github.com/doronbehar/pistol/internal_writers"
 	"github.com/doronbehar/magicmime"

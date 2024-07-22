@@ -1,15 +1,15 @@
 schema = 3
 
 [mod]
+  [mod."al.essio.dev/pkg/shellescape"]
+    version = "v1.5.0"
+    hash = "sha256-wZMut5iRnj+twl19cl88/CU+4OesXI2MKfIE3A9MwLI="
   [mod."github.com/adrg/xdg"]
     version = "v0.5.0"
     hash = "sha256-hYxtRzeFzT+4zbslWSZWmUJf+OBDmCiwL0D/0Ry8Z2I="
   [mod."github.com/alecthomas/chroma/v2"]
     version = "v2.14.0"
     hash = "sha256-d+zcIobMS5Y0/Ym9Uxubf20uyw0aBCr0f1oEOAGHlEA="
-  [mod."github.com/alessio/shellescape"]
-    version = "v1.4.2"
-    hash = "sha256-TOlNouGwNdaCddRwABb1qXp0HTMt6+G4uatzfAg3XFc="
   [mod."github.com/alexflint/go-arg"]
     version = "v1.5.1"
     hash = "sha256-IaQwOGoVvcmq8CRj/lyOFJhlKepg/ICxAjbtJFBK6EY="
@@ -29,8 +29,8 @@ schema = 3
     version = "v1.0.1"
     hash = "sha256-GSpAGboli54A5wDMpDEdZDYh55o1Zs8dZzFIf7hYdMY="
   [mod."github.com/dlclark/regexp2"]
-    version = "v1.11.1"
-    hash = "sha256-phRef83CEZyp6vDNyzwWct2JFRQhbu/ozKGaTOm1w/I="
+    version = "v1.11.2"
+    hash = "sha256-91kKMoSPstiinRwTjdy+G4tbWKSy9WiumV/E53BNGwU="
   [mod."github.com/doronbehar/magicmime"]
     version = "v0.1.1-0.20211127135329-3de4ff29dc49"
     hash = "sha256-pswPuqwLhSIS9+oddaIgJ0Ar6kk8Wra5p/Cpqy9Qj9I="
