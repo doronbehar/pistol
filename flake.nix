@@ -77,6 +77,8 @@
           pkgs.elinks
           pkgs.gomod2nix
         ];
+        # Only useful if I need to play with static compilation out side of
+        # Nix, mostly it is never used.
         inherit MAGIC_DB;
       };
       packages = {

@@ -5,6 +5,7 @@
 NAME := pistol
 VERSION := v$(shell cat VERSION)-git
 ifdef MAGIC_DB
+	# Set by flake.nix
 	MAGIC_DB := $(MAGIC_DB)
 else
 	MAGIC_DB := /usr/share/misc/magic.mgc
