@@ -12,7 +12,6 @@
 buildGoApplication {
   pname = "pistol";
   inherit version src;
-  pwd = ./.;
   modules = ./gomod2nix.toml;
 
   subPackages = [ "cmd/pistol" ];
