@@ -13,15 +13,18 @@ endif
 
 pistol: build
 
+# Cross platform build command, with the VERSION embedded to the executable -
+# in contrary to all nix related builds
 build:
 	go build -ldflags "-X 'main.Version=$(VERSION)'" ./cmd/pistol
 
-build-static:
-	nix build -L ".#pistol-static"
-	ldd ./result/bin/pistol 2>&1 | grep -q 'not a dynamic executable'
-
+# https://stackoverflow.com/a/5810179/4935114
+ifeq (, $(shell which jq)$(shell which nix))
+$(warning "No jq and/or nix executables in PATH, cannot get info from flake.nix")
+else
 release:
 	./bump-version.sh
+endif
 
 # Manpage
 pistol.1: README.adoc
@@ -32,7 +35,8 @@ manpage: pistol.1
 install:
 	go install -ldflags "-X 'main.Version=$(VERSION)'" ./cmd/pistol
 
-# requires: bat (https://github.com/sharkdp/bat), elinks
+# requires: bat (https://github.com/sharkdp/bat), elinks . Both of them are
+# added to the flake.nix.
 test: pistol
 	@echo -------------------
 	@echo fpath
