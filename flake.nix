@@ -49,6 +49,13 @@
             *.nix
             ./azure-pipelines.yml
             .envrc
+            .direnv
+            # Makefile related files
+            ./Makefile
+            # built by go build or simply with `make`
+            ./pistol
+            ./pistol.1
+            ./README.html
             # Evaluated but not used for the build itself
             VERSION
             "bump-version.sh"
