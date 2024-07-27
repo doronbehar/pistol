@@ -52,7 +52,10 @@
             .direnv
             ### Makefile related files
             ./Makefile
-            "bump-version.sh"
+            ./newVersionFile
+            ./newTag
+            ./releaseAssets
+            ./releaseAssetsUploaded
             # built by go build or simply with `make`
             ./pistol
             ./pistol.1
@@ -71,7 +74,7 @@
         inherit version src;
       };
       pistol = pkgs.callPackage ./pkg.nix pkgArgs;
-      pistol-static-linux-native = pkgs.pkgsStatic.callPackage ./pkg.nix pkgArgs;
+      pistol-static-native = pkgs.pkgsStatic.callPackage ./pkg.nix pkgArgs;
       pistol-static-linux-x86_64 = pkgs.pkgsCross.gnu64.pkgsStatic.callPackage ./pkg.nix pkgArgs;
       pistol-static-linux-aarch64 = pkgs.pkgsCross.aarch64-multiplatform-musl.pkgsStatic.callPackage ./pkg.nix pkgArgs;
       pistol-static-linux-armv7l = pkgs.pkgsCross.armv7l-hf-multiplatform.pkgsStatic.callPackage ./pkg.nix pkgArgs;
@@ -91,7 +94,7 @@
       packages = {
         inherit
           pistol
-          pistol-static-linux-native
+          pistol-static-native
           pistol-static-linux-x86_64
           pistol-static-linux-aarch64
           pistol-static-linux-armv7l

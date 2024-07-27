@@ -22,8 +22,101 @@ build:
 ifeq (, $(shell which jq)$(shell which nix))
 $(warning "No jq and/or nix executables in PATH, cannot get info from flake.nix")
 else
-release:
-	./bump-version.sh
+THIS_MAKEFILE_PATH:=$(word $(words $(MAKEFILE_LIST)),$(MAKEFILE_LIST))
+THIS_DIR:=$(shell cd $(dir $(THIS_MAKEFILE_PATH));pwd)
+# https://stackoverflow.com/a/76119094/4935114
+COLOUR_GREEN='\033[0;32m'
+COLOUR_RED='\033[0;31m'
+COLOUR_BLUE='\033[0;34m'
+COLOUR_YELLOW='\033[1;33m'
+COLOUR_CYAN='\033[1;36m'
+COLOUR_PURPLE='\033[1;35m'
+COLOUR_WHITE='\033[1;37m'
+COLOUR_RESET='\033[0m'
+
+# Interestingly, builtins.currentSystem is undefined for `nix repl` and a few
+# other nix commands. This example is from
+# https://nix.dev/manual/nix/stable/language/builtin-constants#builtins-currentSystem
+NIX_CURRENT_SYSTEM=$(shell nix-instantiate \
+	--eval \
+	--expr builtins.currentSystem \
+	--json |\
+	jq --raw-output . \
+)
+NIX_ATTRIBUTES=$(shell nix search \
+	$(THIS_DIR) \
+	pistol-static-linux \
+	--json |\
+	jq --raw-output 'keys | .[]' |\
+	sed 's/^packages.$(NIX_CURRENT_SYSTEM).//g' \
+)
+NIX_TARGETS=$(foreach attr, $(NIX_ATTRIBUTES), releaseAssets/$(attr))
+
+V_MAJOR=$(shell cut -d. -f1 VERSION)
+V_MINOR=$(shell cut -d. -f2 VERSION)
+V_PATCH=$(shell cut -d. -f3 VERSION)
+VERSION:=$(V_MAJOR).$(V_MINOR).$(shell echo $$(($(V_PATCH)+1)))
+version_ok=$(strip $(shell \
+	for version_part_idx in 1 2 3; do \
+		version_part=$$(echo $(VERSION) | cut -d. -f$$version_part_idx); \
+		if test "$$version_part" -eq "$$version_part" 2> /dev/null; then \
+			continue; \
+		else \
+			echo error: semver part $$version_part_idx of \
+				version $(VERSION) is \'$$version_part\' which is not \
+				an integer; \
+			break; \
+		fi; \
+	done \
+))
+ifneq (, $(version_ok))
+$(error $(version_ok))
+endif
+
+check-git-clean:
+	@git diff-index --quiet HEAD || ( \
+		echo -e $(COLOUR_RED)Git directory is dirty, Cannot commit a new \
+		VERSION file and use Nix to compile from a clean checkout.\
+		$(COLOUR_RESET); exit 2)
+
+# This below 2 wildcard checkes essentially mean: No matter how old the
+# new{VersionFile,Tag} files, consider these targets as updated if the files
+# exist. Useful when debugging these phases.
+ifeq (,$(wildcard newVersionFile))
+newVersionFile: VERSION check-git-clean
+	@echo -e $(COLOUR_CYAN)❯ Updating version: \
+		$(COLOUR_WHITE)$(V_MAJOR).$(V_MINOR).$(V_PATCH)$(COLOUR_RESET) \
+		"->" \
+		$(COLOUR_WHITE)$(VERSION)$(COLOUR_RESET)
+	@echo $(VERSION) > VERSION
+	git add VERSION
+	git commit -m "Bump version to $(VERSION)"
+	@touch newVersionFile
+endif
+ifeq (,$(wildcard newTag))
+newTag: newVersionFile
+	git tag -a -m v$(VERSION) v$(VERSION)
+	git push
+	git push origin --tags v$(VERSION)
+	@touch newTag
+endif
+
+$(NIX_TARGETS):
+	@mkdir -p releaseAssets
+	ln -sf $$(nix build \
+		--print-build-logs \
+		--no-link \
+		--print-out-paths \
+		.\#$(@F) \
+	)/bin/pistol "$@"
+	ldd "$@" 2>&1 | grep -q 'not a dynamic executable'
+
+release: pistol.1 newTag $(NIX_TARGETS)
+	gh release create v$(VERSION) --generate-notes pistol.1 $(NIX_TARGETS)
+	$(MAKE) cleanReleaseTemps
+
+cleanReleaseTemps:
+	rm -f newTag newVersionFile $(NIX_TARGETS)
 endif
 
 # Manpage
@@ -92,4 +185,6 @@ test: pistol
 	@echo -------------------
 	@./pistol --config tests/config tests/multi-extra A B
 
-.PHONY: build install changelog
+# Nix is smarter then gnumake in deciding whether a target is already available
+# in the /nix/store cache or not
+.PHONY: build install changelog $(NIX_TARGETS)
