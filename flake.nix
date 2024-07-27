@@ -45,23 +45,23 @@
         filter = gitignoreFilterWith {
           basePath = ./.;
           extraRules = ''
+            ### Nix related
             flake*
             *.nix
-            ./azure-pipelines.yml
             .envrc
             .direnv
-            # Makefile related files
+            ### Makefile related files
             ./Makefile
+            "bump-version.sh"
             # built by go build or simply with `make`
             ./pistol
             ./pistol.1
             ./README.html
-            # Evaluated but not used for the build itself
+            # Evaluated here in this flake.nix but not used for the build itself
             VERSION
-            "bump-version.sh"
-            # CI files
+            ### CI files
             renovate.json5
-            # Git files
+            ### Git files
             .gitignore
           '';
         };
