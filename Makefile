@@ -55,15 +55,15 @@ NIX_TARGETS=$(foreach attr, $(NIX_ATTRIBUTES), releaseAssets/$(attr))
 V_MAJOR=$(shell cut -d. -f1 VERSION)
 V_MINOR=$(shell cut -d. -f2 VERSION)
 V_PATCH=$(shell cut -d. -f3 VERSION)
-VERSION:=$(V_MAJOR).$(V_MINOR).$(shell echo $$(($(V_PATCH)+1)))
+NEXT_VERSION:=$(V_MAJOR).$(V_MINOR).$(shell echo $$(($(V_PATCH)+1)))
 version_ok=$(strip $(shell \
 	for version_part_idx in 1 2 3; do \
-		version_part=$$(echo $(VERSION) | cut -d. -f$$version_part_idx); \
+		version_part=$$(echo $(NEXT_VERSION) | cut -d. -f$$version_part_idx); \
 		if test "$$version_part" -eq "$$version_part" 2> /dev/null; then \
 			continue; \
 		else \
 			echo error: semver part $$version_part_idx of \
-				version $(VERSION) is \'$$version_part\' which is not \
+				version $(NEXT_VERSION) is \'$$version_part\' which is not \
 				an integer; \
 			break; \
 		fi; \
@@ -87,17 +87,17 @@ newVersionFile: VERSION check-git-clean
 	@echo -e $(COLOUR_CYAN)❯ Updating version: \
 		$(COLOUR_WHITE)$(V_MAJOR).$(V_MINOR).$(V_PATCH)$(COLOUR_RESET) \
 		"->" \
-		$(COLOUR_WHITE)$(VERSION)$(COLOUR_RESET)
-	@echo $(VERSION) > VERSION
+		$(COLOUR_WHITE)$(NEXT_VERSION)$(COLOUR_RESET)
+	@echo $(NEXT_VERSION) > VERSION
 	git add VERSION
-	git commit -m "Bump version to $(VERSION)"
+	git commit -m "Bump version to $(NEXT_VERSION)"
 	@touch newVersionFile
 endif
 ifeq (,$(wildcard newTag))
 newTag: newVersionFile
-	git tag -a -m v$(VERSION) v$(VERSION)
+	git tag -a -m v$(NEXT_VERSION) v$(NEXT_VERSION)
 	git push
-	git push origin --tags v$(VERSION)
+	git push origin --tags v$(NEXT_VERSION)
 	@touch newTag
 endif
 
@@ -112,7 +112,7 @@ $(NIX_TARGETS):
 	ldd "$@" 2>&1 | grep -q 'not a dynamic executable'
 
 release: pistol.1 newTag $(NIX_TARGETS)
-	gh release create v$(VERSION) --generate-notes pistol.1 $(NIX_TARGETS)
+	gh release create v$(NEXT_VERSION) --generate-notes pistol.1 $(NIX_TARGETS)
 	$(MAKE) cleanReleaseTemps
 
 cleanReleaseTemps:
