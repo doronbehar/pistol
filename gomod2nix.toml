@@ -23,8 +23,8 @@ schema = 3
     version = "v1.3.0"
     hash = "sha256-nmLdJAB2sWpwHb2lFrYTcMR4yusMM1U629Pm2K9hfm0="
   [mod."github.com/bodgit/sevenzip"]
-    version = "v1.5.1"
-    hash = "sha256-XhzpaFXnEbyrL2MgjIbineyNzRLiLrDP2Gn/5vX6ovM="
+    version = "v1.5.2"
+    hash = "sha256-jeHYGVKcyXUUpm3FMEYpCqjbUqLpyUoe6OLaDXNXz+E="
   [mod."github.com/bodgit/windows"]
     version = "v1.0.1"
     hash = "sha256-GSpAGboli54A5wDMpDEdZDYh55o1Zs8dZzFIf7hYdMY="
@@ -101,11 +101,11 @@ schema = 3
     version = "v0.0.0-20230225012048-214862532bf5"
     hash = "sha256-8y7krSESdxZfxTzo16EDqmF8USRzGmLPYr3iKuVYzzE="
   [mod."golang.org/x/sys"]
-    version = "v0.23.0"
-    hash = "sha256-tC6QVLu72bADgINz26FUGdmYqKgsU45bHPg7sa0ZV7w="
+    version = "v0.25.0"
+    hash = "sha256-PXZ9EQZ7SFpcL7d3E1+KGTxziYlHEIZPfoXEbnaVD3I="
   [mod."golang.org/x/term"]
-    version = "v0.23.0"
-    hash = "sha256-ECmmK3Wc0g/zUy5wAokj7ItRsUi6eoqSe9s9Uhcwu90="
+    version = "v0.24.0"
+    hash = "sha256-PfC5psjzEWKRm1DlnBXX0ntw9OskJFrq1RRjyBa1lOk="
   [mod."golang.org/x/text"]
-    version = "v0.17.0"
-    hash = "sha256-R8JbsP7KX+KFTHH7SjRnUGCdvtagylVOfngWEnVSqBc="
+    version = "v0.18.0"
+    hash = "sha256-aNvJW4gQs+MTfdz6DZqyyHQS2GJ9W8L8qKPVODPn4+k="
