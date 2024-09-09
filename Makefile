@@ -18,10 +18,6 @@ pistol: build
 build:
 	go build -ldflags "-X 'main.Version=$(VERSION)'" ./cmd/pistol
 
-# https://stackoverflow.com/a/5810179/4935114
-ifeq (, $(shell which jq)$(shell which nix))
-$(warning "No jq and/or nix executables in PATH, cannot get info from flake.nix")
-else
 THIS_MAKEFILE_PATH:=$(word $(words $(MAKEFILE_LIST)),$(MAKEFILE_LIST))
 THIS_DIR:=$(shell cd $(dir $(THIS_MAKEFILE_PATH));pwd)
 # https://stackoverflow.com/a/76119094/4935114
@@ -34,6 +30,10 @@ COLOUR_PURPLE='\033[1;35m'
 COLOUR_WHITE='\033[1;37m'
 COLOUR_RESET='\033[0m'
 
+# https://stackoverflow.com/a/5810179/4935114
+ifeq (, $(shell which jq)$(shell which nix))
+$(warning "No jq and/or nix executables in PATH, cannot get info from flake.nix")
+else
 # Interestingly, builtins.currentSystem is undefined for `nix repl` and a few
 # other nix commands. This example is from
 # https://nix.dev/manual/nix/stable/language/builtin-constants#builtins-currentSystem
