@@ -75,6 +75,12 @@ ifneq (, $(version_ok))
 $(error $(version_ok))
 endif
 
+TESTS_INPUTS=$(wildcard $(THIS_DIR)/tests/inputs/*)
+TESTS_OUTPUTS_CURRENT=$(foreach input, \
+	$(TESTS_INPUTS), \
+	$(THIS_DIR)/tests/outputs/$(notdir $(input)).current \
+)
+
 check-git-clean:
 	@git diff-index --quiet HEAD || ( \
 		echo -e $(COLOUR_RED)Git directory is dirty, Cannot commit a new \
@@ -134,60 +140,25 @@ manpage: pistol.1
 install:
 	go install -ldflags "-X 'main.Version=$(VERSION)'" ./cmd/pistol
 
+.PHONY: $(THIS_DIR)/tests/outputs/%.current
 # requires: bat (https://github.com/sharkdp/bat), elinks . Both of them are
 # added to the flake.nix.
+$(THIS_DIR)/tests/outputs/%.current: pistol tests/outputs/%.expected tests/inputs/%
+	@echo testing input file $*
+	@./pistol \
+		--config $(THIS_DIR)/tests/config \
+		$(THIS_DIR)/tests/inputs/$* \
+		-- \
+		$$(if [[ -f $(THIS_DIR)/tests/args/$*.txt ]]; then \
+			cat $(THIS_DIR)/tests/args/$*.txt; \
+		else \
+			echo ""; \
+		fi) \
+		2>&1 | bat --decorations=never --show-all --color=always \
+		> $@
+	@diff --report-identical-files $@ $(THIS_DIR)/tests/outputs/$*.expected
+	@rm $@
+
 .PHONY: test
-test: pistol
-	@echo -------------------
-	@echo fpath
-	@echo -------------------
-	@./pistol --config tests/config tests/inputs/fpath-no-sh
-	@tput sgr0
-	@echo -------------------
-	@echo fpath + sh:
-	@echo -------------------
-	@./pistol --config tests/config tests/inputs/fpath-with-sh
-	@tput sgr0
-	@echo -------------------
-	@echo mimetype
-	@echo -------------------
-	@./pistol --config tests/config tests/inputs/mimetype-no-sh
-	@tput sgr0
-	@echo -------------------
-	@echo mimetype + sh:
-	@echo -------------------
-	@./pistol --config tests/config tests/inputs/mimetype-with-sh
-	@tput sgr0
-	@echo -------------------
-	@echo application/json \(issue '#'34\):
-	@echo -------------------
-	@./pistol --config tests/config tests/inputs/34.json
-	@tput sgr0
-	@echo -------------------
-	@echo gzipped application/json
-	@echo -------------------
-	@./pistol --config tests/config tests/inputs/34.json.gz
-	@tput sgr0
-	@echo -------------------
-	@echo exit code \(issue '#'52\):
-	@echo -------------------
-	@./tests/exit-code.sh
-	@tput sgr0
-	@echo -------------------
-	@echo ./tests/VERSION.bz2 should appear along with license of bz2
-	@echo -------------------
-	@./pistol --config tests/config tests/inputs/VERSION.bz2 -- -v -L
-	@tput sgr0
-	@echo -------------------
-	@echo ./tests/renovate.json5.bz2 should appear without a license of bz2
-	@echo or verbosity, although the arguments are passed to pistol
-	@echo -------------------
-	@./pistol --config tests/config tests/inputs/renovate.json5.bz2 -- -v -L
-	@echo -------------------
-	@echo Checks substitution of multiple pistol-extra arguments without
-	@echo a space between them \(issue 56\). The output should be:
-	@echo
-	@echo "     tests/multi-extra AxB"
-	@echo
-	@echo -------------------
-	@./pistol --config tests/config tests/inputs/multi-extra A B
+test: $(TESTS_OUTPUTS_CURRENT)
+	@$(THIS_DIR)/tests/exit-code.sh

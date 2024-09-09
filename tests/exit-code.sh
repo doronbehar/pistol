@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-if ./pistol --config tests/config tests/exit-code.bz2; then
+if ./pistol --config tests/config tests/exit-code.bz2 > /dev/null 2>&1; then
 	tput setaf 1
 	echo "exit code was not non-zero when testing a non real command"
 	exit 1
@@ -9,7 +9,7 @@ else
 	echo "exit code was not zero when testing a non real command"
 fi
 
-if ./pistol --config tests/config tests/inputs; then
+if ./pistol --config tests/config tests/inputs > /dev/null 2>&1; then
 	tput setaf 1
 	echo "exit code was not non-zero when testing a real command with invalid arguments"
 	exit 1
