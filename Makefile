@@ -11,8 +11,10 @@ else
 	MAGIC_DB := /usr/share/misc/magic.mgc
 endif
 
+.PHONY: pistol
 pistol: build
 
+.PHONY: build
 # Cross platform build command, with the VERSION embedded to the executable -
 # in contrary to all nix related builds
 build:
@@ -101,6 +103,9 @@ newTag: newVersionFile
 	@touch newTag
 endif
 
+# Nix is smarter then gnumake in deciding whether a target is already available
+# in the /nix/store cache or not
+.PHONY: $(NIX_TARGETS)
 $(NIX_TARGETS):
 	@mkdir -p releaseAssets
 	ln -sf $$(nix build \
@@ -125,11 +130,13 @@ pistol.1: README.adoc
 
 manpage: pistol.1
 
+.PHONY: install
 install:
 	go install -ldflags "-X 'main.Version=$(VERSION)'" ./cmd/pistol
 
 # requires: bat (https://github.com/sharkdp/bat), elinks . Both of them are
 # added to the flake.nix.
+.PHONY: test
 test: pistol
 	@echo -------------------
 	@echo fpath
@@ -184,7 +191,3 @@ test: pistol
 	@echo
 	@echo -------------------
 	@./pistol --config tests/config tests/inputs/multi-extra A B
-
-# Nix is smarter then gnumake in deciding whether a target is already available
-# in the /nix/store cache or not
-.PHONY: build install changelog $(NIX_TARGETS)
