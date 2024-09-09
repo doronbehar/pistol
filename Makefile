@@ -134,32 +134,32 @@ test: pistol
 	@echo -------------------
 	@echo fpath
 	@echo -------------------
-	@./pistol --config tests/config tests/fpath-no-sh
+	@./pistol --config tests/config tests/inputs/fpath-no-sh
 	@tput sgr0
 	@echo -------------------
 	@echo fpath + sh:
 	@echo -------------------
-	@./pistol --config tests/config tests/fpath-with-sh
+	@./pistol --config tests/config tests/inputs/fpath-with-sh
 	@tput sgr0
 	@echo -------------------
 	@echo mimetype
 	@echo -------------------
-	@./pistol --config tests/config tests/mimetype-no-sh
+	@./pistol --config tests/config tests/inputs/mimetype-no-sh
 	@tput sgr0
 	@echo -------------------
 	@echo mimetype + sh:
 	@echo -------------------
-	@./pistol --config tests/config tests/mimetype-with-sh
+	@./pistol --config tests/config tests/inputs/mimetype-with-sh
 	@tput sgr0
 	@echo -------------------
 	@echo application/json \(issue '#'34\):
 	@echo -------------------
-	@./pistol --config tests/config tests/34.json
+	@./pistol --config tests/config tests/inputs/34.json
 	@tput sgr0
 	@echo -------------------
 	@echo gzipped application/json
 	@echo -------------------
-	@./pistol --config tests/config tests/34.json.gz
+	@./pistol --config tests/config tests/inputs/34.json.gz
 	@tput sgr0
 	@echo -------------------
 	@echo exit code \(issue '#'52\):
@@ -169,13 +169,13 @@ test: pistol
 	@echo -------------------
 	@echo ./tests/VERSION.bz2 should appear along with license of bz2
 	@echo -------------------
-	@./pistol --config tests/config tests/VERSION.bz2 -- -v -L
+	@./pistol --config tests/config tests/inputs/VERSION.bz2 -- -v -L
 	@tput sgr0
 	@echo -------------------
 	@echo ./tests/renovate.json5.bz2 should appear without a license of bz2
 	@echo or verbosity, although the arguments are passed to pistol
 	@echo -------------------
-	@./pistol --config tests/config tests/renovate.json5.bz2 -- -v -L
+	@./pistol --config tests/config tests/inputs/renovate.json5.bz2 -- -v -L
 	@echo -------------------
 	@echo Checks substitution of multiple pistol-extra arguments without
 	@echo a space between them \(issue 56\). The output should be:
@@ -183,7 +183,7 @@ test: pistol
 	@echo "     tests/multi-extra AxB"
 	@echo
 	@echo -------------------
-	@./pistol --config tests/config tests/multi-extra A B
+	@./pistol --config tests/config tests/inputs/multi-extra A B
 
 # Nix is smarter then gnumake in deciding whether a target is already available
 # in the /nix/store cache or not
