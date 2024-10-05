@@ -2,7 +2,7 @@ module github.com/doronbehar/pistol
 
 go 1.21
 
-toolchain go1.22.6
+toolchain go1.23.2
 
 require (
 	al.essio.dev/pkg/shellescape v1.5.0
