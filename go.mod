@@ -5,7 +5,7 @@ go 1.21
 toolchain go1.22.6
 
 require (
-	al.essio.dev/pkg/shellescape v1.5.0
+	al.essio.dev/pkg/shellescape v1.5.1
 	github.com/adrg/xdg v0.5.0
 	github.com/alecthomas/chroma/v2 v2.14.0
 	github.com/alexflint/go-arg v1.5.1
