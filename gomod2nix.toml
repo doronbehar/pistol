@@ -17,8 +17,8 @@ schema = 3
     version = "v1.2.0"
     hash = "sha256-PivG79qqrPJ1CksNiNNlwC+xPCMMTQxtda3rwk/z6LA="
   [mod."github.com/andybalholm/brotli"]
-    version = "v1.1.0"
-    hash = "sha256-njLViV4v++ZdgOWGWzlvkefuFvA/nkugl3Ta/h1nu/0="
+    version = "v1.1.1"
+    hash = "sha256-kCt+irK1gvz2lGQUeEolYa5+FbLsfWlJMCd5hm+RPgQ="
   [mod."github.com/bodgit/plumbing"]
     version = "v1.3.0"
     hash = "sha256-nmLdJAB2sWpwHb2lFrYTcMR4yusMM1U629Pm2K9hfm0="
@@ -41,8 +41,8 @@ schema = 3
     version = "v1.0.1"
     hash = "sha256-yuvxYYngpfVkUg9yAmG99IUVmADTQA0tMbBXe0Fq0Mc="
   [mod."github.com/fatih/color"]
-    version = "v1.17.0"
-    hash = "sha256-QsKMy3MsvjbYNcA9jP8w6c3wpmWDZ0079bybAEzmXR0="
+    version = "v1.18.0"
+    hash = "sha256-pP5y72FSbi4j/BjyVq/XbAOFjzNjMxZt2R/lFFxGWvY="
   [mod."github.com/golang/snappy"]
     version = "v0.0.4"
     hash = "sha256-Umx+5xHAQCN/Gi4HbtMhnDCSPFAXSsjVbXd8n5LhjAA="
@@ -56,11 +56,11 @@ schema = 3
     version = "v2.0.7"
     hash = "sha256-t1bcXLgrQNOYUVyYEZ0knxcXpsTk4IuJZDjKvyJX75g="
   [mod."github.com/jedib0t/go-pretty/v6"]
-    version = "v6.6.0"
-    hash = "sha256-hjYeaSKwQU2ALIazSrb8yCWIPg6JONMO8t0rq3532+M="
+    version = "v6.6.1"
+    hash = "sha256-7yiwxw855y3bmooF17wmE2Rh/oyeArypuxsqck3RCrA="
   [mod."github.com/klauspost/compress"]
-    version = "v1.17.10"
-    hash = "sha256-OLkMoIaHLIhtDonP0qXf8L+iKB1VBlxm6jOMdjHcvb8="
+    version = "v1.17.11"
+    hash = "sha256-LFSIWy0C4VbiuPve0eKHr7Q7s4XtaGzsZ3qpO+6bEgc="
   [mod."github.com/klauspost/pgzip"]
     version = "v1.2.6"
     hash = "sha256-qA1hjnVW/tqxY48JIWQVulwEwY7fwyvnasymZk3mScg="
@@ -77,8 +77,8 @@ schema = 3
     version = "v4.0.0-alpha.8"
     hash = "sha256-fk56IWQLI2w0fNoYOrNNPbxiOO3PV4znacNUzxcsl74="
   [mod."github.com/nwaples/rardecode/v2"]
-    version = "v2.0.0-beta.2"
-    hash = "sha256-xwdH0iDu4voySQPXOUb82uWsRBlmdlyNvq7o11yvhIw="
+    version = "v2.0.0-beta.3"
+    hash = "sha256-iE+56Lo8Ge38x+j86rzVBP9KQqX+2izKgQgxY7naxrU="
   [mod."github.com/nwidger/jsoncolor"]
     version = "v0.3.2"
     hash = "sha256-ibwPUPCLaBHKRYo93eaPlqlRFB2MW8f/XlImBkg2q2c="
