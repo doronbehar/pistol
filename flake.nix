@@ -82,6 +82,7 @@
     in {
       devShell = pkgs.mkShell {
         nativeBuildInputs = [
+          pkgs.go
           pkgs.file
           # For make check
           pkgs.elinks
