@@ -5,8 +5,8 @@ schema = 3
     version = "v1.5.1"
     hash = "sha256-4pii6K/7lU09qYq4HfZ8dsIw2/8IDExaev2VEtYOMt0="
   [mod."github.com/adrg/xdg"]
-    version = "v0.5.0"
-    hash = "sha256-hYxtRzeFzT+4zbslWSZWmUJf+OBDmCiwL0D/0Ry8Z2I="
+    version = "v0.5.2"
+    hash = "sha256-J+aUMKabWCY72pGvTeTWc4rP1qwrOjAO6ZkqnQ3RCpQ="
   [mod."github.com/alecthomas/chroma/v2"]
     version = "v2.14.0"
     hash = "sha256-d+zcIobMS5Y0/Ym9Uxubf20uyw0aBCr0f1oEOAGHlEA="
@@ -77,8 +77,8 @@ schema = 3
     version = "v4.0.0-alpha.8"
     hash = "sha256-fk56IWQLI2w0fNoYOrNNPbxiOO3PV4znacNUzxcsl74="
   [mod."github.com/nwaples/rardecode/v2"]
-    version = "v2.0.0-beta.3"
-    hash = "sha256-iE+56Lo8Ge38x+j86rzVBP9KQqX+2izKgQgxY7naxrU="
+    version = "v2.0.0-beta.4"
+    hash = "sha256-+SB1HrgF/Cb4Eo+qIaOuaNif+y2XsXccmpU0N0GT/ew="
   [mod."github.com/nwidger/jsoncolor"]
     version = "v0.3.2"
     hash = "sha256-ibwPUPCLaBHKRYo93eaPlqlRFB2MW8f/XlImBkg2q2c="
