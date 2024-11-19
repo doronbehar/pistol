@@ -26,8 +26,8 @@ schema = 3
     version = "v1.3.0"
     hash = "sha256-nmLdJAB2sWpwHb2lFrYTcMR4yusMM1U629Pm2K9hfm0="
   [mod."github.com/bodgit/sevenzip"]
-    version = "v1.5.2"
-    hash = "sha256-jeHYGVKcyXUUpm3FMEYpCqjbUqLpyUoe6OLaDXNXz+E="
+    version = "v1.6.0"
+    hash = "sha256-E2jCJXM9KJYsYt/tbcrXG91ZUeCcwjiO8ZE1bpSsb1c="
   [mod."github.com/bodgit/windows"]
     version = "v1.0.1"
     hash = "sha256-GSpAGboli54A5wDMpDEdZDYh55o1Zs8dZzFIf7hYdMY="
@@ -59,8 +59,8 @@ schema = 3
     version = "v2.0.7"
     hash = "sha256-t1bcXLgrQNOYUVyYEZ0knxcXpsTk4IuJZDjKvyJX75g="
   [mod."github.com/jedib0t/go-pretty/v6"]
-    version = "v6.6.1"
-    hash = "sha256-7yiwxw855y3bmooF17wmE2Rh/oyeArypuxsqck3RCrA="
+    version = "v6.6.2"
+    hash = "sha256-aR6A/wKaHqHGe4JsZgz1k4eBx8De6VawRwRCnVBAT48="
   [mod."github.com/klauspost/compress"]
     version = "v1.17.11"
     hash = "sha256-LFSIWy0C4VbiuPve0eKHr7Q7s4XtaGzsZ3qpO+6bEgc="
