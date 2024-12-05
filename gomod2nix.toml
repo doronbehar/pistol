@@ -80,8 +80,8 @@ schema = 3
     version = "v4.0.0-alpha.9"
     hash = "sha256-ow/IORKEVnFjIHE0EB1N1utNS1NKSTZd8RNhrNqHY64="
   [mod."github.com/nwaples/rardecode/v2"]
-    version = "v2.0.0"
-    hash = "sha256-8cT5AY2zJWF25HRO0Xl8c0hRn5l7uvOhb5cG7D/S5II="
+    version = "v2.0.1"
+    hash = "sha256-8dHysewqOigayRP9kTCddXC/l6CMrjAlC9m9yeS4nqw="
   [mod."github.com/nwidger/jsoncolor"]
     version = "v0.3.2"
     hash = "sha256-ibwPUPCLaBHKRYo93eaPlqlRFB2MW8f/XlImBkg2q2c="
@@ -107,11 +107,11 @@ schema = 3
     version = "v0.0.0-20230225012048-214862532bf5"
     hash = "sha256-8y7krSESdxZfxTzo16EDqmF8USRzGmLPYr3iKuVYzzE="
   [mod."golang.org/x/sys"]
-    version = "v0.27.0"
-    hash = "sha256-BXQcF9RrJ55Pq7Nl67TeFGkgkyuKkQ8hHKN4/L4ggWc="
+    version = "v0.28.0"
+    hash = "sha256-kzSlDo5FKsQU9cLefIt2dueGUfz9XuEW+mGSGlPATGc="
   [mod."golang.org/x/term"]
-    version = "v0.26.0"
-    hash = "sha256-WswEQdriq1dI9CSPsL7j4qr1KFGiWU5oGssvyq/LJXw="
+    version = "v0.27.0"
+    hash = "sha256-cb5p/yOlVL7dbkxugUVfqESTVpZ2LtrUWPnx9yue3r0="
   [mod."golang.org/x/text"]
-    version = "v0.20.0"
-    hash = "sha256-YP8zSo2e9okqhxVB8me8sJyij2O0tTQEg5t+8bsIUx8="
+    version = "v0.21.0"
+    hash = "sha256-QaMwddBRnoS2mv9Y86eVC2x2wx/GZ7kr2zAJvwDeCPc="
