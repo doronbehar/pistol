@@ -59,8 +59,8 @@ schema = 3
     version = "v2.0.7"
     hash = "sha256-t1bcXLgrQNOYUVyYEZ0knxcXpsTk4IuJZDjKvyJX75g="
   [mod."github.com/jedib0t/go-pretty/v6"]
-    version = "v6.6.3"
-    hash = "sha256-LdhCkWiduH9JHOWXr/yTpSbLydCimJ1GDRUv557GE34="
+    version = "v6.6.4"
+    hash = "sha256-Uhxp3xmKGKB3/JAnDhQzBRhysCZMFF4NpfylVsAr7eY="
   [mod."github.com/klauspost/compress"]
     version = "v1.17.11"
     hash = "sha256-LFSIWy0C4VbiuPve0eKHr7Q7s4XtaGzsZ3qpO+6bEgc="
