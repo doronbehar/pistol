@@ -11,7 +11,7 @@ require (
 	github.com/alexflint/go-arg v1.5.1
 	github.com/doronbehar/magicmime v0.1.1-0.20211127135329-3de4ff29dc49
 	github.com/dustin/go-humanize v1.0.1
-	github.com/jedib0t/go-pretty/v6 v6.6.4
+	github.com/jedib0t/go-pretty/v6 v6.6.5
 	github.com/mholt/archiver/v4 v4.0.0-alpha.9
 	github.com/nwidger/jsoncolor v0.3.2
 	github.com/sirupsen/logrus v1.9.3
@@ -38,7 +38,7 @@ require (
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/mattn/go-runewidth v0.0.16 // indirect
 	github.com/nwaples/rardecode/v2 v2.0.1 // indirect
-	github.com/pierrec/lz4/v4 v4.1.21 // indirect
+	github.com/pierrec/lz4/v4 v4.1.22 // indirect
 	github.com/rivo/uniseg v0.4.7 // indirect
 	github.com/sorairolake/lzip-go v0.3.5 // indirect
 	github.com/therootcompany/xz v1.0.1 // indirect
