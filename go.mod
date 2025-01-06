@@ -7,7 +7,7 @@ toolchain go1.23.2
 require (
 	al.essio.dev/pkg/shellescape v1.5.1
 	github.com/adrg/xdg v0.5.3
-	github.com/alecthomas/chroma/v2 v2.14.0
+	github.com/alecthomas/chroma/v2 v2.15.0
 	github.com/alexflint/go-arg v1.5.1
 	github.com/doronbehar/magicmime v0.1.1-0.20211127135329-3de4ff29dc49
 	github.com/dustin/go-humanize v1.0.1
