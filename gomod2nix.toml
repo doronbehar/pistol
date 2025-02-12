@@ -4,9 +4,6 @@ schema = 3
   [mod."al.essio.dev/pkg/shellescape"]
     version = "v1.5.1"
     hash = "sha256-4pii6K/7lU09qYq4HfZ8dsIw2/8IDExaev2VEtYOMt0="
-  [mod."github.com/STARRY-S/zip"]
-    version = "v0.2.1"
-    hash = "sha256-eyvVeAHIUhzNIVKCfYzNTFDcMq2OuIfaIcMoEz+T68o="
   [mod."github.com/adrg/xdg"]
     version = "v0.5.3"
     hash = "sha256-bo6tBgHS+3sl6f4oWpmdFrZjfV6eA/3xAlysSW0bIEs="
@@ -77,8 +74,8 @@ schema = 3
     version = "v0.0.16"
     hash = "sha256-NC+ntvwIpqDNmXb7aixcg09il80ygq6JAnW0Gb5b/DQ="
   [mod."github.com/mholt/archiver/v4"]
-    version = "v4.0.0-alpha.9"
-    hash = "sha256-ow/IORKEVnFjIHE0EB1N1utNS1NKSTZd8RNhrNqHY64="
+    version = "v4.0.0-alpha.8"
+    hash = "sha256-fk56IWQLI2w0fNoYOrNNPbxiOO3PV4znacNUzxcsl74="
   [mod."github.com/nwaples/rardecode/v2"]
     version = "v2.1.0"
     hash = "sha256-4sZp1xA1KLT2CGOg0RsprdvJmKco8bFVRGIfgtkLxLw="
@@ -94,9 +91,6 @@ schema = 3
   [mod."github.com/sirupsen/logrus"]
     version = "v1.9.3"
     hash = "sha256-EnxsWdEUPYid+aZ9H4/iMTs1XMvCLbXZRDyvj89Ebms="
-  [mod."github.com/sorairolake/lzip-go"]
-    version = "v0.3.5"
-    hash = "sha256-2zvduBHMt9Jhg1VWAIHg9VV+lzxw3x/N9hGBfn5SENE="
   [mod."github.com/therootcompany/xz"]
     version = "v1.0.1"
     hash = "sha256-SujtLzRINpXKEyldKuRYrTfhsLLop12PpdlY0F18/88="
