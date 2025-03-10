@@ -2,8 +2,8 @@ schema = 3
 
 [mod]
   [mod."al.essio.dev/pkg/shellescape"]
-    version = "v1.5.1"
-    hash = "sha256-4pii6K/7lU09qYq4HfZ8dsIw2/8IDExaev2VEtYOMt0="
+    version = "v1.6.0"
+    hash = "sha256-dra32NY6DuVXLr7SblL0kF0S6e/Tea5jayWEMaj7K3E="
   [mod."github.com/adrg/xdg"]
     version = "v0.5.3"
     hash = "sha256-bo6tBgHS+3sl6f4oWpmdFrZjfV6eA/3xAlysSW0bIEs="
