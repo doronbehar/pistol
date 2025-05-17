@@ -8,8 +8,8 @@ schema = 3
     version = "v0.5.3"
     hash = "sha256-bo6tBgHS+3sl6f4oWpmdFrZjfV6eA/3xAlysSW0bIEs="
   [mod."github.com/alecthomas/chroma/v2"]
-    version = "v2.17.2"
-    hash = "sha256-9hh5gmk/kpvYc2TX1W1tDCUM6svroNAS+p/Kxv4GLko="
+    version = "v2.18.0"
+    hash = "sha256-E93fMpYOCk7L6MIG2aG/MkENEFjO1urynsMjtwRXA8g="
   [mod."github.com/alexflint/go-arg"]
     version = "v1.5.1"
     hash = "sha256-IaQwOGoVvcmq8CRj/lyOFJhlKepg/ICxAjbtJFBK6EY="
