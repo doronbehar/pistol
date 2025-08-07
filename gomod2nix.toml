@@ -11,8 +11,8 @@ schema = 3
     version = "v2.20.0"
     hash = "sha256-rL1mJS8fCltcii9w/efyyE4iyzogyjP+N80lE3CuzVE="
   [mod."github.com/alexflint/go-arg"]
-    version = "v1.5.1"
-    hash = "sha256-IaQwOGoVvcmq8CRj/lyOFJhlKepg/ICxAjbtJFBK6EY="
+    version = "v1.6.0"
+    hash = "sha256-xLuVx2tlvfpSU5ivjderC8/Kxu7OTanJfAsenMnYYIg="
   [mod."github.com/alexflint/go-scalar"]
     version = "v1.2.0"
     hash = "sha256-PivG79qqrPJ1CksNiNNlwC+xPCMMTQxtda3rwk/z6LA="
@@ -101,11 +101,11 @@ schema = 3
     version = "v0.0.0-20230225012048-214862532bf5"
     hash = "sha256-8y7krSESdxZfxTzo16EDqmF8USRzGmLPYr3iKuVYzzE="
   [mod."golang.org/x/sys"]
-    version = "v0.33.0"
-    hash = "sha256-wlOzIOUgAiGAtdzhW/KPl/yUVSH/lvFZfs5XOuJ9LOQ="
+    version = "v0.34.0"
+    hash = "sha256-5rZ7p8IaGli5X1sJbfIKOcOEwY4c0yQhinJPh2EtK50="
   [mod."golang.org/x/term"]
-    version = "v0.32.0"
-    hash = "sha256-4cM/vhb8EUrlfHidBRfjYEQlUQehXiydJN77YkQvAic="
+    version = "v0.33.0"
+    hash = "sha256-BtYV1YkrvMTV7k3SVac1+0iv5vDUKHgBSJkeEFPmiH8="
   [mod."golang.org/x/text"]
     version = "v0.22.0"
     hash = "sha256-kUwLNFk9K/YuWmO5/u2IshrmhT2CCuk+mAShSlTTeZo="

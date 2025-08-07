@@ -8,14 +8,14 @@ require (
 	al.essio.dev/pkg/shellescape v1.6.0
 	github.com/adrg/xdg v0.5.3
 	github.com/alecthomas/chroma/v2 v2.20.0
-	github.com/alexflint/go-arg v1.5.1
+	github.com/alexflint/go-arg v1.6.0
 	github.com/doronbehar/magicmime v0.1.1-0.20211127135329-3de4ff29dc49
 	github.com/dustin/go-humanize v1.0.1
 	github.com/jedib0t/go-pretty/v6 v6.6.8
 	github.com/mholt/archiver/v4 v4.0.0-alpha.8
 	github.com/nwidger/jsoncolor v0.3.2
 	github.com/sirupsen/logrus v1.9.3
-	golang.org/x/term v0.32.0
+	golang.org/x/term v0.33.0
 )
 
 require (
@@ -42,6 +42,6 @@ require (
 	github.com/therootcompany/xz v1.0.1 // indirect
 	github.com/ulikunitz/xz v0.5.12 // indirect
 	go4.org v0.0.0-20230225012048-214862532bf5 // indirect
-	golang.org/x/sys v0.33.0 // indirect
+	golang.org/x/sys v0.34.0 // indirect
 	golang.org/x/text v0.22.0 // indirect
 )
