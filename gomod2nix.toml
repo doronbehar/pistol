@@ -8,8 +8,8 @@ schema = 3
     version = "v0.5.3"
     hash = "sha256-bo6tBgHS+3sl6f4oWpmdFrZjfV6eA/3xAlysSW0bIEs="
   [mod."github.com/alecthomas/chroma/v2"]
-    version = "v2.18.0"
-    hash = "sha256-E93fMpYOCk7L6MIG2aG/MkENEFjO1urynsMjtwRXA8g="
+    version = "v2.20.0"
+    hash = "sha256-rL1mJS8fCltcii9w/efyyE4iyzogyjP+N80lE3CuzVE="
   [mod."github.com/alexflint/go-arg"]
     version = "v1.5.1"
     hash = "sha256-IaQwOGoVvcmq8CRj/lyOFJhlKepg/ICxAjbtJFBK6EY="
@@ -56,8 +56,8 @@ schema = 3
     version = "v2.0.7"
     hash = "sha256-t1bcXLgrQNOYUVyYEZ0knxcXpsTk4IuJZDjKvyJX75g="
   [mod."github.com/jedib0t/go-pretty/v6"]
-    version = "v6.6.7"
-    hash = "sha256-n0RmaMMlHEpawF1+WUVQLsDsoTh316LZ9fCGkMOla9c="
+    version = "v6.6.8"
+    hash = "sha256-wES8igoYJjRYEk7H/err0o3owGrosz++GTvma8YWMbM="
   [mod."github.com/klauspost/compress"]
     version = "v1.17.11"
     hash = "sha256-LFSIWy0C4VbiuPve0eKHr7Q7s4XtaGzsZ3qpO+6bEgc="
