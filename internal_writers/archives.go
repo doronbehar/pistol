@@ -32,7 +32,7 @@ func NewArchiveLister(magic_db, mimeType, filePath string) (func(w io.Writer) er
 		case "application/x-tar":
 			format = archiver.Tar{}
 		case "application/x-xz":
-			if res, _ := regexp.MatchString(`.*\.tar\.xz`, filePath); res {
+			if res, _ := regexp.MatchString(`.*\.tar\.xz$`, filePath); res {
 				format = archiver.CompressedArchive{
 					Compression: archiver.Xz{},
 					Archival: archiver.Tar{},
@@ -42,7 +42,7 @@ func NewArchiveLister(magic_db, mimeType, filePath string) (func(w io.Writer) er
 				isArchive = false
 			}
 		case "application/x-bzip2":
-			if res, _ := regexp.MatchString(`.*\.tar\.bz2`, filePath); res {
+			if res, _ := regexp.MatchString(`.*\.tar\.bz2$`, filePath); res {
 				format = archiver.CompressedArchive{
 					Compression: archiver.Bz2{},
 					Archival: archiver.Tar{},
@@ -52,7 +52,7 @@ func NewArchiveLister(magic_db, mimeType, filePath string) (func(w io.Writer) er
 				isArchive = false
 			}
 		case "application/gzip":
-			if res, _ := regexp.MatchString(`.*\.tar\.gz`, filePath); res {
+			if res, _ := regexp.MatchString(`.*\.tar\.gz$`, filePath); res {
 				format = archiver.CompressedArchive{
 					Compression: archiver.Gz{},
 					Archival: archiver.Tar{},
@@ -62,7 +62,7 @@ func NewArchiveLister(magic_db, mimeType, filePath string) (func(w io.Writer) er
 				isArchive = false
 			}
 		case "application/x-lz4":
-			if res, _ := regexp.MatchString(`.*\.tar\.lz`, filePath); res {
+			if res, _ := regexp.MatchString(`.*\.tar\.lz4$`, filePath); res {
 				format = archiver.CompressedArchive{
 					Compression: archiver.Lz4{},
 					Archival: archiver.Tar{},
@@ -72,7 +72,7 @@ func NewArchiveLister(magic_db, mimeType, filePath string) (func(w io.Writer) er
 				isArchive = false
 			}
 		case "application/x-snappy-framed":
-			if res, _ := regexp.MatchString(`.*\.tar\.sz`, filePath); res {
+			if res, _ := regexp.MatchString(`.*\.tar\.sz$`, filePath); res {
 				format = archiver.CompressedArchive{
 					Compression: archiver.Sz{},
 					Archival: archiver.Tar{},
@@ -82,7 +82,7 @@ func NewArchiveLister(magic_db, mimeType, filePath string) (func(w io.Writer) er
 				isArchive = false
 			}
 		case "application/x-zstd":
-			if res, _ := regexp.MatchString(`.*\.tar\.zst`, filePath); res {
+			if res, _ := regexp.MatchString(`.*\.tar\.zst$`, filePath); res {
 				format = archiver.CompressedArchive{
 					Compression: archiver.Zstd{},
 					Archival: archiver.Tar{},
