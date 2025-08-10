@@ -8,7 +8,7 @@ import (
 	"context"
 	"golang.org/x/term"
 
-	"github.com/mholt/archiver/v4"
+	"github.com/mholt/archives"
 	"github.com/jedib0t/go-pretty/v6/table"
 	log "github.com/sirupsen/logrus"
 	"github.com/dustin/go-humanize"
@@ -21,88 +21,97 @@ import (
 func NewArchiveLister(magic_db, mimeType, filePath string) (func(w io.Writer) error, error) {
 	return func (w io.Writer) error {
 		isArchive := true
-		var singleFileFormat archiver.Decompressor
-		var format archiver.Archival
+		var singleFileFormat interface {
+			OpenReader(r io.Reader) (io.ReadCloser, error)
+		}
+		var format archives.Format
 		switch mimeType {
 		// zip
 		case "application/zip":
-			format = archiver.Zip{}
+			format = &archives.Zip{}
 		case "application/x-rar-compressed":
-			format = archiver.Rar{}
+			format = &archives.Rar{}
 		case "application/x-tar":
-			format = archiver.Tar{}
+			format = &archives.Tar{}
 		case "application/x-xz":
 			if res, _ := regexp.MatchString(`.*\.tar\.xz$`, filePath); res {
-				format = archiver.CompressedArchive{
-					Compression: archiver.Xz{},
-					Archival: archiver.Tar{},
+				format = archives.CompressedArchive{
+					Compression: &archives.Xz{},
+					Archival:    &archives.Tar{},
+					Extraction:  &archives.Tar{},
 				}
 			} else {
-				singleFileFormat = archiver.Xz{}
+				singleFileFormat = &archives.Xz{}
 				isArchive = false
 			}
 		case "application/x-bzip2":
 			if res, _ := regexp.MatchString(`.*\.tar\.bz2$`, filePath); res {
-				format = archiver.CompressedArchive{
-					Compression: archiver.Bz2{},
-					Archival: archiver.Tar{},
+				format = archives.CompressedArchive{
+					Compression: &archives.Bz2{},
+					Archival:    &archives.Tar{},
+					Extraction:  &archives.Tar{},
 				}
 			} else {
-				singleFileFormat = archiver.Bz2{}
+				singleFileFormat = &archives.Bz2{}
 				isArchive = false
 			}
 		case "application/gzip":
 			if res, _ := regexp.MatchString(`.*\.tar\.gz$`, filePath); res {
-				format = archiver.CompressedArchive{
-					Compression: archiver.Gz{},
-					Archival: archiver.Tar{},
+				format = archives.CompressedArchive{
+					Compression: &archives.Gz{},
+					Archival:    &archives.Tar{},
+					Extraction:  &archives.Tar{},
 				}
 			} else {
-				singleFileFormat = archiver.Gz{}
+				singleFileFormat = &archives.Gz{}
 				isArchive = false
 			}
 		case "application/x-lz4":
 			if res, _ := regexp.MatchString(`.*\.tar\.lz4$`, filePath); res {
-				format = archiver.CompressedArchive{
-					Compression: archiver.Lz4{},
-					Archival: archiver.Tar{},
+				format = archives.CompressedArchive{
+					Compression: &archives.Lz4{},
+					Archival:    &archives.Tar{},
+					Extraction:  &archives.Tar{},
 				}
 			} else {
-				singleFileFormat = archiver.Lz4{}
+				singleFileFormat = &archives.Lz4{}
 				isArchive = false
 			}
 		case "application/x-snappy-framed":
 			if res, _ := regexp.MatchString(`.*\.tar\.sz$`, filePath); res {
-				format = archiver.CompressedArchive{
-					Compression: archiver.Sz{},
-					Archival: archiver.Tar{},
+				format = archives.CompressedArchive{
+					Compression: &archives.Sz{},
+					Archival:    &archives.Tar{},
+					Extraction:  &archives.Tar{},
 				}
 			} else {
-				singleFileFormat = archiver.Sz{}
+				singleFileFormat = &archives.Sz{}
 				isArchive = false
 			}
 		case "application/x-zstd":
 			if res, _ := regexp.MatchString(`.*\.tar\.zst$`, filePath); res {
-				format = archiver.CompressedArchive{
-					Compression: archiver.Zstd{},
-					Archival: archiver.Tar{},
+				format = archives.CompressedArchive{
+					Compression: &archives.Zstd{},
+					Archival:    &archives.Tar{},
+					Extraction:  &archives.Tar{},
 				}
 			} else {
-				singleFileFormat = archiver.Zstd{}
+				singleFileFormat = &archives.Zstd{}
 				isArchive = false
 			}
 		case "application/x-7z-compressed":
-			format = archiver.SevenZip{}
+			format = &archives.SevenZip{}
 		// brotli - currently unsupported by libmagic, but we don't mind putting it
 		// here anyway.
 		case "application/x-brotli":
 			if res, _ := regexp.MatchString(`.*\.tar\.br$`, filePath); res {
-				format = archiver.CompressedArchive{
-					Compression: archiver.Brotli{},
-					Archival:    archiver.Tar{},
+				format = archives.CompressedArchive{
+					Compression: &archives.Brotli{},
+					Archival:    &archives.Tar{},
+					Extraction:  &archives.Tar{},
 				}
 			} else {
-				singleFileFormat = archiver.Brotli{}
+				singleFileFormat = &archives.Brotli{}
 				isArchive = false
 			}
 		}
@@ -121,10 +130,10 @@ func NewArchiveLister(magic_db, mimeType, filePath string) (func(w io.Writer) er
 					t.SetAllowedRowLength(width)
 				}
 			}
-			archiveHandler := func(ctx context.Context, f archiver.File) error {
-				fPerm := fmt.Sprintf("%v", f.Mode())
-				fSize := humanize.Bytes(uint64(f.Size()))
-				fModtS := f.ModTime()
+			archiveHandler := func(ctx context.Context, f archives.FileInfo) error {
+				fPerm := fmt.Sprintf("%v", f.FileInfo.Mode())
+				fSize := humanize.Bytes(uint64(f.FileInfo.Size()))
+				fModtS := f.FileInfo.ModTime()
 				fModt := fmt.Sprintf(
 					"%04d-%02d-%02d %02d:%02d",
 					fModtS.Year(),
@@ -150,7 +159,7 @@ func NewArchiveLister(magic_db, mimeType, filePath string) (func(w io.Writer) er
 				)
 				return err
 			}
-			err = format.Extract(context.TODO(), reader, nil, archiveHandler)
+			err = format.(archives.Extractor).Extract(context.Background(), reader, archiveHandler)
 			if err != nil {
 				log.Fatalf(
 					"Encountered errors extracting file %s: %v\n",

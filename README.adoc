@@ -58,7 +58,7 @@ The following table lists Pistol’s native previewing support:
 https://github.com/alecthomas/chroma[`chroma`].
 
 |Archives |Prints the contents of archive files using
-https://github.com/mholt/archiver[`archiver`].
+https://github.com/mholt/archives[`archives`].
 |===
 
 In case Pistol encounters a MIME type it doesn't know how to handle
