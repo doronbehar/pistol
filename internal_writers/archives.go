@@ -93,12 +93,18 @@ func NewArchiveLister(magic_db, mimeType, filePath string) (func(w io.Writer) er
 			}
 		case "application/x-7z-compressed":
 			format = archiver.SevenZip{}
-		// brotli - currently unsupported by libmagic
-		// case "application/x-brotli":
-			// // This may be a brotli compressed file / tar
-			// if compressedTar(filePath) {
-				// format := archiver.NewTarBrotli()
-			// }
+		// brotli - currently unsupported by libmagic, but we don't mind putting it
+		// here anyway.
+		case "application/x-brotli":
+			if res, _ := regexp.MatchString(`.*\.tar\.br$`, filePath); res {
+				format = archiver.CompressedArchive{
+					Compression: archiver.Brotli{},
+					Archival:    archiver.Tar{},
+				}
+			} else {
+				singleFileFormat = archiver.Brotli{}
+				isArchive = false
+			}
 		}
 		if isArchive {
 			t := table.NewWriter()
