@@ -15,7 +15,7 @@ require (
 	github.com/mholt/archives v0.1.3
 	github.com/nwidger/jsoncolor v0.3.2
 	github.com/sirupsen/logrus v1.9.3
-	golang.org/x/term v0.34.0
+	golang.org/x/term v0.35.0
 )
 
 require (
