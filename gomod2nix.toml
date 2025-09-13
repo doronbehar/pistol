@@ -101,8 +101,8 @@ schema = 3
     version = "v0.3.5"
     hash = "sha256-2zvduBHMt9Jhg1VWAIHg9VV+lzxw3x/N9hGBfn5SENE="
   [mod."github.com/ulikunitz/xz"]
-    version = "v0.5.12"
-    hash = "sha256-i8IGHLdPZkKsmgHNB2cHHI4/493tJh7uiBzoKXXXgOA="
+    version = "v0.5.15"
+    hash = "sha256-L5KYLue5U14bxUuNyhZ6lIjbda6eCQsx1V6gToqfRdk="
   [mod."go4.org"]
     version = "v0.0.0-20230225012048-214862532bf5"
     hash = "sha256-8y7krSESdxZfxTzo16EDqmF8USRzGmLPYr3iKuVYzzE="
