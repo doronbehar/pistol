@@ -1,8 +1,8 @@
 module github.com/doronbehar/pistol
 
-go 1.23.0
+go 1.24.0
 
-toolchain go1.23.4
+toolchain go1.24.5
 
 require (
 	al.essio.dev/pkg/shellescape v1.6.0
@@ -15,7 +15,7 @@ require (
 	github.com/mholt/archives v0.1.3
 	github.com/nwidger/jsoncolor v0.3.2
 	github.com/sirupsen/logrus v1.9.3
-	golang.org/x/term v0.34.0
+	golang.org/x/term v0.35.0
 )
 
 require (
@@ -44,6 +44,6 @@ require (
 	github.com/sorairolake/lzip-go v0.3.5 // indirect
 	github.com/ulikunitz/xz v0.5.12 // indirect
 	go4.org v0.0.0-20230225012048-214862532bf5 // indirect
-	golang.org/x/sys v0.35.0 // indirect
+	golang.org/x/sys v0.36.0 // indirect
 	golang.org/x/text v0.22.0 // indirect
 )
