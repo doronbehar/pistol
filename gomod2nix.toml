@@ -5,8 +5,8 @@ schema = 3
     version = "v1.6.0"
     hash = "sha256-dra32NY6DuVXLr7SblL0kF0S6e/Tea5jayWEMaj7K3E="
   [mod."github.com/STARRY-S/zip"]
-    version = "v0.2.1"
-    hash = "sha256-eyvVeAHIUhzNIVKCfYzNTFDcMq2OuIfaIcMoEz+T68o="
+    version = "v0.2.3"
+    hash = "sha256-WTsyp8F7iJWBuBkAcqPWjQNSkR40gu24e5vXZnq3ftg="
   [mod."github.com/adrg/xdg"]
     version = "v0.5.3"
     hash = "sha256-bo6tBgHS+3sl6f4oWpmdFrZjfV6eA/3xAlysSW0bIEs="
@@ -20,14 +20,14 @@ schema = 3
     version = "v1.2.0"
     hash = "sha256-PivG79qqrPJ1CksNiNNlwC+xPCMMTQxtda3rwk/z6LA="
   [mod."github.com/andybalholm/brotli"]
-    version = "v1.1.2-0.20250424173009-453214e765f3"
-    hash = "sha256-zbJmULoV7eXeYvY6uK9OlNjAD1YBo5V59bv+Aj7fo9s="
+    version = "v1.2.0"
+    hash = "sha256-EwPR3o6o8dUzsAeHki26rYm/s1uDuEcpV3ljmaHiNSg="
   [mod."github.com/bodgit/plumbing"]
     version = "v1.3.0"
     hash = "sha256-nmLdJAB2sWpwHb2lFrYTcMR4yusMM1U629Pm2K9hfm0="
   [mod."github.com/bodgit/sevenzip"]
-    version = "v1.6.0"
-    hash = "sha256-E2jCJXM9KJYsYt/tbcrXG91ZUeCcwjiO8ZE1bpSsb1c="
+    version = "v1.6.1"
+    hash = "sha256-2kT6kZsKnRBf20KkMCjtiu7IoOXxDjk+u9kYyrziaWA="
   [mod."github.com/bodgit/windows"]
     version = "v1.0.1"
     hash = "sha256-GSpAGboli54A5wDMpDEdZDYh55o1Zs8dZzFIf7hYdMY="
@@ -46,12 +46,6 @@ schema = 3
   [mod."github.com/fatih/color"]
     version = "v1.18.0"
     hash = "sha256-pP5y72FSbi4j/BjyVq/XbAOFjzNjMxZt2R/lFFxGWvY="
-  [mod."github.com/hashicorp/errwrap"]
-    version = "v1.1.0"
-    hash = "sha256-6lwuMQOfBq+McrViN3maJTIeh4f8jbEqvLy2c9FvvFw="
-  [mod."github.com/hashicorp/go-multierror"]
-    version = "v1.1.1"
-    hash = "sha256-ANzPEUJIZIlToxR89Mn7Db73d9LGI51ssy7eNnUgmlA="
   [mod."github.com/hashicorp/golang-lru/v2"]
     version = "v2.0.7"
     hash = "sha256-t1bcXLgrQNOYUVyYEZ0knxcXpsTk4IuJZDjKvyJX75g="
@@ -59,8 +53,8 @@ schema = 3
     version = "v6.6.8"
     hash = "sha256-wES8igoYJjRYEk7H/err0o3owGrosz++GTvma8YWMbM="
   [mod."github.com/klauspost/compress"]
-    version = "v1.17.11"
-    hash = "sha256-LFSIWy0C4VbiuPve0eKHr7Q7s4XtaGzsZ3qpO+6bEgc="
+    version = "v1.18.0"
+    hash = "sha256-jc5pMU/HCBFOShMcngVwNMhz9wolxjOb579868LtOuk="
   [mod."github.com/klauspost/pgzip"]
     version = "v1.2.6"
     hash = "sha256-qA1hjnVW/tqxY48JIWQVulwEwY7fwyvnasymZk3mScg="
@@ -74,17 +68,17 @@ schema = 3
     version = "v0.0.16"
     hash = "sha256-NC+ntvwIpqDNmXb7aixcg09il80ygq6JAnW0Gb5b/DQ="
   [mod."github.com/mholt/archives"]
-    version = "v0.1.3"
-    hash = "sha256-pv8GIAS+hXVMCpn9Z2uWa5NrmjuA+JIikyvh4o2H7So="
+    version = "v0.1.4"
+    hash = "sha256-S7aXxuVuRGA1GMSJZi0bJExX4cFMIfcmjAwef+U8n+U="
   [mod."github.com/mikelolasagasti/xz"]
     version = "v1.0.1"
     hash = "sha256-wlsKB1zTo4HE45+YQuma9oZPnlmyrybA+DC+Z3RlBeI="
   [mod."github.com/minio/minlz"]
-    version = "v1.0.0"
-    hash = "sha256-7Q2SjEu7dJWzYAeKU8lnFhWY/t6cZMECXoGwGAqBPF0="
+    version = "v1.0.1"
+    hash = "sha256-dovSuYFYdBiivLCsU+F8Ogm2n86sesLWXMmBFo4gGw0="
   [mod."github.com/nwaples/rardecode/v2"]
-    version = "v2.1.0"
-    hash = "sha256-4sZp1xA1KLT2CGOg0RsprdvJmKco8bFVRGIfgtkLxLw="
+    version = "v2.1.1"
+    hash = "sha256-fJnCAcg/fv53dIMmhXWVs/V8IARS/HXNduTYMZZ+Q4c="
   [mod."github.com/nwidger/jsoncolor"]
     version = "v0.3.2"
     hash = "sha256-ibwPUPCLaBHKRYo93eaPlqlRFB2MW8f/XlImBkg2q2c="
@@ -98,8 +92,11 @@ schema = 3
     version = "v1.9.3"
     hash = "sha256-EnxsWdEUPYid+aZ9H4/iMTs1XMvCLbXZRDyvj89Ebms="
   [mod."github.com/sorairolake/lzip-go"]
-    version = "v0.3.5"
-    hash = "sha256-2zvduBHMt9Jhg1VWAIHg9VV+lzxw3x/N9hGBfn5SENE="
+    version = "v0.3.8"
+    hash = "sha256-C43PjPyDLqiH9rb+TS6PNGaMSIuyDLezMh9OXDSl6o8="
+  [mod."github.com/spf13/afero"]
+    version = "v1.15.0"
+    hash = "sha256-LhcezbOqfuBzacytbqck0hNUxi6NbWNhifUc5/9uHQ8="
   [mod."github.com/ulikunitz/xz"]
     version = "v0.5.15"
     hash = "sha256-L5KYLue5U14bxUuNyhZ6lIjbda6eCQsx1V6gToqfRdk="
@@ -113,5 +110,5 @@ schema = 3
     version = "v0.35.0"
     hash = "sha256-z3DqFKX0MJv7eloHlMwL96m5tmTFyGL1cD5Zh2ZQJpE="
   [mod."golang.org/x/text"]
-    version = "v0.22.0"
-    hash = "sha256-kUwLNFk9K/YuWmO5/u2IshrmhT2CCuk+mAShSlTTeZo="
+    version = "v0.29.0"
+    hash = "sha256-2cWBtJje+Yc+AnSgCANqBlIwnOMZEGkpQ2cFI45VfLI="
