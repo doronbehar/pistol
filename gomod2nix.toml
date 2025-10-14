@@ -71,8 +71,8 @@ schema = 3
     version = "v0.0.19"
     hash = "sha256-GpnbKplhX410Q/eIdknvWbYZgdav1keN+7wNUeOSMHE="
   [mod."github.com/mholt/archives"]
-    version = "v0.1.4"
-    hash = "sha256-S7aXxuVuRGA1GMSJZi0bJExX4cFMIfcmjAwef+U8n+U="
+    version = "v0.1.5"
+    hash = "sha256-WCIHFfBViib0x0bw9a7FcQCu7LTrtnny67NbA8YuOa4="
   [mod."github.com/mikelolasagasti/xz"]
     version = "v1.0.1"
     hash = "sha256-wlsKB1zTo4HE45+YQuma9oZPnlmyrybA+DC+Z3RlBeI="
@@ -80,8 +80,8 @@ schema = 3
     version = "v1.0.1"
     hash = "sha256-dovSuYFYdBiivLCsU+F8Ogm2n86sesLWXMmBFo4gGw0="
   [mod."github.com/nwaples/rardecode/v2"]
-    version = "v2.2.0"
-    hash = "sha256-so72UXNqM9w/CHau9M9evidHMeQPWAMdjVhEhXCGGXQ="
+    version = "v2.2.1"
+    hash = "sha256-GDLDrV63wvBWbpKytdqT4P/vsjlgT6Dt6lAQL4OhiwA="
   [mod."github.com/nwidger/jsoncolor"]
     version = "v0.3.2"
     hash = "sha256-ibwPUPCLaBHKRYo93eaPlqlRFB2MW8f/XlImBkg2q2c="
