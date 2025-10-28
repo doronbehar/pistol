@@ -31,9 +31,12 @@ schema = 3
   [mod."github.com/bodgit/windows"]
     version = "v1.0.1"
     hash = "sha256-GSpAGboli54A5wDMpDEdZDYh55o1Zs8dZzFIf7hYdMY="
+  [mod."github.com/clipperhouse/stringish"]
+    version = "v0.1.1"
+    hash = "sha256-Mp8M1CRbwr6dcJ4BD9tXD5I78ZgCFEm0GDxJv0GYReg="
   [mod."github.com/clipperhouse/uax29/v2"]
-    version = "v2.2.0"
-    hash = "sha256-BtyMi0Ul1CGY8miZDbsUWT9iW81UAn7CH/vAR4/S5vE="
+    version = "v2.3.0"
+    hash = "sha256-dLL70mEOxrmYVoQjy2K7QvZiahAlJKOcFDz2mW/R/Do="
   [mod."github.com/dlclark/regexp2"]
     version = "v1.11.5"
     hash = "sha256-jN5+2ED+YbIoPIuyJ4Ou5pqJb2w1uNKzp5yTjKY6rEQ="
@@ -53,11 +56,11 @@ schema = 3
     version = "v2.0.7"
     hash = "sha256-t1bcXLgrQNOYUVyYEZ0knxcXpsTk4IuJZDjKvyJX75g="
   [mod."github.com/jedib0t/go-pretty/v6"]
-    version = "v6.6.8"
-    hash = "sha256-wES8igoYJjRYEk7H/err0o3owGrosz++GTvma8YWMbM="
+    version = "v6.6.9"
+    hash = "sha256-HOcafsWTp3xCCBBFKyIGTzVMONj4Vo0zaQinKufzOK0="
   [mod."github.com/klauspost/compress"]
-    version = "v1.18.0"
-    hash = "sha256-jc5pMU/HCBFOShMcngVwNMhz9wolxjOb579868LtOuk="
+    version = "v1.18.1"
+    hash = "sha256-nkL7v2/C66brSfYRPN8FXLtUXN2I7VZ+Obvyc6be+GA="
   [mod."github.com/klauspost/pgzip"]
     version = "v1.2.6"
     hash = "sha256-qA1hjnVW/tqxY48JIWQVulwEwY7fwyvnasymZk3mScg="
