@@ -362,7 +362,7 @@ page].
 Pistol is pretty dumb when it parses your config, it splits all line by
 spaces, meaning that e.g:
 
-[source,config]
+[source,txt]
 ----
 application/json jq '.' %pistol-filename%
 ----
@@ -380,7 +380,7 @@ Indicating that `jq` got a literal `'.'`. When you run in your shell
 stripping the quotes around `.`. However, Pistol is not smarter then
 your shell because if you’d try for example:
 
-[source,config]
+[source,txt]
 ----
 application/json jq '.[] | .' %pistol-filename%
 ----
@@ -396,7 +396,7 @@ That’s because Pistol doesn't consider your quotes as interesting
 instructions, it just splits words by spaces. Hence, to overcome this
 disability, you can use:
 
-[source,config]
+[source,txt]
 ----
 application/json sh: jq '.' %pistol-filename%
 ----
@@ -412,7 +412,7 @@ to make sure single quotes are escaped or not used at all inside
 
 More over, with `sh:` you can use shell pipes:
 
-[source,config]
+[source,txt]
 ----
 fpath .*.md$ sh: bat --paging=never --color=always %pistol-filename% | head -8
 ----
