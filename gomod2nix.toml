@@ -56,8 +56,8 @@ schema = 3
     version = "v2.0.7"
     hash = "sha256-t1bcXLgrQNOYUVyYEZ0knxcXpsTk4IuJZDjKvyJX75g="
   [mod."github.com/jedib0t/go-pretty/v6"]
-    version = "v6.7.0"
-    hash = "sha256-+5oTfHGaSiO0OR0wQT20jP7urlcKEvp+OV+Eq+XymQI="
+    version = "v6.7.1"
+    hash = "sha256-7uumjCoN0yZm1EzwFZes7R5YmoDpp1kOGF8twKbMrq4="
   [mod."github.com/klauspost/compress"]
     version = "v1.18.1"
     hash = "sha256-nkL7v2/C66brSfYRPN8FXLtUXN2I7VZ+Obvyc6be+GA="
@@ -107,8 +107,8 @@ schema = 3
     version = "v0.0.0-20230225012048-214862532bf5"
     hash = "sha256-8y7krSESdxZfxTzo16EDqmF8USRzGmLPYr3iKuVYzzE="
   [mod."golang.org/x/sys"]
-    version = "v0.37.0"
-    hash = "sha256-5aT0xP02sW1o9sfJHtWoGGNVYDdwb9FyiX/n6RAlzPo="
+    version = "v0.38.0"
+    hash = "sha256-1+i5EaG3JwH3KMtefzJLG5R6jbOeJM4GK3/LHBVnSy0="
   [mod."golang.org/x/term"]
     version = "v0.36.0"
     hash = "sha256-5YLOE1v+5zEXG62rGrJKXyuDM/ylDnJQW/hLwbMLrY8="
