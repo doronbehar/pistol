@@ -110,8 +110,8 @@ schema = 3
     version = "v0.38.0"
     hash = "sha256-1+i5EaG3JwH3KMtefzJLG5R6jbOeJM4GK3/LHBVnSy0="
   [mod."golang.org/x/term"]
-    version = "v0.36.0"
-    hash = "sha256-5YLOE1v+5zEXG62rGrJKXyuDM/ylDnJQW/hLwbMLrY8="
+    version = "v0.37.0"
+    hash = "sha256-w7OZlNTd5sAhnDxrl9lKpKc1U/s2+MyZnmQPllJopMQ="
   [mod."golang.org/x/text"]
-    version = "v0.30.0"
-    hash = "sha256-VPT1Y2zzgdk+Q3Gx8hdwKdxbVh0/Zn/HwDpILCW3ZNA="
+    version = "v0.31.0"
+    hash = "sha256-AT46RrSmV6+/d5FDhs9fPwYzmQ7WSo+YL9tPfhREwLw="
