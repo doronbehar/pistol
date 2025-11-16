@@ -11,7 +11,7 @@ require (
 	github.com/alexflint/go-arg v1.6.0
 	github.com/doronbehar/magicmime v0.1.1-0.20211127135329-3de4ff29dc49
 	github.com/dustin/go-humanize v1.0.1
-	github.com/jedib0t/go-pretty/v6 v6.7.1
+	github.com/jedib0t/go-pretty/v6 v6.7.2
 	github.com/mholt/archives v0.1.5
 	github.com/nwidger/jsoncolor v0.3.2
 	github.com/sirupsen/logrus v1.9.3
