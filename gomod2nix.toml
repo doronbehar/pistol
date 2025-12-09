@@ -59,8 +59,8 @@ schema = 3
     version = "v6.7.5"
     hash = "sha256-zJgONxTWU5jboSyRCGDkKIdU6P0ox5+EEfotmA08MsE="
   [mod."github.com/klauspost/compress"]
-    version = "v1.18.1"
-    hash = "sha256-nkL7v2/C66brSfYRPN8FXLtUXN2I7VZ+Obvyc6be+GA="
+    version = "v1.18.2"
+    hash = "sha256-mRa+6qEi5joqQao13ZFogmq67rOQzHCVbCCjKA+HKEc="
   [mod."github.com/klauspost/pgzip"]
     version = "v1.2.6"
     hash = "sha256-qA1hjnVW/tqxY48JIWQVulwEwY7fwyvnasymZk3mScg="
@@ -83,8 +83,8 @@ schema = 3
     version = "v1.0.1"
     hash = "sha256-dovSuYFYdBiivLCsU+F8Ogm2n86sesLWXMmBFo4gGw0="
   [mod."github.com/nwaples/rardecode/v2"]
-    version = "v2.2.1"
-    hash = "sha256-GDLDrV63wvBWbpKytdqT4P/vsjlgT6Dt6lAQL4OhiwA="
+    version = "v2.2.2"
+    hash = "sha256-6PC/z/iDiuAq/UcA/EI0gV3gZiRBhoge9NKIU4hiiMQ="
   [mod."github.com/nwidger/jsoncolor"]
     version = "v0.3.2"
     hash = "sha256-ibwPUPCLaBHKRYo93eaPlqlRFB2MW8f/XlImBkg2q2c="
@@ -107,11 +107,11 @@ schema = 3
     version = "v0.0.0-20230225012048-214862532bf5"
     hash = "sha256-8y7krSESdxZfxTzo16EDqmF8USRzGmLPYr3iKuVYzzE="
   [mod."golang.org/x/sys"]
-    version = "v0.38.0"
-    hash = "sha256-1+i5EaG3JwH3KMtefzJLG5R6jbOeJM4GK3/LHBVnSy0="
+    version = "v0.39.0"
+    hash = "sha256-dxTBu/JAWUkPbjFIXXRFdhQWyn+YyEpIC+tWqGo0Y6U="
   [mod."golang.org/x/term"]
-    version = "v0.37.0"
-    hash = "sha256-w7OZlNTd5sAhnDxrl9lKpKc1U/s2+MyZnmQPllJopMQ="
+    version = "v0.38.0"
+    hash = "sha256-46mX91XGJqii6SUESiU5mLVJDBOfKYCp+408m91hrMw="
   [mod."golang.org/x/text"]
-    version = "v0.31.0"
-    hash = "sha256-AT46RrSmV6+/d5FDhs9fPwYzmQ7WSo+YL9tPfhREwLw="
+    version = "v0.32.0"
+    hash = "sha256-9PXtWBKKY9rG4AgjSP4N+I1DhepXhy8SF/vWSIDIoWs="
