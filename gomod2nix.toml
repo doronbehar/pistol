@@ -14,8 +14,8 @@ schema = 3
     version = "v2.21.1"
     hash = "sha256-N6ske1LCEJy7MZS1L/0DEaWXnWlVqGaoU6oCwrM5teQ="
   [mod."github.com/alexflint/go-arg"]
-    version = "v1.6.0"
-    hash = "sha256-xLuVx2tlvfpSU5ivjderC8/Kxu7OTanJfAsenMnYYIg="
+    version = "v1.6.1"
+    hash = "sha256-JLZVsfVRRv1EBIL1UndkLNogGa4jy3LlI7O1zpraJHU="
   [mod."github.com/alexflint/go-scalar"]
     version = "v1.2.0"
     hash = "sha256-PivG79qqrPJ1CksNiNNlwC+xPCMMTQxtda3rwk/z6LA="
