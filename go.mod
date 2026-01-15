@@ -14,7 +14,7 @@ require (
 	github.com/jedib0t/go-pretty/v6 v6.7.8
 	github.com/mholt/archives v0.1.5
 	github.com/nwidger/jsoncolor v0.3.2
-	github.com/sirupsen/logrus v1.9.3
+	github.com/sirupsen/logrus v1.9.4
 	golang.org/x/term v0.39.0
 )
 
