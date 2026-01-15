@@ -92,8 +92,8 @@ schema = 3
     version = "v4.1.23"
     hash = "sha256-x2QFpVVZdBQVnurWYq4qtn0tFTp8BQtbEyTjfpEYDx4="
   [mod."github.com/sirupsen/logrus"]
-    version = "v1.9.3"
-    hash = "sha256-EnxsWdEUPYid+aZ9H4/iMTs1XMvCLbXZRDyvj89Ebms="
+    version = "v1.9.4"
+    hash = "sha256-ltRvmtM3XTCAFwY0IesfRqYIivyXPPuvkFjL4ARh1wg="
   [mod."github.com/sorairolake/lzip-go"]
     version = "v0.3.8"
     hash = "sha256-C43PjPyDLqiH9rb+TS6PNGaMSIuyDLezMh9OXDSl6o8="
@@ -104,8 +104,8 @@ schema = 3
     version = "v0.5.15"
     hash = "sha256-L5KYLue5U14bxUuNyhZ6lIjbda6eCQsx1V6gToqfRdk="
   [mod."go4.org"]
-    version = "v0.0.0-20230225012048-214862532bf5"
-    hash = "sha256-8y7krSESdxZfxTzo16EDqmF8USRzGmLPYr3iKuVYzzE="
+    version = "v0.0.0-20260112195520-a5071408f32f"
+    hash = "sha256-K2sBsO4B4NwY2Hd5Do/LikhpvbL2prHh7cmOSvnTLrM="
   [mod."golang.org/x/sys"]
     version = "v0.40.0"
     hash = "sha256-KDe+wMr7dfMFwKMJEljzk+f82pQWFFPoFHivjD7qJGg="
