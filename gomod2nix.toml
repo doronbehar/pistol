@@ -11,8 +11,8 @@ schema = 3
     version = "v0.5.3"
     hash = "sha256-bo6tBgHS+3sl6f4oWpmdFrZjfV6eA/3xAlysSW0bIEs="
   [mod."github.com/alecthomas/chroma/v2"]
-    version = "v2.22.0"
-    hash = "sha256-tKZJQtFpog/4RD/VQedJjmyxCJGn7UhNvp6i2lmHMN8="
+    version = "v2.23.0"
+    hash = "sha256-DX/p/jelrQD8TwXNFmHR1D5Pt/ZdGhuGbRUh1tjZoXM="
   [mod."github.com/alexflint/go-arg"]
     version = "v1.6.1"
     hash = "sha256-JLZVsfVRRv1EBIL1UndkLNogGa4jy3LlI7O1zpraJHU="
@@ -59,8 +59,8 @@ schema = 3
     version = "v6.7.8"
     hash = "sha256-ID+hqb1OXPCpWkhx43ElEw6Uei28LstXEozeep5VHkc="
   [mod."github.com/klauspost/compress"]
-    version = "v1.18.2"
-    hash = "sha256-mRa+6qEi5joqQao13ZFogmq67rOQzHCVbCCjKA+HKEc="
+    version = "v1.18.3"
+    hash = "sha256-rG6YIM3ePl2fIr26ornLxWH22jbvGuXr6T/PYdr4Ogw="
   [mod."github.com/klauspost/pgzip"]
     version = "v1.2.6"
     hash = "sha256-qA1hjnVW/tqxY48JIWQVulwEwY7fwyvnasymZk3mScg="
@@ -89,8 +89,8 @@ schema = 3
     version = "v0.3.2"
     hash = "sha256-ibwPUPCLaBHKRYo93eaPlqlRFB2MW8f/XlImBkg2q2c="
   [mod."github.com/pierrec/lz4/v4"]
-    version = "v4.1.23"
-    hash = "sha256-x2QFpVVZdBQVnurWYq4qtn0tFTp8BQtbEyTjfpEYDx4="
+    version = "v4.1.25"
+    hash = "sha256-rpGrxdd36HU2aFtYjLET24v9qmqexkhCGwfPGGRoId0="
   [mod."github.com/sirupsen/logrus"]
     version = "v1.9.4"
     hash = "sha256-ltRvmtM3XTCAFwY0IesfRqYIivyXPPuvkFjL4ARh1wg="
