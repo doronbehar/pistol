@@ -11,9 +11,7 @@
     flake = false;
   };
   inputs.gomod2nix = {
-    # Pinned due to https://github.com/nix-community/gomod2nix/pull/231
-    # breaking cross compilation.
-    url = "github:nix-community/gomod2nix/02e63a239d6eabd595db56852535992c898eba72";
+    url = "github:nix-community/gomod2nix";
     inputs.nixpkgs.follows = "nixpkgs";
     inputs.flake-utils.follows = "flake-utils";
   };
