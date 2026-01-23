@@ -11,8 +11,8 @@ schema = 3
     version = "v0.5.3"
     hash = "sha256-bo6tBgHS+3sl6f4oWpmdFrZjfV6eA/3xAlysSW0bIEs="
   [mod."github.com/alecthomas/chroma/v2"]
-    version = "v2.23.0"
-    hash = "sha256-DX/p/jelrQD8TwXNFmHR1D5Pt/ZdGhuGbRUh1tjZoXM="
+    version = "v2.23.1"
+    hash = "sha256-pDznsfPRcIw9BWmD+pwn7B5iJ7JHGnTRmia9skytQ3A="
   [mod."github.com/alexflint/go-arg"]
     version = "v1.6.1"
     hash = "sha256-JLZVsfVRRv1EBIL1UndkLNogGa4jy3LlI7O1zpraJHU="
@@ -35,8 +35,8 @@ schema = 3
     version = "v0.1.1"
     hash = "sha256-Mp8M1CRbwr6dcJ4BD9tXD5I78ZgCFEm0GDxJv0GYReg="
   [mod."github.com/clipperhouse/uax29/v2"]
-    version = "v2.3.0"
-    hash = "sha256-dLL70mEOxrmYVoQjy2K7QvZiahAlJKOcFDz2mW/R/Do="
+    version = "v2.3.1"
+    hash = "sha256-47WQNfmb5fj9oM5NA72/mNnBWl99NpChAHZ3LftLeKI="
   [mod."github.com/dlclark/regexp2"]
     version = "v1.11.5"
     hash = "sha256-jN5+2ED+YbIoPIuyJ4Ou5pqJb2w1uNKzp5yTjKY6rEQ="
