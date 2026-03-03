@@ -133,6 +133,9 @@ endif
 # Manpage
 pistol.1: README.adoc
 	asciidoctor -b manpage -d manpage README.adoc
+# README preview
+README.html: README.adoc
+	asciidoctor README.adoc
 
 manpage: pistol.1
 
