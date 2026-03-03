@@ -79,6 +79,9 @@
       pistol-static-linux-aarch64 = pkgs.pkgsCross.aarch64-multiplatform-musl.pkgsStatic.callPackage ./pkg.nix pkgArgs;
       pistol-static-linux-armv7l = pkgs.pkgsCross.armv7l-hf-multiplatform.pkgsStatic.callPackage ./pkg.nix pkgArgs;
       pistol-static-linux-arm = pkgs.pkgsCross.arm-embedded.pkgsStatic.callPackage ./pkg.nix pkgArgs;
+      asciidoctor = pkgs.asciidoctor-with-extensions.override {
+        withJava = false;
+      };
     in {
       devShell = pkgs.mkShell {
         nativeBuildInputs = [
@@ -87,6 +90,7 @@
           # For make check
           pkgs.elinks
           pkgs.gomod2nix
+          asciidoctor
         ];
         # Only useful if I need to play with static compilation out side of
         # Nix, mostly it is never used.
