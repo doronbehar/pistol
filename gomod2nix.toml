@@ -26,8 +26,8 @@ schema = 3
     hash = 'sha256-PivG79qqrPJ1CksNiNNlwC+xPCMMTQxtda3rwk/z6LA='
 
   [mod.'github.com/andybalholm/brotli']
-    version = 'v1.2.0'
-    hash = 'sha256-EwPR3o6o8dUzsAeHki26rYm/s1uDuEcpV3ljmaHiNSg='
+    version = 'v1.2.1'
+    hash = 'sha256-gLTptbERswhB3Ycw7FomtgvwTP4Lxou/hXebPQNtZD8='
 
   [mod.'github.com/bodgit/plumbing']
     version = 'v1.3.0'
@@ -62,20 +62,20 @@ schema = 3
     hash = 'sha256-yuvxYYngpfVkUg9yAmG99IUVmADTQA0tMbBXe0Fq0Mc='
 
   [mod.'github.com/fatih/color']
-    version = 'v1.18.0'
-    hash = 'sha256-pP5y72FSbi4j/BjyVq/XbAOFjzNjMxZt2R/lFFxGWvY='
+    version = 'v1.19.0'
+    hash = 'sha256-YgMm1nid8yigNLG6aHfuMbsvMI1UYVf/Rkg44pp/NTU='
 
   [mod.'github.com/hashicorp/golang-lru/v2']
     version = 'v2.0.7'
     hash = 'sha256-t1bcXLgrQNOYUVyYEZ0knxcXpsTk4IuJZDjKvyJX75g='
 
   [mod.'github.com/jedib0t/go-pretty/v6']
-    version = 'v6.7.8'
-    hash = 'sha256-ID+hqb1OXPCpWkhx43ElEw6Uei28LstXEozeep5VHkc='
+    version = 'v6.7.9'
+    hash = 'sha256-idaOyHkG485bO3F0f1S9KTNqZQlrVv0uV9XoLZsFUqs='
 
   [mod.'github.com/klauspost/compress']
-    version = 'v1.18.4'
-    hash = 'sha256-swwNE6xKz4ZAOUHPWFlHYiqFeZLRZuuKYhLQ34aYnAU='
+    version = 'v1.18.5'
+    hash = 'sha256-H9b5iFJf4XbEnkGQCjGQAJ3aYhVDiolKrDewTbhuzQo='
 
   [mod.'github.com/klauspost/pgzip']
     version = 'v1.2.6'
