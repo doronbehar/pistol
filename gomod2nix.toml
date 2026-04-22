@@ -46,8 +46,8 @@ schema = 3
     hash = 'sha256-GO3az7WiGcwU0OvmocwdfR5ohGRL8NbjscIaMyhAdxE='
 
   [mod.'github.com/dlclark/regexp2']
-    version = 'v1.11.5'
-    hash = 'sha256-jN5+2ED+YbIoPIuyJ4Ou5pqJb2w1uNKzp5yTjKY6rEQ='
+    version = 'v1.12.0'
+    hash = 'sha256-PVX2rDCkiG0vyA1CbDi3bzLeZ2T8hcqJv3pZ5YwGzMI='
 
   [mod.'github.com/doronbehar/magicmime']
     version = 'v0.1.1-0.20211127135329-3de4ff29dc49'
@@ -70,8 +70,8 @@ schema = 3
     hash = 'sha256-t1bcXLgrQNOYUVyYEZ0knxcXpsTk4IuJZDjKvyJX75g='
 
   [mod.'github.com/jedib0t/go-pretty/v6']
-    version = 'v6.7.9'
-    hash = 'sha256-idaOyHkG485bO3F0f1S9KTNqZQlrVv0uV9XoLZsFUqs='
+    version = 'v6.7.10'
+    hash = 'sha256-pnYoM6fyBBQr1542ncNF0ezGTPucW9IPK06mQvFsRoQ='
 
   [mod.'github.com/klauspost/compress']
     version = 'v1.18.5'
