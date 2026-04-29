@@ -14,8 +14,8 @@ schema = 3
     hash = 'sha256-bo6tBgHS+3sl6f4oWpmdFrZjfV6eA/3xAlysSW0bIEs='
 
   [mod.'github.com/alecthomas/chroma/v2']
-    version = 'v2.23.1'
-    hash = 'sha256-pDznsfPRcIw9BWmD+pwn7B5iJ7JHGnTRmia9skytQ3A='
+    version = 'v2.24.0'
+    hash = 'sha256-DufsljWRKireFuLFcnPozuF0N3UoRYGlEfNFMD+z0ng='
 
   [mod.'github.com/alexflint/go-arg']
     version = 'v1.6.1'
@@ -34,8 +34,8 @@ schema = 3
     hash = 'sha256-nmLdJAB2sWpwHb2lFrYTcMR4yusMM1U629Pm2K9hfm0='
 
   [mod.'github.com/bodgit/sevenzip']
-    version = 'v1.6.1'
-    hash = 'sha256-2kT6kZsKnRBf20KkMCjtiu7IoOXxDjk+u9kYyrziaWA='
+    version = 'v1.6.2'
+    hash = 'sha256-i3rZ7vYO4pY6+GCta/MHYvHJWz46ncxiSmxzR1dqcPY='
 
   [mod.'github.com/bodgit/windows']
     version = 'v1.0.1'
@@ -86,8 +86,8 @@ schema = 3
     hash = 'sha256-JC60PjKj7MvhZmUHTZ9p372FV72I9Mxvli3fivTbxuA='
 
   [mod.'github.com/mattn/go-isatty']
-    version = 'v0.0.21'
-    hash = 'sha256-B70ZCZYoajKE8xxKPh9sgyVz2URKi0EyaOX8XFDqWKw='
+    version = 'v0.0.22'
+    hash = 'sha256-6O/0jc33pKUzlzUGpH8Ekk54XgJvx6Qe7kJtbcNJAV4='
 
   [mod.'github.com/mattn/go-runewidth']
     version = 'v0.0.23'
@@ -102,8 +102,8 @@ schema = 3
     hash = 'sha256-wlsKB1zTo4HE45+YQuma9oZPnlmyrybA+DC+Z3RlBeI='
 
   [mod.'github.com/minio/minlz']
-    version = 'v1.1.0'
-    hash = 'sha256-1THyH+uGnSIAme7PaITtxlAzzzeKhzDNQ9DPXatQF6o='
+    version = 'v1.1.1'
+    hash = 'sha256-X39IcjMek9+u4QiNU3QVb64GYe9NcS1vxXfsZV7W1TU='
 
   [mod.'github.com/nwaples/rardecode/v2']
     version = 'v2.2.2'
