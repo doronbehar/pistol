@@ -14,7 +14,7 @@ schema = 3
     hash = 'sha256-bo6tBgHS+3sl6f4oWpmdFrZjfV6eA/3xAlysSW0bIEs='
 
   [mod.'github.com/alecthomas/chroma/v2']
-    version = 'v2.24.0'
+    version = 'v2.24.1'
     hash = 'sha256-DufsljWRKireFuLFcnPozuF0N3UoRYGlEfNFMD+z0ng='
 
   [mod.'github.com/alexflint/go-arg']
