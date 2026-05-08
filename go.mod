@@ -13,7 +13,7 @@ require (
 	github.com/mholt/archives v0.1.5
 	github.com/nwidger/jsoncolor v0.3.2
 	github.com/sirupsen/logrus v1.9.4
-	golang.org/x/term v0.42.0
+	golang.org/x/term v0.43.0
 )
 
 require (
@@ -41,6 +41,6 @@ require (
 	github.com/spf13/afero v1.15.0 // indirect
 	github.com/ulikunitz/xz v0.5.15 // indirect
 	go4.org v0.0.0-20260112195520-a5071408f32f // indirect
-	golang.org/x/sys v0.43.0 // indirect
+	golang.org/x/sys v0.44.0 // indirect
 	golang.org/x/text v0.36.0 // indirect
 )
