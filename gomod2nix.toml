@@ -14,8 +14,8 @@ schema = 3
     hash = 'sha256-bo6tBgHS+3sl6f4oWpmdFrZjfV6eA/3xAlysSW0bIEs='
 
   [mod.'github.com/alecthomas/chroma/v2']
-    version = 'v2.24.1'
-    hash = 'sha256-DufsljWRKireFuLFcnPozuF0N3UoRYGlEfNFMD+z0ng='
+    version = 'v2.26.0'
+    hash = 'sha256-iY5vB9N5lNQLubD/v0j5PsNo1890Un7b/HjhQBZBSkc='
 
   [mod.'github.com/alexflint/go-arg']
     version = 'v1.6.1'
@@ -45,9 +45,9 @@ schema = 3
     version = 'v2.7.0'
     hash = 'sha256-GO3az7WiGcwU0OvmocwdfR5ohGRL8NbjscIaMyhAdxE='
 
-  [mod.'github.com/dlclark/regexp2']
-    version = 'v1.12.0'
-    hash = 'sha256-PVX2rDCkiG0vyA1CbDi3bzLeZ2T8hcqJv3pZ5YwGzMI='
+  [mod.'github.com/dlclark/regexp2/v2']
+    version = 'v2.1.0'
+    hash = 'sha256-AUF+0kL+e2txpBo+a/woYnCd44En/2giuDgpH3Gq3sw='
 
   [mod.'github.com/doronbehar/magicmime']
     version = 'v0.1.1-0.20211127135329-3de4ff29dc49'
