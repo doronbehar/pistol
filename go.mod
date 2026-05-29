@@ -5,7 +5,7 @@ go 1.26
 require (
 	al.essio.dev/pkg/shellescape v1.6.0
 	github.com/adrg/xdg v0.5.3
-	github.com/alecthomas/chroma/v2 v2.26.0
+	github.com/alecthomas/chroma/v2 v2.26.1
 	github.com/alexflint/go-arg v1.6.1
 	github.com/doronbehar/magicmime v0.1.1-0.20211127135329-3de4ff29dc49
 	github.com/dustin/go-humanize v1.0.1
@@ -24,7 +24,7 @@ require (
 	github.com/bodgit/sevenzip v1.6.2 // indirect
 	github.com/bodgit/windows v1.0.1 // indirect
 	github.com/clipperhouse/uax29/v2 v2.7.0 // indirect
-	github.com/dlclark/regexp2/v2 v2.1.0 // indirect
+	github.com/dlclark/regexp2/v2 v2.1.1 // indirect
 	github.com/dsnet/compress v0.0.2-0.20230904184137-39efe44ab707 // indirect
 	github.com/fatih/color v1.19.0 // indirect
 	github.com/hashicorp/golang-lru/v2 v2.0.7 // indirect
