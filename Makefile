@@ -33,7 +33,9 @@ COLOUR_WHITE='\033[1;37m'
 COLOUR_RESET='\033[0m'
 
 # https://stackoverflow.com/a/5810179/4935114
-ifeq (, $(shell which jq)$(shell which nix))
+ifeq (, $(shell which jq 2>/dev/null))
+$(warning "No jq and/or nix executables in PATH, cannot get info from flake.nix")
+else ifeq (, $(shell which nix 2>/dev/null))
 $(warning "No jq and/or nix executables in PATH, cannot get info from flake.nix")
 else
 # Interestingly, builtins.currentSystem is undefined for `nix repl` and a few
