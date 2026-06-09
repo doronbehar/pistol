@@ -46,8 +46,8 @@ schema = 3
     hash = 'sha256-GO3az7WiGcwU0OvmocwdfR5ohGRL8NbjscIaMyhAdxE='
 
   [mod.'github.com/dlclark/regexp2/v2']
-    version = 'v2.1.1'
-    hash = 'sha256-Bdz5dmR6mnABpsBDHH3S6HVXnZ3cmTOKPpklgb/U7BE='
+    version = 'v2.2.1'
+    hash = 'sha256-kd7GO+bExbWUNCZXtX/zwG4pn2ZYEYuEfIR2KfTHqMQ='
 
   [mod.'github.com/doronbehar/magicmime']
     version = 'v0.1.1-0.20211127135329-3de4ff29dc49'
@@ -142,13 +142,13 @@ schema = 3
     hash = 'sha256-K2sBsO4B4NwY2Hd5Do/LikhpvbL2prHh7cmOSvnTLrM='
 
   [mod.'golang.org/x/sys']
-    version = 'v0.45.0'
-    hash = 'sha256-hkBoNazrDA67ER6sWhb+EKxx9nJ24+nz3zGy+zT5Hvw='
+    version = 'v0.46.0'
+    hash = 'sha256-NzRXMSEk6upeudJvUEPVnw6clJ3d8UdC/vdfANWAc8g='
 
   [mod.'golang.org/x/term']
-    version = 'v0.43.0'
-    hash = 'sha256-gFV1oGgs/vpRamvDWmu93voN57iyZMk/hh+oL8L9VrQ='
+    version = 'v0.44.0'
+    hash = 'sha256-nzbvOgvGRbx1qpq1rbk7b6zNsNeNj8mOGoyZLtnzq3w='
 
   [mod.'golang.org/x/text']
-    version = 'v0.37.0'
-    hash = 'sha256-8XDOnlPIybcDRy89fkjG5VqtIt5Ku+LmaqYhgKl7i1E='
+    version = 'v0.38.0'
+    hash = 'sha256-PzREcn7yzTAJ0WBvyYL/2/r+tfoeKTY/E5HVXi/CJsU='
