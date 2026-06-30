@@ -20,98 +20,102 @@
     inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self
-    , nixpkgs
-    , flake-utils
-    , flake-compat
-    , gitignore
-    , gomod2nix
-  }:
-  flake-utils.lib.eachDefaultSystem (system:
-    let
-      pkgs = import nixpkgs {
-        inherit system;
-        overlays = [
-          gomod2nix.overlays.default
-        ];
-      };
-      inherit (gitignore.lib) gitignoreFilterWith;
-      # https://discourse.nixos.org/t/passing-git-commit-hash-and-tag-to-build-with-flakes/11355/2
-      version_rev = if (self ? rev) then (builtins.substring 0 8 self.rev) else "dirty";
-      version = "${pkgs.lib.fileContents ./VERSION}-${version_rev}-flake";
-      # Used also in the devShell
-      MAGIC_DB = "${pkgs.pkgsStatic.file}/share/misc/magic.mgc";
-      src = pkgs.lib.cleanSourceWith {
-        filter = gitignoreFilterWith {
-          basePath = ./.;
-          extraRules = ''
-            ### Nix related
-            flake*
-            *.nix
-            .envrc
-            .direnv
-            ### Makefile related files
-            ./Makefile
-            ./newVersionFile
-            ./newTag
-            ./releaseAssets
-            ./releaseAssetsUploaded
-            # built by go build or simply with `make`
-            ./pistol
-            ./pistol.1
-            ./README.html
-            # Evaluated here in this flake.nix but not used for the build itself
-            VERSION
-            ### CI files
-            renovate.json5
-            ### Git files
-            .gitignore
-          '';
+  outputs =
+    {
+      self,
+      nixpkgs,
+      flake-utils,
+      flake-compat,
+      gitignore,
+      gomod2nix,
+    }:
+    flake-utils.lib.eachDefaultSystem (
+      system:
+      let
+        pkgs = import nixpkgs {
+          inherit system;
+          overlays = [
+            gomod2nix.overlays.default
+          ];
         };
-        src = ./.;
-      };
-      pkgArgs = {
-        inherit version src;
-      };
-      pistol = pkgs.callPackage ./pkg.nix pkgArgs;
-      pistol-static-native = pkgs.pkgsStatic.callPackage ./pkg.nix pkgArgs;
-      pistol-static-linux-x86_64 = pkgs.pkgsCross.gnu64.pkgsStatic.callPackage ./pkg.nix pkgArgs;
-      pistol-static-linux-aarch64 = pkgs.pkgsCross.aarch64-multiplatform-musl.pkgsStatic.callPackage ./pkg.nix pkgArgs;
-      pistol-static-linux-armv7l = pkgs.pkgsCross.armv7l-hf-multiplatform.pkgsStatic.callPackage ./pkg.nix pkgArgs;
-      pistol-static-linux-arm = pkgs.pkgsCross.arm-embedded.pkgsStatic.callPackage ./pkg.nix pkgArgs;
-      asciidoctor = pkgs.asciidoctor-with-extensions.override {
-        withJava = false;
-      };
-    in {
-      devShell = pkgs.mkShell {
-        nativeBuildInputs = [
-          pkgs.go
-          pkgs.file
-          # For make check
-          pkgs.elinks
-          pkgs.gomod2nix
-          asciidoctor
-        ];
-        # Only useful if I need to play with static compilation out side of
-        # Nix, mostly it is never used.
-        inherit MAGIC_DB;
-      };
-      packages = {
-        inherit
-          pistol
-          pistol-static-native
-          pistol-static-linux-x86_64
-          pistol-static-linux-aarch64
-          pistol-static-linux-armv7l
-          #pistol-static-linux-arm # Currently broken
-        ;
-      };
-      defaultPackage = pistol;
-      apps.pistol = {
-        type = "app";
-        program = "${pistol}/bin/pistol";
-      };
-      defaultApp = self.apps.${system}.pistol;
-    }
-  );
+        inherit (gitignore.lib) gitignoreFilterWith;
+        # https://discourse.nixos.org/t/passing-git-commit-hash-and-tag-to-build-with-flakes/11355/2
+        version_rev = if (self ? rev) then (builtins.substring 0 8 self.rev) else "dirty";
+        version = "${pkgs.lib.fileContents ./VERSION}-${version_rev}-flake";
+        # Used also in the devShell
+        MAGIC_DB = "${pkgs.pkgsStatic.file}/share/misc/magic.mgc";
+        src = pkgs.lib.cleanSourceWith {
+          filter = gitignoreFilterWith {
+            basePath = ./.;
+            extraRules = ''
+              ### Nix related
+              flake*
+              *.nix
+              .envrc
+              .direnv
+              ### Makefile related files
+              ./Makefile
+              ./newVersionFile
+              ./newTag
+              ./releaseAssets
+              ./releaseAssetsUploaded
+              # built by go build or simply with `make`
+              ./pistol
+              ./pistol.1
+              ./README.html
+              # Evaluated here in this flake.nix but not used for the build itself
+              VERSION
+              ### CI files
+              renovate.json5
+              ### Git files
+              .gitignore
+            '';
+          };
+          src = ./.;
+        };
+        pkgArgs = {
+          inherit version src;
+        };
+        pistol = pkgs.callPackage ./pkg.nix pkgArgs;
+        pistol-static-native = pkgs.pkgsStatic.callPackage ./pkg.nix pkgArgs;
+        pistol-static-linux-x86_64 = pkgs.pkgsCross.gnu64.pkgsStatic.callPackage ./pkg.nix pkgArgs;
+        pistol-static-linux-aarch64 = pkgs.pkgsCross.aarch64-multiplatform-musl.pkgsStatic.callPackage ./pkg.nix pkgArgs;
+        pistol-static-linux-armv7l = pkgs.pkgsCross.armv7l-hf-multiplatform.pkgsStatic.callPackage ./pkg.nix pkgArgs;
+        pistol-static-linux-arm = pkgs.pkgsCross.arm-embedded.pkgsStatic.callPackage ./pkg.nix pkgArgs;
+        asciidoctor = pkgs.asciidoctor-with-extensions.override {
+          withJava = false;
+        };
+      in
+      {
+        devShell = pkgs.mkShell {
+          nativeBuildInputs = [
+            pkgs.go
+            pkgs.file
+            # For make check
+            pkgs.elinks
+            pkgs.gomod2nix
+            asciidoctor
+          ];
+          # Only useful if I need to play with static compilation out side of
+          # Nix, mostly it is never used.
+          inherit MAGIC_DB;
+        };
+        packages = {
+          inherit
+            pistol
+            pistol-static-native
+            pistol-static-linux-x86_64
+            pistol-static-linux-aarch64
+            pistol-static-linux-armv7l
+            #pistol-static-linux-arm # Currently broken
+            ;
+        };
+        defaultPackage = pistol;
+        apps.pistol = {
+          type = "app";
+          program = "${pistol}/bin/pistol";
+        };
+        defaultApp = self.apps.${system}.pistol;
+      }
+    );
 }
