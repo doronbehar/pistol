@@ -26,8 +26,8 @@ schema = 3
     hash = 'sha256-PivG79qqrPJ1CksNiNNlwC+xPCMMTQxtda3rwk/z6LA='
 
   [mod.'github.com/andybalholm/brotli']
-    version = 'v1.2.1'
-    hash = 'sha256-gLTptbERswhB3Ycw7FomtgvwTP4Lxou/hXebPQNtZD8='
+    version = 'v1.2.2'
+    hash = 'sha256-XVnD/ruaOOYmt1Eipv/kIzNStI9fqOYc3hJHJ7ao9Yg='
 
   [mod.'github.com/bodgit/plumbing']
     version = 'v1.3.0'
@@ -70,8 +70,8 @@ schema = 3
     hash = 'sha256-t1bcXLgrQNOYUVyYEZ0knxcXpsTk4IuJZDjKvyJX75g='
 
   [mod.'github.com/jedib0t/go-pretty/v6']
-    version = 'v6.8.1'
-    hash = 'sha256-jPdfElca0qQIE1N1xzlUBjftgNpC4B5cIxj+Q2Qulv0='
+    version = 'v6.8.2'
+    hash = 'sha256-74A/hNeFz1DRl7j4qcY4MGTpc3hzEKnWfMjedD27fng='
 
   [mod.'github.com/klauspost/compress']
     version = 'v1.18.6'
