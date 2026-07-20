@@ -34,8 +34,8 @@ schema = 3
     hash = 'sha256-nmLdJAB2sWpwHb2lFrYTcMR4yusMM1U629Pm2K9hfm0='
 
   [mod.'github.com/bodgit/sevenzip']
-    version = 'v1.6.4'
-    hash = 'sha256-JoxeirpIPod08n2oil3vk3hj23sitSM9hQTUYeCgox0='
+    version = 'v1.6.5'
+    hash = 'sha256-P4S/rDtIewel039jBrFcLrCoh3uASMJHm0QgBgvQOvw='
 
   [mod.'github.com/bodgit/windows']
     version = 'v1.0.1'
@@ -46,8 +46,8 @@ schema = 3
     hash = 'sha256-GO3az7WiGcwU0OvmocwdfR5ohGRL8NbjscIaMyhAdxE='
 
   [mod.'github.com/dlclark/regexp2/v2']
-    version = 'v2.2.2'
-    hash = 'sha256-FqxCqYtijRRlYrNmvL05k00TcZHx9y23pNwsDBH0XIc='
+    version = 'v2.5.2'
+    hash = 'sha256-DDAmlbWxWXHA39VF0aU9dhYdowGiw5/dKTrSl8kMEJ0='
 
   [mod.'github.com/doronbehar/magicmime']
     version = 'v0.1.1-0.20211127135329-3de4ff29dc49'
@@ -70,8 +70,8 @@ schema = 3
     hash = 'sha256-t1bcXLgrQNOYUVyYEZ0knxcXpsTk4IuJZDjKvyJX75g='
 
   [mod.'github.com/jedib0t/go-pretty/v6']
-    version = 'v6.8.2'
-    hash = 'sha256-74A/hNeFz1DRl7j4qcY4MGTpc3hzEKnWfMjedD27fng='
+    version = 'v6.8.3'
+    hash = 'sha256-DYPdlK01uIN2H2Eq9qTNvfAJ3ajjEt9wDVhTIKg+JEw='
 
   [mod.'github.com/klauspost/compress']
     version = 'v1.19.0'
@@ -86,8 +86,8 @@ schema = 3
     hash = 'sha256-hH+yMJHjboEDQbv399OEjfc50RgtO/edw0r2sJfxEJg='
 
   [mod.'github.com/mattn/go-isatty']
-    version = 'v0.0.22'
-    hash = 'sha256-6O/0jc33pKUzlzUGpH8Ekk54XgJvx6Qe7kJtbcNJAV4='
+    version = 'v0.0.23'
+    hash = 'sha256-CbvLefXb6HYNFEsPyLDGj5jhnYwXNNC4aOM2oJsGhnk='
 
   [mod.'github.com/mattn/go-runewidth']
     version = 'v0.0.24'
@@ -102,8 +102,8 @@ schema = 3
     hash = 'sha256-wlsKB1zTo4HE45+YQuma9oZPnlmyrybA+DC+Z3RlBeI='
 
   [mod.'github.com/minio/minlz']
-    version = 'v1.1.1'
-    hash = 'sha256-X39IcjMek9+u4QiNU3QVb64GYe9NcS1vxXfsZV7W1TU='
+    version = 'v1.2.0'
+    hash = 'sha256-/3RRrhQBmR7jgp0aQTg/xUNNS7uY1QQcptuECRFAg1w='
 
   [mod.'github.com/nwaples/rardecode/v2']
     version = 'v2.2.5'
