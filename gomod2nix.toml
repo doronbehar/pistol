@@ -90,8 +90,8 @@ schema = 3
     hash = 'sha256-pmq8KKIb2+qMF3E1cR2B7NAj5joF2tZduyXjIfIlkTk='
 
   [mod.'github.com/mattn/go-runewidth']
-    version = 'v0.0.27'
-    hash = 'sha256-TQd0ek+jjvxgN9YA6N/ctOyrADIAg9bBcClJCDltIWc='
+    version = 'v0.0.28'
+    hash = 'sha256-8Bwg2XAEB7MJs5bxEtWMtkycx80i2S/yI8fj77/YfmM='
 
   [mod.'github.com/mholt/archives']
     version = 'v0.1.5'
@@ -114,12 +114,12 @@ schema = 3
     hash = 'sha256-ibwPUPCLaBHKRYo93eaPlqlRFB2MW8f/XlImBkg2q2c='
 
   [mod.'github.com/pierrec/lz4/v4']
-    version = 'v4.1.28'
-    hash = 'sha256-LW93xi47P8vkHHRXuiB+4LYxX0Q+jA1DwXK0oKopXLA='
+    version = 'v4.1.29'
+    hash = 'sha256-1GhsFCeDdcq+FC0a/Jan4A48WAPJ/w5zZA0ysZA/08M='
 
   [mod.'github.com/sirupsen/logrus']
-    version = 'v1.10.0'
-    hash = 'sha256-9lAOEz1AMESzKIrArVG7oLXcBgCHY08o1Xo10bHDHGg='
+    version = 'v1.10.1'
+    hash = 'sha256-9/OQwxkPMHsCXF1tIhyLKLpwDOIk/5Nm+xmcbT0K8u4='
 
   [mod.'github.com/sorairolake/lzip-go']
     version = 'v0.3.8'
