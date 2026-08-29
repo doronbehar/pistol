@@ -26,8 +26,8 @@ schema = 3
     hash = 'sha256-PivG79qqrPJ1CksNiNNlwC+xPCMMTQxtda3rwk/z6LA='
 
   [mod.'github.com/andybalholm/brotli']
-    version = 'v1.2.2'
-    hash = 'sha256-XVnD/ruaOOYmt1Eipv/kIzNStI9fqOYc3hJHJ7ao9Yg='
+    version = 'v1.2.3'
+    hash = 'sha256-KGEXtlCC4FQrsEKd3n99Cf0DpJ3ls0amnlVboSk/5Yo='
 
   [mod.'github.com/bodgit/plumbing']
     version = 'v1.3.0'
@@ -106,8 +106,8 @@ schema = 3
     hash = 'sha256-/3RRrhQBmR7jgp0aQTg/xUNNS7uY1QQcptuECRFAg1w='
 
   [mod.'github.com/nwaples/rardecode/v2']
-    version = 'v2.3.0'
-    hash = 'sha256-uhkIRg8EM8G/zjHG8LOD+CmL1ixnCRdOJFGIR0N/kdY='
+    version = 'v2.4.1'
+    hash = 'sha256-Qq34s5JG/quXop9PmexrO9inoPnLM2FzI8I8Gp3eClg='
 
   [mod.'github.com/nwidger/jsoncolor']
     version = 'v0.3.2'
@@ -118,8 +118,8 @@ schema = 3
     hash = 'sha256-1GhsFCeDdcq+FC0a/Jan4A48WAPJ/w5zZA0ysZA/08M='
 
   [mod.'github.com/sirupsen/logrus']
-    version = 'v1.10.1'
-    hash = 'sha256-9/OQwxkPMHsCXF1tIhyLKLpwDOIk/5Nm+xmcbT0K8u4='
+    version = 'v1.10.2'
+    hash = 'sha256-1BKin1NpY1kFawnHkY0FxQ152aeB82RRKIDWJLctZB4='
 
   [mod.'github.com/sorairolake/lzip-go']
     version = 'v0.3.8'
