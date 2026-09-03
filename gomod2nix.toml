@@ -2,8 +2,8 @@ schema = 3
 
 [mod]
   [mod.'al.essio.dev/pkg/shellescape']
-    version = 'v1.6.0'
-    hash = 'sha256-dra32NY6DuVXLr7SblL0kF0S6e/Tea5jayWEMaj7K3E='
+    version = 'v1.6.1'
+    hash = 'sha256-OdvVFol8L2WJO1Jj5U4sm9G6gn9q5FYEflGSOxkaG5I='
 
   [mod.'github.com/STARRY-S/zip']
     version = 'v0.2.3'
@@ -74,8 +74,8 @@ schema = 3
     hash = 'sha256-DYPdlK01uIN2H2Eq9qTNvfAJ3ajjEt9wDVhTIKg+JEw='
 
   [mod.'github.com/klauspost/compress']
-    version = 'v1.19.2'
-    hash = 'sha256-Q7taaWYa+O5MkhiGESFs4UdMba8cDGEROXU/Y+3M5vE='
+    version = 'v1.20.0'
+    hash = 'sha256-M7FmkBv1S66kAjg9yjkzY/PtCb/RTsRABSDLYYQ9itM='
 
   [mod.'github.com/klauspost/pgzip']
     version = 'v1.2.6'
@@ -90,8 +90,8 @@ schema = 3
     hash = 'sha256-pmq8KKIb2+qMF3E1cR2B7NAj5joF2tZduyXjIfIlkTk='
 
   [mod.'github.com/mattn/go-runewidth']
-    version = 'v0.0.28'
-    hash = 'sha256-8Bwg2XAEB7MJs5bxEtWMtkycx80i2S/yI8fj77/YfmM='
+    version = 'v0.0.29'
+    hash = 'sha256-AZ+wSUPj0+ZukidTuqnNogxkBKpfZ+I2LOdQ2P0ajaI='
 
   [mod.'github.com/mholt/archives']
     version = 'v0.1.5'
