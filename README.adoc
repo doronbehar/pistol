@@ -13,7 +13,7 @@ ifndef::env-github[]
 
 == Name
 
-pistol - General purpose file previewer designed for Ranger, Lf to make scope.sh redundant.
+pistol - General purpose file previewer designed for terminal file browsers.
 endif::[]
 
 == Introduction
