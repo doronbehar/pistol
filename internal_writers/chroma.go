@@ -12,7 +12,7 @@ import (
 )
 
 func chromaPrint(w io.Writer, contents string, lexer chroma.Lexer) error {
-	iterator, err := lexer.Tokenise(nil, string(contents))
+	iterator, err := lexer.Tokenise(nil, contents)
 	if err != nil {
 		panic(err)
 	}
@@ -42,12 +42,13 @@ func NewChromaWriter(magic_db, mimeType, filePath string) (func(w io.Writer) err
 		lexer = clexers.Fallback
 	}
 	log.Infof("using chroma to print %s with lexer %s\n", filePath, lexer)
-	contents, err := os.ReadFile(filePath)
+	raw, err := os.ReadFile(filePath)
 	if err != nil {
 		log.Fatalf("Encountered error reading file %s", filePath)
 	}
+	contents := string(raw)
 	return func (w io.Writer) error {
-		return chromaPrint(w, string(contents), lexer)
+		return chromaPrint(w, contents, lexer)
 	}, nil
 }
 
