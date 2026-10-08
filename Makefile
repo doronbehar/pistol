@@ -111,10 +111,13 @@ newTag: newVersionFile
 	@touch newTag
 endif
 
+gomod2nix.toml: go.mod go.sum
+	gomod2nix
+
 # Nix is smarter then gnumake in deciding whether a target is already available
 # in the /nix/store cache or not
 .PHONY: $(NIX_TARGETS)
-$(NIX_TARGETS):
+$(NIX_TARGETS): gomod2nix.toml
 	@mkdir -p releaseAssets
 	ln -sf $$(nix build \
 		--print-build-logs \
