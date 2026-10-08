@@ -460,6 +460,24 @@ image/.* pv %pistol-filename% %pistol-extra0% %pistol-extra1% %pistol-extra2% %p
 
 === Environmental Variables
 
+==== Preview Chunk Size
+
+To prevent `pistol` from choking on too large text files, it reads by default
+only the first 100KB of the text files it gets, before passing them to
+`chroma`. This also applies to compressed text files. 
+
+This limitation is meant to prevent draining the system's memory, since
+`pistol` is supposed to be a _preview_ program, not a `$PAGER`. If you need to
+see more then 100 KB of a text file, open an editor, or use `less`. To modify
+this preview data size, to (e.g) 1MB, set:
+
+[source,sh]
+----
+export PISTOL_CHROMA_SIZE=1000000
+----
+
+WARNING: given a size limit $s$, `chroma` seems to require $8 \cdot s$ memory
+to process a file of size $\leq s$.
 
 ==== Chroma Formatters
 

@@ -77,7 +77,10 @@ ifneq (, $(version_ok))
 $(error $(version_ok))
 endif
 
-TESTS_INPUTS=$(wildcard $(THIS_DIR)/tests/inputs/*)
+# The large files are tested separately, see test-large
+TESTS_INPUTS=$(filter-out $(THIS_DIR)/tests/inputs/large.%, \
+	$(wildcard $(THIS_DIR)/tests/inputs/*) \
+)
 TESTS_OUTPUTS_CURRENT=$(foreach input, \
 	$(TESTS_INPUTS), \
 	$(THIS_DIR)/tests/outputs/$(notdir $(input)).current \
@@ -167,6 +170,20 @@ $(THIS_DIR)/tests/outputs/%.current: pistol tests/outputs/%.expected tests/input
 	@diff --report-identical-files $@ $(THIS_DIR)/tests/outputs/$*.expected
 	@rm $@
 
+# A ~1 GiB high entropy file, so that it barely shrinks when compressed.
+$(THIS_DIR)/tests/inputs/large.log: $(THIS_DIR)/tests/large/log.go
+	go run $< $@
+
+$(THIS_DIR)/tests/inputs/large.log.gz: $(THIS_DIR)/tests/inputs/large.log
+	gzip --keep --force --fast $<
+
+.PHONY: test-large-text
+test-large-text: pistol $(THIS_DIR)/tests/inputs/large.log $(THIS_DIR)/tests/inputs/large.log.gz
+	@$(THIS_DIR)/tests/large/text.sh
+
+.PHONY: test-large
+test-large: test-large-text
+
 .PHONY: test
-test: $(TESTS_OUTPUTS_CURRENT)
+test: $(TESTS_OUTPUTS_CURRENT) test-large
 	@$(THIS_DIR)/tests/exit-code.sh
