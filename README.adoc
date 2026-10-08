@@ -138,12 +138,17 @@ of it from https://github.com/doronbehar/pistol/releases[the releases page],
 available since version `0.3.1`. The releases assets include also the manual
 page `pistol.1.gz`.
 
-WARNING: Currently, Darwin compatible binaries are not available there, but it
+[WARNING]
+====
+Currently, Darwin compatible binaries are not available there, but it
 should be possible to generate them via CI. All other binaries were cross
 compiled from my own `x86_64` linux machine, using Nix' superb
 https://nix.dev/tutorials/cross-compilation[cross compilation support].
+====
 
-NOTE: For a statically compiled Pistol to be functional, it needs to read a `libmagic` database
+[NOTE]
+====
+For a statically compiled Pistol to be functional, it needs to read a `libmagic` database
 (usually found in `/usr/share/misc/magic.mgc`) and the static executable
 includes the contents of this database found on https://github.com/NixOS/nixpkgs/blob/nixos-unstable/pkgs/tools/misc/file/default.nix[Nixpkgs'
 `file`]
@@ -152,6 +157,7 @@ package. The content of the `magic.mgc` database is copied to
 Hence using this executable might not be desirable due to this behaviour which
 a regular compilation of `pistol` does not include. This behaviour is compiled
 into `pistol` if you use `go {build,install}` with `-tags EMBED_MAGIC_DB`.
+====
 
 
 === From Source
@@ -272,9 +278,12 @@ You can change this behaviour by writing a configuration file in
 `~/.config/pistol/pistol.conf` (or `$XDG_CONFIG_HOME/pistol/pistol.conf`) On
 GNU systems, with the syntax as explained below.
 
-NOTE: On OS X, this location defaults to:
+[NOTE]
+====
+On OS X, this location defaults to:
 `~/Library/Application Support/pistol/pistol.conf`, as the XDG specification
 imposes.
+====
 
 === Syntax
 
