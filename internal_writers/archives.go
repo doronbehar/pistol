@@ -186,23 +186,9 @@ func NewArchiveLister(magic_db, mimeType, filePath string) (func(w io.Writer) er
 			}
 			// Why 512? https://stackoverflow.com/a/17741765/4935114
 			fBytes := make([]byte, 512)
-			nBytes, err := fReader.Read(fBytes)
-			var fContents []byte
-			if err != nil {
-				if err != io.EOF {
-					panic(err)
-				}
-				fContents = fBytes[:nBytes]
-			} else {
-				// TODO: Perhaps put protections here against too large files
-				fRest,err := io.ReadAll(fReader)
-				if err != nil {
-					panic(err)
-				}
-				fContents = append(
-					fBytes[:nBytes],
-					fRest...
-				)
+			nBytes, readErr := fReader.Read(fBytes)
+			if readErr != nil && readErr != io.EOF {
+				panic(readErr)
 			}
 			if err := magicmime.OpenWithPath(magic_db, magicmime.MAGIC_MIME_TYPE | magicmime.MAGIC_SYMLINK); err != nil {
 				log.Fatalf("Failed to open database again from some reason %v", err)
@@ -214,7 +200,29 @@ func NewArchiveLister(magic_db, mimeType, filePath string) (func(w io.Writer) er
 				panic(err)
 			}
 			log.Infof("Detected inner mimetype of compressed file as %s", innerMimeType)
-			if isText, _ := regexp.MatchString("text/*", innerMimeType); isText {
+			isText, _ := regexp.MatchString("text/*", innerMimeType)
+			isJson, _ := regexp.MatchString("application/json", innerMimeType)
+			var fContents []byte
+			if readErr == io.EOF {
+				fContents = fBytes[:nBytes]
+			} else {
+				var fRestReader io.Reader = fReader
+				if isText {
+					// Don't decompress more than chroma is going to get.
+					fRestReader = io.LimitReader(fReader, chromaSize() - int64(nBytes))
+				}
+				// TODO: Perhaps put protections here against too large non-text
+				// files (JSON).
+				fRest,err := io.ReadAll(fRestReader)
+				if err != nil {
+					panic(err)
+				}
+				fContents = append(
+					fBytes[:nBytes],
+					fRest...
+				)
+			}
+			if isText {
 				lexer := clexers.MatchMimeType(innerMimeType)
 				if lexer == nil {
 					lexer = clexers.Fallback
@@ -225,7 +233,7 @@ func NewArchiveLister(magic_db, mimeType, filePath string) (func(w io.Writer) er
 					lexer,
 				)
 				chromaPrint(w,string(fContents), lexer)
-			} else if isJson, _ := regexp.MatchString("application/json", innerMimeType); isJson {
+			} else if isJson {
 				jsonPrint(w, fContents)
 			} else {
 				fmt.Fprintf(w, "%s file compressed in a %s archive\n", innerMimeType, mimeType)
