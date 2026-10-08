@@ -18,6 +18,9 @@ import (
 )
 
 
+// The amount of files of an archive that are listed in a single table.
+const archiveRowsBatch = 1000
+
 func NewArchiveLister(magic_db, mimeType, filePath string) (func(w io.Writer) error, error) {
 	return func (w io.Writer) error {
 		isArchive := true
@@ -124,13 +127,43 @@ func NewArchiveLister(magic_db, mimeType, filePath string) (func(w io.Writer) er
 				"Modification Time",
 				"File Name",
 			})
+			// Tables of archives with many files are rendered in batches, and
+			// the header is rendered only in the first one. So the minimal
+			// widths of the first columns are set here, to keep them aligned
+			// between batches.
+			t.SetColumnConfigs([]table.ColumnConfig{
+				// The width of the "Permissions" header, as modes are always 10
+				// characters long.
+				{Number: 1, WidthMin: 11},
+				// The width of the longest humanize.Bytes output, e.g. "1.0 GB".
+				{Number: 2, WidthMin: 6},
+				// The width of the "Modification Time" header, as the formatted
+				// time is always 16 characters long.
+				{Number: 3, WidthMin: 17},
+			})
 			if term.IsTerminal(0) {
 				width, _, err := term.GetSize(0)
 				if err == nil {
 					t.SetAllowedRowLength(width)
 				}
 			}
+			batched := false
 			archiveHandler := func(ctx context.Context, f archives.FileInfo) error {
+				// The table has to hold all of its rows in memory in order to be
+				// rendered, so archives with many files are listed in batches of
+				// rows.
+				if t.Length() >= archiveRowsBatch {
+					if !batched {
+						// The width of the file names column isn't bounded, and
+						// rows rendered later can't affect the columns above
+						// them, so the border to the right of it is dropped.
+						t.Style().Options.DrawBorder = false
+						batched = true
+					}
+					t.Render()
+					t.ResetHeaders()
+					t.ResetRows()
+				}
 				fPerm := fmt.Sprintf("%v", f.FileInfo.Mode())
 				fSize := humanize.Bytes(uint64(f.FileInfo.Size()))
 				fModtS := f.FileInfo.ModTime()
@@ -169,7 +202,9 @@ func NewArchiveLister(magic_db, mimeType, filePath string) (func(w io.Writer) er
 				return err
 			}
 			defer reader.Close()
-			t.Render()
+			if !batched || t.Length() > 0 {
+				t.Render()
+			}
 		} else {
 			fCompressed, err := os.Open(filePath)
 			if err != nil {
