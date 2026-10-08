@@ -190,8 +190,20 @@ $(THIS_DIR)/tests/inputs/large.json: $(THIS_DIR)/tests/large/json.go
 test-large-json: pistol $(THIS_DIR)/tests/inputs/large.json
 	@$(THIS_DIR)/tests/large/json.sh
 
+# Archives with a large amount of empty files, and with a few huge files
+# (decompressed size of 16 GiB).
+$(THIS_DIR)/tests/inputs/large.amounts.tar.gz: $(THIS_DIR)/tests/large/archive-amounts.go
+	go run $< $@
+
+$(THIS_DIR)/tests/inputs/large.files.tar.gz: $(THIS_DIR)/tests/large/archive-files.go
+	go run $< $@
+
+.PHONY: test-large-archive
+test-large-archive: pistol $(THIS_DIR)/tests/inputs/large.files.tar.gz $(THIS_DIR)/tests/inputs/large.amounts.tar.gz
+	@$(THIS_DIR)/tests/large/archive.sh
+
 .PHONY: test-large
-test-large: test-large-text test-large-json
+test-large: test-large-text test-large-json test-large-archive
 
 .PHONY: test
 test: $(TESTS_OUTPUTS_CURRENT) test-large
