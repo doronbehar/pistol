@@ -27,7 +27,7 @@ func jsonPrint(w io.Writer, contents []byte) error {
 func NewJsonWriter(magic_db, mimeType, filePath string) (func(w io.Writer) error, error) {
 	contents, err := os.ReadFile(filePath)
 	if err != nil {
-		log.Fatalf("Encountered error reading file %s", filePath)
+		log.Fatalf("Encountered error reading file %s: %v", filePath, err)
 	}
 	return func (w io.Writer) error {
 		return jsonPrint(w, contents)
