@@ -210,6 +210,9 @@ func NewArchiveLister(magic_db, mimeType, filePath string) (func(w io.Writer) er
 			}
 			innerMimeType, err := magicmime.TypeByBuffer(fBytes[:nBytes])
 			defer magicmime.Close()
+			if err != nil {
+				panic(err)
+			}
 			log.Infof("Detected inner mimetype of compressed file as %s", innerMimeType)
 			if isText, _ := regexp.MatchString("text/*", innerMimeType); isText {
 				lexer := clexers.MatchMimeType(innerMimeType)
