@@ -44,7 +44,7 @@ func NewChromaWriter(magic_db, mimeType, filePath string) (func(w io.Writer) err
 	log.Infof("using chroma to print %s with lexer %s\n", filePath, lexer)
 	raw, err := os.ReadFile(filePath)
 	if err != nil {
-		log.Fatalf("Encountered error reading file %s", filePath)
+		log.Fatalf("Encountered error reading file %s: %v", filePath, err)
 	}
 	contents := string(raw)
 	return func (w io.Writer) error {
