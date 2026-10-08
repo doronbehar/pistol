@@ -3,6 +3,7 @@ package pistol
 import (
 	"io"
 	"os"
+	"strconv"
 
 	"github.com/alecthomas/chroma/v2"
 	log "github.com/sirupsen/logrus"
@@ -36,13 +37,36 @@ func chromaPrint(w io.Writer, contents string, lexer chroma.Lexer) error {
 	return formatter.Format(w, style, iterator)
 }
 
+// Default amount of bytes read from a file to be highlighted by chroma, see
+// PISTOL_CHROMA_SIZE in the README.
+const defaultChromaSize = 100000
+
+// chromaSize returns the maximal amount of bytes of a text file we feed to
+// chroma. chroma needs the whole text in memory, and then even more for its own
+// representation of it, so we avoid feeding it the whole of large files.
+func chromaSize() int64 {
+	if env_size := os.Getenv("PISTOL_CHROMA_SIZE"); env_size != "" {
+		size, err := strconv.ParseInt(env_size, 10, 64)
+		if err != nil || size < 1 {
+			log.Fatalf("PISTOL_CHROMA_SIZE must be a positive number of bytes, got: %q", env_size)
+		}
+		return size
+	}
+	return defaultChromaSize
+}
+
 func NewChromaWriter(magic_db, mimeType, filePath string) (func(w io.Writer) error, error) {
 	lexer := clexers.Match(filePath)
 	if lexer == nil {
 		lexer = clexers.Fallback
 	}
 	log.Infof("using chroma to print %s with lexer %s\n", filePath, lexer)
-	raw, err := os.ReadFile(filePath)
+	f, err := os.Open(filePath)
+	if err != nil {
+		log.Fatalf("Encountered error opening file %s: %v", filePath, err)
+	}
+	defer f.Close()
+	raw, err := io.ReadAll(io.LimitReader(f, chromaSize()))
 	if err != nil {
 		log.Fatalf("Encountered error reading file %s: %v", filePath, err)
 	}
