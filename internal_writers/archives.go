@@ -18,6 +18,9 @@ import (
 )
 
 
+// The amount of files of an archive that are listed in a single table.
+const archiveRowsBatch = 1000
+
 func NewArchiveLister(magic_db, mimeType, filePath string) (func(w io.Writer) error, error) {
 	return func (w io.Writer) error {
 		isArchive := true
@@ -124,13 +127,43 @@ func NewArchiveLister(magic_db, mimeType, filePath string) (func(w io.Writer) er
 				"Modification Time",
 				"File Name",
 			})
+			// Tables of archives with many files are rendered in batches, and
+			// the header is rendered only in the first one. So the minimal
+			// widths of the first columns are set here, to keep them aligned
+			// between batches.
+			t.SetColumnConfigs([]table.ColumnConfig{
+				// The width of the "Permissions" header, as modes are always 10
+				// characters long.
+				{Number: 1, WidthMin: 11},
+				// The width of the longest humanize.Bytes output, e.g. "1.0 GB".
+				{Number: 2, WidthMin: 6},
+				// The width of the "Modification Time" header, as the formatted
+				// time is always 16 characters long.
+				{Number: 3, WidthMin: 17},
+			})
 			if term.IsTerminal(0) {
 				width, _, err := term.GetSize(0)
 				if err == nil {
 					t.SetAllowedRowLength(width)
 				}
 			}
+			batched := false
 			archiveHandler := func(ctx context.Context, f archives.FileInfo) error {
+				// The table has to hold all of its rows in memory in order to be
+				// rendered, so archives with many files are listed in batches of
+				// rows.
+				if t.Length() >= archiveRowsBatch {
+					if !batched {
+						// The width of the file names column isn't bounded, and
+						// rows rendered later can't affect the columns above
+						// them, so the border to the right of it is dropped.
+						t.Style().Options.DrawBorder = false
+						batched = true
+					}
+					t.Render()
+					t.ResetHeaders()
+					t.ResetRows()
+				}
 				fPerm := fmt.Sprintf("%v", f.FileInfo.Mode())
 				fSize := humanize.Bytes(uint64(f.FileInfo.Size()))
 				fModtS := f.FileInfo.ModTime()
@@ -169,7 +202,9 @@ func NewArchiveLister(magic_db, mimeType, filePath string) (func(w io.Writer) er
 				return err
 			}
 			defer reader.Close()
-			t.Render()
+			if !batched || t.Length() > 0 {
+				t.Render()
+			}
 		} else {
 			fCompressed, err := os.Open(filePath)
 			if err != nil {
@@ -186,23 +221,9 @@ func NewArchiveLister(magic_db, mimeType, filePath string) (func(w io.Writer) er
 			}
 			// Why 512? https://stackoverflow.com/a/17741765/4935114
 			fBytes := make([]byte, 512)
-			nBytes, err := fReader.Read(fBytes)
-			var fContents []byte
-			if err != nil {
-				if err != io.EOF {
-					panic(err)
-				}
-				fContents = fBytes[:nBytes]
-			} else {
-				// TODO: Perhaps put protections here against too large files
-				fRest,err := io.ReadAll(fReader)
-				if err != nil {
-					panic(err)
-				}
-				fContents = append(
-					fBytes[:nBytes],
-					fRest...
-				)
+			nBytes, readErr := fReader.Read(fBytes)
+			if readErr != nil && readErr != io.EOF {
+				panic(readErr)
 			}
 			if err := magicmime.OpenWithPath(magic_db, magicmime.MAGIC_MIME_TYPE | magicmime.MAGIC_SYMLINK); err != nil {
 				log.Fatalf("Failed to open database again from some reason %v", err)
@@ -214,7 +235,32 @@ func NewArchiveLister(magic_db, mimeType, filePath string) (func(w io.Writer) er
 				panic(err)
 			}
 			log.Infof("Detected inner mimetype of compressed file as %s", innerMimeType)
-			if isText, _ := regexp.MatchString("text/*", innerMimeType); isText {
+			isText, _ := regexp.MatchString("text/*", innerMimeType)
+			isJson, _ := regexp.MatchString("application/json", innerMimeType)
+			sizeLimit := chromaSize()
+			var fContents []byte
+			if readErr == io.EOF {
+				fContents = fBytes[:nBytes]
+			} else {
+				var fRestReader io.Reader = fReader
+				if isText {
+					// Don't decompress more than chroma is going to get.
+					fRestReader = io.LimitReader(fReader, sizeLimit - int64(nBytes))
+				} else if isJson {
+					// JSON can't be parsed when truncated. Read one byte more
+					// than the limit, to know whether the file is too large.
+					fRestReader = io.LimitReader(fReader, sizeLimit - int64(nBytes) + 1)
+				}
+				fRest,err := io.ReadAll(fRestReader)
+				if err != nil {
+					panic(err)
+				}
+				fContents = append(
+					fBytes[:nBytes],
+					fRest...
+				)
+			}
+			if isText {
 				lexer := clexers.MatchMimeType(innerMimeType)
 				if lexer == nil {
 					lexer = clexers.Fallback
@@ -225,8 +271,18 @@ func NewArchiveLister(magic_db, mimeType, filePath string) (func(w io.Writer) er
 					lexer,
 				)
 				chromaPrint(w,string(fContents), lexer)
-			} else if isJson, _ := regexp.MatchString("application/json", innerMimeType); isJson {
-				jsonPrint(w, fContents)
+			} else if isJson {
+				// In principle, this can never happen, and it is unfortunate. It seems
+				// that libmagic doesn't detect JSON as a mimetype, just with 512 bytes.
+				if int64(len(fContents)) > sizeLimit {
+					fmt.Fprintf(
+						w,
+						"Compressed JSON file larger then %s\n",
+						humanize.Bytes(uint64(sizeLimit)),
+					)
+				} else {
+					jsonPrint(w, fContents)
+				}
 			} else {
 				fmt.Fprintf(w, "%s file compressed in a %s archive\n", innerMimeType, mimeType)
 			}

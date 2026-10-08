@@ -77,7 +77,10 @@ ifneq (, $(version_ok))
 $(error $(version_ok))
 endif
 
-TESTS_INPUTS=$(wildcard $(THIS_DIR)/tests/inputs/*)
+# The large files are tested separately, see test-large
+TESTS_INPUTS=$(filter-out $(THIS_DIR)/tests/inputs/large.%, \
+	$(wildcard $(THIS_DIR)/tests/inputs/*) \
+)
 TESTS_OUTPUTS_CURRENT=$(foreach input, \
 	$(TESTS_INPUTS), \
 	$(THIS_DIR)/tests/outputs/$(notdir $(input)).current \
@@ -167,6 +170,41 @@ $(THIS_DIR)/tests/outputs/%.current: pistol tests/outputs/%.expected tests/input
 	@diff --report-identical-files $@ $(THIS_DIR)/tests/outputs/$*.expected
 	@rm $@
 
+# A ~1 GiB high entropy file, so that it barely shrinks when compressed.
+$(THIS_DIR)/tests/inputs/large.log: $(THIS_DIR)/tests/large/log.go
+	go run $< $@
+
+$(THIS_DIR)/tests/inputs/large.log.gz: $(THIS_DIR)/tests/inputs/large.log
+	gzip --keep --force --fast $<
+
+.PHONY: test-large-text
+test-large-text: pistol $(THIS_DIR)/tests/inputs/large.log $(THIS_DIR)/tests/inputs/large.log.gz
+	@$(THIS_DIR)/tests/large/text.sh
+
+# A ~5 MiB JSON file. It can't be larger, because libmagic detects only JSON
+# files that fit in the first 7 MiB it reads as such.
+$(THIS_DIR)/tests/inputs/large.json: $(THIS_DIR)/tests/large/json.go
+	go run $< $@
+
+.PHONY: test-large-json
+test-large-json: pistol $(THIS_DIR)/tests/inputs/large.json
+	@$(THIS_DIR)/tests/large/json.sh
+
+# Archives with a large amount of empty files, and with a few huge files
+# (decompressed size of 16 GiB).
+$(THIS_DIR)/tests/inputs/large.amounts.tar.gz: $(THIS_DIR)/tests/large/archive-amounts.go
+	go run $< $@
+
+$(THIS_DIR)/tests/inputs/large.files.tar.gz: $(THIS_DIR)/tests/large/archive-files.go
+	go run $< $@
+
+.PHONY: test-large-archive
+test-large-archive: pistol $(THIS_DIR)/tests/inputs/large.files.tar.gz $(THIS_DIR)/tests/inputs/large.amounts.tar.gz
+	@$(THIS_DIR)/tests/large/archive.sh
+
+.PHONY: test-large
+test-large: test-large-text test-large-json test-large-archive
+
 .PHONY: test
-test: $(TESTS_OUTPUTS_CURRENT)
+test: $(TESTS_OUTPUTS_CURRENT) test-large
 	@$(THIS_DIR)/tests/exit-code.sh
