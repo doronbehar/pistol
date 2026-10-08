@@ -181,8 +181,17 @@ $(THIS_DIR)/tests/inputs/large.log.gz: $(THIS_DIR)/tests/inputs/large.log
 test-large-text: pistol $(THIS_DIR)/tests/inputs/large.log $(THIS_DIR)/tests/inputs/large.log.gz
 	@$(THIS_DIR)/tests/large/text.sh
 
+# A ~5 MiB JSON file. It can't be larger, because libmagic detects only JSON
+# files that fit in the first 7 MiB it reads as such.
+$(THIS_DIR)/tests/inputs/large.json: $(THIS_DIR)/tests/large/json.go
+	go run $< $@
+
+.PHONY: test-large-json
+test-large-json: pistol $(THIS_DIR)/tests/inputs/large.json
+	@$(THIS_DIR)/tests/large/json.sh
+
 .PHONY: test-large
-test-large: test-large-text
+test-large: test-large-text test-large-json
 
 .PHONY: test
 test: $(TESTS_OUTPUTS_CURRENT) test-large

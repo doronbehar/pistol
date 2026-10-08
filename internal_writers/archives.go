@@ -202,6 +202,7 @@ func NewArchiveLister(magic_db, mimeType, filePath string) (func(w io.Writer) er
 			log.Infof("Detected inner mimetype of compressed file as %s", innerMimeType)
 			isText, _ := regexp.MatchString("text/*", innerMimeType)
 			isJson, _ := regexp.MatchString("application/json", innerMimeType)
+			sizeLimit := chromaSize()
 			var fContents []byte
 			if readErr == io.EOF {
 				fContents = fBytes[:nBytes]
@@ -209,10 +210,12 @@ func NewArchiveLister(magic_db, mimeType, filePath string) (func(w io.Writer) er
 				var fRestReader io.Reader = fReader
 				if isText {
 					// Don't decompress more than chroma is going to get.
-					fRestReader = io.LimitReader(fReader, chromaSize() - int64(nBytes))
+					fRestReader = io.LimitReader(fReader, sizeLimit - int64(nBytes))
+				} else if isJson {
+					// JSON can't be parsed when truncated. Read one byte more
+					// than the limit, to know whether the file is too large.
+					fRestReader = io.LimitReader(fReader, sizeLimit - int64(nBytes) + 1)
 				}
-				// TODO: Perhaps put protections here against too large non-text
-				// files (JSON).
 				fRest,err := io.ReadAll(fRestReader)
 				if err != nil {
 					panic(err)
@@ -234,7 +237,17 @@ func NewArchiveLister(magic_db, mimeType, filePath string) (func(w io.Writer) er
 				)
 				chromaPrint(w,string(fContents), lexer)
 			} else if isJson {
-				jsonPrint(w, fContents)
+				// In principle, this can never happen, and it is unfortunate. It seems
+				// that libmagic doesn't detect JSON as a mimetype, just with 512 bytes.
+				if int64(len(fContents)) > sizeLimit {
+					fmt.Fprintf(
+						w,
+						"Compressed JSON file larger then %s\n",
+						humanize.Bytes(uint64(sizeLimit)),
+					)
+				} else {
+					jsonPrint(w, fContents)
+				}
 			} else {
 				fmt.Fprintf(w, "%s file compressed in a %s archive\n", innerMimeType, mimeType)
 			}
