@@ -26,8 +26,8 @@ schema = 3
     hash = 'sha256-PivG79qqrPJ1CksNiNNlwC+xPCMMTQxtda3rwk/z6LA='
 
   [mod.'github.com/andybalholm/brotli']
-    version = 'v1.2.6'
-    hash = 'sha256-t3Z1bHg8mRr7cEdTbffO6f2ppPSaXK7IiaVEnjC8TuQ='
+    version = 'v1.3.0'
+    hash = 'sha256-nOM6tzHZYnMSNxcKOGUa3nspb75OX+OSfGx8szQY6w0='
 
   [mod.'github.com/bodgit/plumbing']
     version = 'v1.3.0'
@@ -46,8 +46,8 @@ schema = 3
     hash = 'sha256-GO3az7WiGcwU0OvmocwdfR5ohGRL8NbjscIaMyhAdxE='
 
   [mod.'github.com/dlclark/regexp2/v2']
-    version = 'v2.8.4'
-    hash = 'sha256-GAeBGDS8BqR7/m02Tt8VLC7ObnT8aQRZ2nlVekZ4W8s='
+    version = 'v2.13.0'
+    hash = 'sha256-4+7Gj1z+r9L0nIVTu/KJnrwL6ESKedKELk6LUrfehg4='
 
   [mod.'github.com/doronbehar/magicmime']
     version = 'v0.1.1-0.20211127135329-3de4ff29dc49'
@@ -74,12 +74,12 @@ schema = 3
     hash = 'sha256-DYPdlK01uIN2H2Eq9qTNvfAJ3ajjEt9wDVhTIKg+JEw='
 
   [mod.'github.com/klauspost/compress']
-    version = 'v1.20.1'
-    hash = 'sha256-saWVNlxTAS7/lNaGght51onyIDaAFV1Kx11g3+vPuX4='
+    version = 'v1.20.4'
+    hash = 'sha256-KYm39Vrg8cR7bU0aqK2KTdth8UhHnH17Vcl9FB0Hf/E='
 
   [mod.'github.com/klauspost/pgzip']
-    version = 'v1.2.7'
-    hash = 'sha256-HRAbr8J+vEOa3TB3ObAJyuMv13USdEONt+KHvzFxqkU='
+    version = 'v1.3.0'
+    hash = 'sha256-F6pCaASPReNIX9W7PZrDoV9QPcWMS/Y7C/evwputO6g='
 
   [mod.'github.com/mattn/go-colorable']
     version = 'v0.1.16'
@@ -102,12 +102,12 @@ schema = 3
     hash = 'sha256-wlsKB1zTo4HE45+YQuma9oZPnlmyrybA+DC+Z3RlBeI='
 
   [mod.'github.com/minio/minlz']
-    version = 'v1.2.2'
-    hash = 'sha256-XSKvX/HtJzJdRp0tTuhtOk+2gQ5DqZCs7ngVTfklRLs='
+    version = 'v1.2.4'
+    hash = 'sha256-9YtspTWKC+sAaYgEGLk4/jcXeGF0kwjZtB/YaEy/K18='
 
   [mod.'github.com/nwaples/rardecode/v2']
-    version = 'v2.4.3'
-    hash = 'sha256-8rs3+ntkBHQreGTyOTzzpYvbOFsqFs/97wWlDOQxV8U='
+    version = 'v2.4.6'
+    hash = 'sha256-pYTMp5siPTcXpkvAju8qWbzyVbbjJ4rK0nNot+zzu8o='
 
   [mod.'github.com/nwidger/jsoncolor']
     version = 'v0.3.2'
@@ -138,17 +138,17 @@ schema = 3
     hash = 'sha256-KkgxNnViDRkpJy/Xv4OFyLfmIaC7BPLEJTtpvuGP7Ks='
 
   [mod.'go4.org']
-    version = 'v0.0.0-20260112195520-a5071408f32f'
-    hash = 'sha256-K2sBsO4B4NwY2Hd5Do/LikhpvbL2prHh7cmOSvnTLrM='
+    version = 'v0.0.0-20261028031214-ed6929a230fe'
+    hash = 'sha256-m0MAHXi+MQl3lqTY/eOYsNZd2czCw9LThX9LX/shoZw='
 
   [mod.'golang.org/x/sys']
-    version = 'v0.49.0'
-    hash = 'sha256-/1S3yy3in72ygZT1CKymvOzJZqCMYiGSqZDfvSyB3LI='
+    version = 'v0.50.0'
+    hash = 'sha256-3T1I5T5pgbQBxRhN9Q2Ajvsy1kJW9WM/uddR9cOUVNA='
 
   [mod.'golang.org/x/term']
-    version = 'v0.47.0'
-    hash = 'sha256-XtEeyv5y3g9nWfzB7vevm5KwNR8hW+LVsBNEectqIhA='
+    version = 'v0.48.0'
+    hash = 'sha256-iTwcS7DeeZIc9MEPaTY4SgM0e5OVBim7xW7umCcxdkc='
 
   [mod.'golang.org/x/text']
-    version = 'v0.43.0'
-    hash = 'sha256-gykmMKFe61Tc4tblLPd3IyMKCqL0MSTQpgb6yE5EnDA='
+    version = 'v0.44.0'
+    hash = 'sha256-dTeEJZSwSLJ5jumnR+JjT4gSpXW6E22IxT0aCrcf2vQ='
