@@ -9,7 +9,7 @@ require (
 	github.com/alexflint/go-arg v1.6.1
 	github.com/doronbehar/magicmime v0.1.1-0.20211127135329-3de4ff29dc49
 	github.com/dustin/go-humanize v1.1.0
-	github.com/jedib0t/go-pretty/v6 v6.8.3
+	github.com/jedib0t/go-pretty/v6 v6.9.1
 	github.com/mholt/archives v0.1.5
 	github.com/nwidger/jsoncolor v0.3.2
 	github.com/sirupsen/logrus v1.10.2
@@ -37,6 +37,7 @@ require (
 	github.com/minio/minlz v1.2.4 // indirect
 	github.com/nwaples/rardecode/v2 v2.4.6 // indirect
 	github.com/pierrec/lz4/v4 v4.1.33 // indirect
+	github.com/rivo/uniseg v0.4.7 // indirect
 	github.com/sorairolake/lzip-go v0.3.8 // indirect
 	github.com/spf13/afero v1.15.0 // indirect
 	github.com/stangelandcl/ppmd v0.1.1 // indirect
