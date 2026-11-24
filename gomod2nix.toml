@@ -46,8 +46,8 @@ schema = 3
     hash = 'sha256-GO3az7WiGcwU0OvmocwdfR5ohGRL8NbjscIaMyhAdxE='
 
   [mod.'github.com/dlclark/regexp2/v2']
-    version = 'v2.13.0'
-    hash = 'sha256-4+7Gj1z+r9L0nIVTu/KJnrwL6ESKedKELk6LUrfehg4='
+    version = 'v2.13.2'
+    hash = 'sha256-ZIzVBaF7mUILr6NMxTw6z6NsSc0R7+9y1JAN6kmdhEQ='
 
   [mod.'github.com/doronbehar/magicmime']
     version = 'v0.1.1-0.20211127135329-3de4ff29dc49'
@@ -70,12 +70,16 @@ schema = 3
     hash = 'sha256-t1bcXLgrQNOYUVyYEZ0knxcXpsTk4IuJZDjKvyJX75g='
 
   [mod.'github.com/jedib0t/go-pretty/v6']
-    version = 'v6.9.2'
-    hash = 'sha256-qOLtwQw/LKMUK80Zo8Y2aHyE7BrIEpALpFcbbD6q6Y8='
+    version = 'v6.9.3'
+    hash = 'sha256-+X5E4W+2AT2Isok9qVXZ59k5D8m9cv6ZnuUAnll6Z0I='
 
   [mod.'github.com/klauspost/compress']
-    version = 'v1.20.4'
-    hash = 'sha256-KYm39Vrg8cR7bU0aqK2KTdth8UhHnH17Vcl9FB0Hf/E='
+    version = 'v1.20.5'
+    hash = 'sha256-F+7R/K9y3md95FX3UxavK0pz8aFJp67zRKqNeMMCths='
+
+  [mod.'github.com/klauspost/cpuid/v2']
+    version = 'v2.4.2'
+    hash = 'sha256-VkA5WnObZcmbiQCCGLSsRSNXx5WdPwlgIIA74oW9WCk='
 
   [mod.'github.com/klauspost/pgzip']
     version = 'v1.3.0'
@@ -102,8 +106,8 @@ schema = 3
     hash = 'sha256-wlsKB1zTo4HE45+YQuma9oZPnlmyrybA+DC+Z3RlBeI='
 
   [mod.'github.com/minio/minlz']
-    version = 'v1.2.4'
-    hash = 'sha256-9YtspTWKC+sAaYgEGLk4/jcXeGF0kwjZtB/YaEy/K18='
+    version = 'v1.3.0'
+    hash = 'sha256-HQDLr3AwIauKJbbcyWY8rX25z5YVjLEE9FVxgI80rHs='
 
   [mod.'github.com/nwaples/rardecode/v2']
     version = 'v2.4.6'
@@ -114,8 +118,8 @@ schema = 3
     hash = 'sha256-ibwPUPCLaBHKRYo93eaPlqlRFB2MW8f/XlImBkg2q2c='
 
   [mod.'github.com/pierrec/lz4/v4']
-    version = 'v4.1.33'
-    hash = 'sha256-HQl2KwOMGbkInrAhPYoleXBpHuHoZxFAopsK3+pTt24='
+    version = 'v4.1.34'
+    hash = 'sha256-iLaFutMhXZJEIfzCuUQyNTE1bjBqOEVUP72ME7yDi9k='
 
   [mod.'github.com/rivo/uniseg']
     version = 'v0.4.7'
@@ -140,6 +144,10 @@ schema = 3
   [mod.'github.com/ulikunitz/xz']
     version = 'v0.5.17'
     hash = 'sha256-KkgxNnViDRkpJy/Xv4OFyLfmIaC7BPLEJTtpvuGP7Ks='
+
+  [mod.'github.com/zeebo/xxh3']
+    version = 'v1.1.1-0.20260908150653-f7225998cebf'
+    hash = 'sha256-k9u8tEsr7QPTuI/F6ZTcRIzUOBMGaRGPNLu0PpLjSQE='
 
   [mod.'go4.org']
     version = 'v0.0.0-20261028031214-ed6929a230fe'
